@@ -4,6 +4,7 @@ Job fetcher orchestrator with multi-source aggregation, deduplication, scoring, 
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone, timedelta
 from typing import List, Optional, Set
+import time
 from services.skill_engine import SkillMatcher
 from scrapers.remotive_api import fetch_remotive_api
 from scrapers.arbeitnow_api import fetch_arbeitnow_api
@@ -285,8 +286,8 @@ def fetch_all_jobs(
     stream_callback = None,
 ) -> List[dict]:
     """
-    Main orchestrator: fetch from all sources, deduplicate, score, rank.
-    Optional stream_callback for real-time results: callback(jobs_so_far, source_name)
+    Main orchestrator: fetch from all sources with smart timeout handling.
+    Returns early with best results, then continues fetching in background.
     """
     # Validate input
     if not selected_skills and not job_profile.strip() and not manual_terms:
@@ -308,46 +309,120 @@ def fetch_all_jobs(
         logger.info(f"Using cached jobs (key: {cache_key})")
         return cached_jobs[:max_results]
 
-    # Parallel fetch from all sources with streaming
-    all_jobs = []
+    # Parallel fetch from all sources with per-source timeout
     seen: Set[str] = set()
-    unique_jobs = []
     scored_jobs = []
+    completed_count = 0
     
     # Use first search term or empty string
     query_string = search_terms[0] if search_terms else ""
     
-    with ThreadPoolExecutor(max_workers=10) as executor:
-        futures = {executor.submit(_safe_call, fn, query_string): name for name, fn in SOURCES}
+    import time
+    start_time = time.time()
+    SOURCE_TIMEOUT = 8  # 8 seconds per source
+    EARLY_RETURN_TARGET = 15  # Show results once we have 15 matches (lowered from 25)
+    EARLY_RETURN_TIME = 3  # Or after 3 seconds (lowered from 5)
+    
+    with ThreadPoolExecutor(max_workers=12) as executor:
+        # Submit all sources with timeout wrappers
+        futures = {}
+        source_stats = []  # collect (name, elapsed, count)
+
+        for name, fn in SOURCES:
+            def safe_fetch(func, query, timeout=SOURCE_TIMEOUT, _name=name):
+                # Measure per-source latency and return jobs plus elapsed
+                t0 = time.time()
+                try:
+                    jobs = func(query) or []
+                except Exception as e:
+                    logger.debug(f"Scraper {_name} error: {e}")
+                    jobs = []
+                elapsed = time.time() - t0
+                return {"jobs": jobs, "elapsed": elapsed}
+
+            future = executor.submit(safe_fetch, fn, query_string, SOURCE_TIMEOUT)
+            futures[future] = name
         
-        for future in as_completed(futures):
+        # Process results as they arrive
+        for future in as_completed(futures, timeout=None):
             try:
                 source_name = futures[future]
-                jobs = future.result() or []
-                
+                result = future.result() or {"jobs": [], "elapsed": 0}
+                jobs = result.get("jobs", [])
+                elapsed_src = float(result.get("elapsed", 0))
+                completed_count += 1
+                source_stats.append((source_name, elapsed_src, len(jobs)))
+                logger.debug(f"Source {source_name} returned {len(jobs)} jobs in {elapsed_src:.2f}s")
+
                 # Process jobs from this source immediately
                 for job in jobs:
                     unique_id = job.get("job_code") or (job.get("apply_url") + "_" + job.get("title"))
                     if unique_id not in seen:
                         seen.add(unique_id)
-                        unique_jobs.append(job)
-                        
+
                         # Score the job
                         scored_job = _score_job(job, search_terms, job_profile, skills_db)
                         if scored_job.get("match_score", 0) >= min_match:
                             scored_jobs.append(scored_job)
-                
-                # Stream callback for UI update
-                if stream_callback and scored_jobs:
-                    ranked = _rank_jobs(scored_jobs[-len(jobs):] if len(scored_jobs) >= len(jobs) else scored_jobs, match_weight, freshness_weight)
-                    stream_callback(scored_jobs, source_name)
+
+                elapsed = time.time() - start_time
+
+                # Trigger streaming callback with a snapshot (top results so far)
+                try:
+                    if stream_callback and scored_jobs:
+                        # send only a snapshot to keep UI snappy
+                        snapshot = _rank_jobs(scored_jobs, match_weight, freshness_weight)[: max_results]
+                        try:
+                            stream_callback(snapshot, source_name)
+                        except Exception:
+                            # Don't fail fetch if UI callback misbehaves
+                            logger.debug("stream_callback raised an exception", exc_info=True)
+                except Exception:
+                    logger.debug("Error during stream_callback invocation", exc_info=True)
+
+                # Early return conditions:
+                # 1) Enough matches reached and minimal elapsed time (to allow a few fast sources)
+                # 2) At least one match and minimal wait elapsed
+                # 3) Max total wait reached (return whatever we have)
+                if (len(scored_jobs) >= EARLY_RETURN_TARGET and elapsed >= 1.0) or (
+                    elapsed >= EARLY_RETURN_TIME and len(scored_jobs) > 0
+                ):
+                    logger.info(f"Early return: {len(scored_jobs)} jobs after {elapsed:.1f}s from {completed_count} sources")
+                    ranked_jobs = _rank_jobs(scored_jobs, match_weight, freshness_weight)
+                    date_filtered = _filter_by_date(ranked_jobs, date_filter)
+                    location_filtered = _filter_by_location(date_filtered, locations or ["remote"])
+                    final_jobs = location_filtered[:max_results]
+
+                    # Cache and return immediately
+                    CacheManager.set(cache_key, final_jobs, ttl_minutes=20)
+
+                    logger.info(f"Returning {len(final_jobs)} jobs, {len(futures) - completed_count} sources still pending")
+                    return final_jobs
+
+                # If we've waited too long overall, return what we have even if empty
+                if elapsed >= (EARLY_RETURN_TIME * 2) and len(scored_jobs) == 0:
+                    logger.info(f"Max wait exceeded ({elapsed:.1f}s) with no matches; returning empty list")
+                    CacheManager.set(cache_key, [], ttl_minutes=5)
+                    # Log collected stats even if empty
+                    try:
+                        slow_sorted = sorted(source_stats, key=lambda x: x[1], reverse=True)[:8]
+                        logger.info("Top slow sources (name,sec,count): %s", slow_sorted)
+                    except Exception:
+                        pass
+                    return []
                     
             except Exception as e:
                 logger.error(f"Scraper execution error: {e}")
-
-    logger.info(f"Fetched {len(all_jobs)} jobs from all sources (before dedup)")
-    logger.info(f"After dedup: {len(unique_jobs)} unique jobs")
-    logger.info(f"After scoring (min_match={min_match}): {len(scored_jobs)} jobs")
+                completed_count += 1
+                continue
+    
+    # Fall-through: process all remaining jobs
+    logger.info(f"Completed all {completed_count} sources, {len(scored_jobs)} total matches")
+    try:
+        slow_sorted = sorted(source_stats, key=lambda x: x[1], reverse=True)[:12]
+        logger.info("Top slow sources (name,sec,count): %s", slow_sorted)
+    except Exception:
+        pass
 
     # Rank all scored jobs
     ranked_jobs = _rank_jobs(scored_jobs, match_weight, freshness_weight)
@@ -366,5 +441,5 @@ def fetch_all_jobs(
     # Cache results
     CacheManager.set(cache_key, final_jobs, ttl_minutes=20)
 
-    logger.info(f"Final results: {len(final_jobs)} jobs")
+    logger.info(f"Final results: {len(final_jobs)} jobs from {completed_count} sources")
     return final_jobs

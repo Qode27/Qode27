@@ -38,22 +38,24 @@ def render():
     )
 
     # =========================================================================
-    # DARK THEME CSS & STYLING
+    # LIGHT THEME CSS & STYLING (REDESIGNED - CLEAN & MINIMAL)
     # =========================================================================
     st.markdown("""
     <style>
-        /* Color Scheme */
+        /* Color Palette */
         :root {
-            --bg: #0B1220;
-            --card: #111A2E;
-            --primary: #3B82F6;
-            --accent: #22C55E;
-            --text: #E5E7EB;
-            --text-muted: #94A3B8;
-            --border: #1F2A44;
+            --primary-blue: #2563EB;
+            --light-bg: #F5F9FF;
+            --white: #FFFFFF;
+            --text-primary: #0F172A;
+            --text-secondary: #475569;
+            --text-muted: #64748B;
+            --border: #E2E8F0;
+            --success: #22C55E;
+            --warning: #F97316;
         }
 
-        /* Global Styles */
+        /* Global */
         * {
             margin: 0;
             padding: 0;
@@ -61,107 +63,104 @@ def render():
         }
 
         body, html {
-            background: #0B1220 !important;
-            color: #E5E7EB !important;
+            background: var(--white) !important;
+            color: var(--text-primary) !important;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
         }
 
         .main {
-            background: #0B1220 !important;
+            background: var(--white) !important;
         }
 
         h1, h2, h3, h4, h5, h6 {
-            color: #E5E7EB !important;
+            color: var(--text-primary) !important;
+            font-weight: 600;
         }
 
         p, span, label {
-            color: #E5E7EB !important;
+            color: var(--text-secondary) !important;
         }
 
-        /* Cards */
+        /* Job Cards - Clean */
         .job-card {
-            background: #111A2E !important;
-            border: 1px solid #1F2A44;
+            background: var(--white);
+            border: 1px solid var(--border);
             border-radius: 12px;
             padding: 1.5rem;
-            transition: all 0.2s ease;
+            transition: all 0.15s ease;
             margin-bottom: 1rem;
         }
 
         .job-card:hover {
-            border-color: #3B82F6;
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15) !important;
-            transform: translateY(-2px);
+            border-color: var(--primary-blue);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.08);
         }
 
-        /* Badge Styles */
+        /* Badges - Soft */
         .badge {
             display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
+            padding: 6px 12px;
+            border-radius: 6px;
             font-size: 0.75rem;
-            font-weight: 600;
+            font-weight: 500;
+            border: none;
         }
 
         .badge-high {
-            background: rgba(34, 197, 94, 0.2) !important;
-            color: #22C55E !important;
-            border: 1px solid #22C55E !important;
+            background: #F0FDF4;
+            color: #22C55E;
         }
 
         .badge-med {
-            background: rgba(249, 115, 22, 0.2) !important;
-            color: #FB923C !important;
-            border: 1px solid #FB923C !important;
+            background: #FEF3C7;
+            color: #D97706;
         }
 
         .badge-low {
-            background: rgba(148, 163, 184, 0.2) !important;
-            color: #94A3B8 !important;
-            border: 1px solid #94A3B8 !important;
+            background: #F3F4F6;
+            color: #6B7280;
         }
 
         .badge-remote {
-            background: rgba(59, 130, 246, 0.2) !important;
-            color: #3B82F6 !important;
-            border: 1px solid #3B82F6 !important;
+            background: #F0F9FF;
+            color: var(--primary-blue);
         }
 
-        /* Filter Title */
+        /* Filter Section */
         .filter-title {
-            font-size: 0.875rem;
-            font-weight: 700;
-            color: #94A3B8;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
         }
 
         /* Empty State */
         .empty-state {
             text-align: center;
             padding: 3rem;
-            color: #94A3B8;
+            color: var(--text-muted);
         }
 
         .empty-state-icon {
-            font-size: 3rem;
+            font-size: 2.5rem;
             margin-bottom: 1rem;
         }
 
         /* Footer */
         .footer {
-            background: #111A2E;
-            border-top: 1px solid #1F2A44;
+            background: var(--white);
+            border-top: 1px solid var(--border);
             padding: 2rem;
             text-align: center;
-            color: #94A3B8;
+            color: var(--text-muted);
             font-size: 0.875rem;
             margin-top: 4rem;
         }
 
         .footer a {
-            color: #3B82F6;
+            color: var(--primary-blue);
             text-decoration: none;
         }
 
@@ -171,7 +170,7 @@ def render():
 
         hr {
             border: none;
-            border-top: 1px solid #1F2A44;
+            border-top: 1px solid var(--border-light);
         }
     </style>
     """, unsafe_allow_html=True)
@@ -320,15 +319,55 @@ def render():
                 st.error("⚠️ Enter a job title, select skills, or add custom skills to search.")
                 st.stop()
 
-            # Containers for streaming display
-            status_placeholder = st.empty()
-            
-            status_placeholder.markdown("🔄 **Searching for jobs...** Results appear as they arrive!", unsafe_allow_html=True)
-            
-            sources_found = 0
-            
+            # Placeholder for incremental results
+            results_placeholder = st.empty()
+
             try:
-                # Get final ranked results
+                # Expand search terms first
+                from services.job_fetcher import _expand_search_terms
+                search_terms = _expand_search_terms(selected_skills, skills_db, job_profile.strip(), manual_skills)
+
+                # Check cache first (instant results if available)
+                from utils.cache import CacheManager
+                cache_key = f"jobs_{hash(tuple(sorted(search_terms)))}"
+                cached_jobs = CacheManager.get(cache_key)
+
+                if cached_jobs:
+                    # Use cached results immediately and render
+                    normalized_jobs = normalize_jobs(cached_jobs)
+                    st.session_state.last_search_results = normalized_jobs
+                    st.session_state.results_page = 1
+                    st.session_state.last_search_meta = {
+                        "job_profile": job_profile,
+                        "selected_skills": selected_skills,
+                        "manual_skills": manual_skills,
+                        "locations": locations,
+                        "date_filter": date_filter,
+                        "min_match": min_match,
+                    }
+                    st.rerun()
+
+                # Define streaming callback to update UI as sources complete
+                def _stream_cb(jobs_so_far, source_name=None):
+                    try:
+                        normalized = normalize_jobs(jobs_so_far)
+                        snapshot = normalized[:25]
+                        with results_placeholder.container():
+                            for job in snapshot:
+                                st.markdown(f"### {job.get('title','Untitled')}")
+                                st.caption(f"**{job.get('company','Unknown')}** — {job.get('location','Remote')}")
+                                match_pct = job.get('match_percent', 0)
+                                if match_pct >= 70:
+                                    st.markdown(f'<div class="badge badge-high">{match_pct}%</div>', unsafe_allow_html=True)
+                                elif match_pct >= 40:
+                                    st.markdown(f'<div class="badge badge-med">{match_pct}%</div>', unsafe_allow_html=True)
+                                else:
+                                    st.markdown(f'<div class="badge badge-low">{match_pct}%</div>', unsafe_allow_html=True)
+                                st.markdown('---')
+                    except Exception:
+                        logger.debug('stream callback render error', exc_info=True)
+
+                # Kick off fetch with streaming callback; this will render intermediate results quickly
                 jobs = fetch_all_jobs(
                     selected_skills=selected_skills,
                     skills_db=skills_db,
@@ -340,15 +379,10 @@ def render():
                     max_results=500,
                     match_weight=60,
                     freshness_weight=40,
+                    stream_callback=_stream_cb,
                 )
-                
+
                 normalized_jobs = normalize_jobs(jobs)
-                sources_found = 3  # Default sources count
-
-                status_placeholder.empty()
-
-                with st.container():
-                    st.success(f"✓ **Found {len(normalized_jobs)} matching jobs** from {sources_found}+ sources!")
 
                 st.session_state.last_search_results = normalized_jobs
                 st.session_state.results_page = 1
@@ -360,12 +394,10 @@ def render():
                     "date_filter": date_filter,
                     "min_match": min_match,
                 }
-
                 st.rerun()
 
             except Exception as e:
-                status_placeholder.empty()
-                st.error(f"❌ Search error: {e}")
+                st.error(f"❌ Search error: {str(e)}")
                 logger.error(f"Search error: {e}", exc_info=True)
 
         if clear_clicked:

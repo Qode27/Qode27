@@ -1,405 +1,405 @@
 """
-Kansalt.com - Multi-Tool Professional Platform
-Landing page with 3 main tools: Jobs, Education, Businesses
+Kansalt.com - Multi-Tab Platform (Education | Jobs | Business)
+Light theme, premium SaaS design, live deployment ready.
 """
 import streamlit as st
 import sys
 import os
 
-# Add project root to path for imports
+# Add project root to path
 project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
-# =========================================================================
-# DISPATCH TO TOOLS
-# =========================================================================
-if "selected_tool" not in st.session_state:
-    st.session_state.selected_tool = None
+# Import tab render functions
+from pages.education import render as render_education
+from pages.jobs import render as render_jobs
+from pages.business import render as render_business
 
-if st.session_state.selected_tool:
-    sel = st.session_state.selected_tool
-    if sel == "jobs":
-        from pages import jobs
-        jobs.render()
-        st.stop()
-    elif sel == "education":
-        from pages import education
-        education.render()
-        st.stop()
-    elif sel == "businesses":
-        from pages import businesses
-        businesses.render()
-        st.stop()
-
-# =========================================================================
+# =====================================================
 # PAGE CONFIG
-# =========================================================================
+# =====================================================
 st.set_page_config(
     layout="wide",
-    page_title="Kansalt - Professional Tools",
-    page_icon="🚀",
-    initial_sidebar_state="collapsed",
+    page_title="Kansalt - Education | Jobs | Business",
+    page_icon="🌍",
+    initial_sidebar_state="expanded",
 )
 
-# =========================================================================
-# DARK THEME CSS & STYLING
-# =========================================================================
+# =====================================================
+# LIGHT THEME - GLOBAL CSS (REDESIGNED)
+# =====================================================
 st.markdown("""
 <style>
-    /* Color Scheme */
+    /* Color Palette - Calm, Professional White-Blue */
     :root {
-        --bg: #0B1220;
-        --card: #111A2E;
-        --primary: #3B82F6;
-        --accent: #22C55E;
-        --text: #E5E7EB;
-        --text-muted: #94A3B8;
-        --border: #1F2A44;
+        --primary-blue: #2563EB;
+        --secondary-blue: #3B82F6;
+        --light-bg: #F5F9FF;
+        --white: #FFFFFF;
+        --light-gray: #F8FAFC;
+        --text-primary: #0F172A;
+        --text-secondary: #475569;
+        --text-muted: #64748B;
+        --border: #E2E8F0;
     }
 
-    /* Global Styles */
+    /* Global Reset & Base */
     * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
     }
 
-    body, html {
-        background: #0B1220 !important;
-        color: #E5E7EB !important;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+    html, body {
+        background: var(--white) !important;
+        color: var(--text-primary) !important;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+        line-height: 1.6;
     }
 
     .main {
-        background: #0B1220 !important;
+        background: var(--white) !important;
     }
 
-    /* Headings */
-    h1, h2, h3, h4, h5, h6 {
-        color: #E5E7EB !important;
+    /* Typography - Clean Hierarchy */
+    h1 {
+        font-size: 2.25rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+        letter-spacing: -0.02em;
     }
 
-    /* Text */
-    p, span, label {
-        color: #E5E7EB !important;
-    }
-
-    /* Tool Cards */
-    .tool-card {
-        background: linear-gradient(135deg, #111A2E 0%, #1A2744 100%);
-        border: 1px solid #1F2A44;
-        border-radius: 16px;
-        padding: 3rem;
-        margin-bottom: 2rem;
-        transition: all 0.3s ease;
-        cursor: pointer;
-        text-align: center;
-    }
-
-    .tool-card:hover {
-        border-color: #3B82F6;
-        box-shadow: 0 0 30px rgba(59, 130, 246, 0.2);
-        transform: translateY(-5px);
-    }
-
-    .tool-icon {
-        font-size: 4rem;
-        margin-bottom: 1rem;
-        display: block;
-    }
-
-    .tool-title {
+    h2 {
         font-size: 1.75rem;
         font-weight: 700;
-        color: #E5E7EB;
-        margin-bottom: 1rem;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+        margin-top: 1.5rem;
+        letter-spacing: -0.01em;
     }
 
-    .tool-description {
-        color: #94A3B8;
-        font-size: 1rem;
-        line-height: 1.6;
-        margin-bottom: 2rem;
-    }
-
-    .tool-button {
-        background: linear-gradient(135deg, #3B82F6 0%, #22C55E 100%);
-        color: white;
-        border: none;
-        padding: 0.75rem 2rem;
-        border-radius: 8px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        font-size: 1rem;
-    }
-
-    .tool-button:hover {
-        opacity: 0.9;
-        transform: scale(1.05);
-    }
-
-    /* Hero Section */
-    .hero {
-        text-align: center;
-        padding: 4rem 2rem;
-        background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(34, 197, 94, 0.1) 100%);
-        border-radius: 16px;
-        margin-bottom: 4rem;
-        border: 1px solid #1F2A44;
-    }
-
-    .hero h1 {
-        font-size: 3rem;
-        background: linear-gradient(135deg, #3B82F6 0%, #22C55E 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        margin-bottom: 1rem;
-        font-weight: 800;
-    }
-
-    .hero p {
+    h3 {
         font-size: 1.25rem;
-        color: #94A3B8;
-        margin-bottom: 2rem;
-        max-width: 600px;
-        margin-left: auto;
-        margin-right: auto;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
     }
 
-    /* Features Grid */
-    .features {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 2rem;
-        margin-bottom: 4rem;
+    p {
+        color: var(--text-secondary);
+        font-size: 0.95rem;
     }
 
-    .feature-item {
-        background: #111A2E;
-        border: 1px solid #1F2A44;
+    /* Spacing - Generous whitespace */
+    section {
+        padding: 2rem 0;
+    }
+
+    /* Cards - Subtle, Clean */
+    .card {
+        background: var(--white);
+        border: 1px solid var(--border);
         border-radius: 12px;
         padding: 1.5rem;
+        transition: all 0.2s ease;
     }
 
-    .feature-icon {
-        font-size: 2rem;
-        margin-bottom: 1rem;
+    .card:hover {
+        border-color: var(--primary-blue);
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.08);
     }
 
-    .feature-title {
-        font-weight: 600;
-        margin-bottom: 0.5rem;
-        color: #3B82F6;
+    /* Buttons - Clean & Clear */
+    button {
+        border-radius: 8px;
+        font-weight: 500;
+        transition: all 0.15s ease;
+        border: none;
     }
 
-    .feature-text {
-        font-size: 0.9rem;
-        color: #94A3B8;
+    button[kind="primary"] {
+        background: var(--primary-blue) !important;
+        color: white !important;
+        padding: 10px 20px !important;
     }
 
-    /* Footer */
+    button[kind="primary"]:hover {
+        background: #1d4ed8 !important;
+        box-shadow: 0 2px 8px rgba(37, 99, 235, 0.12) !important;
+    }
+
+    button[kind="secondary"] {
+        background: var(--white) !important;
+        color: var(--primary-blue) !important;
+        border: 1.5px solid var(--primary-blue) !important;
+    }
+
+    button[kind="secondary"]:hover {
+        background: var(--light-bg) !important;
+    }
+
+    /* Inputs - Minimal, Clear */
+    input, select, textarea {
+        border: 1px solid var(--border) !important;
+        border-radius: 8px !important;
+        background: var(--white) !important;
+        color: var(--text-primary) !important;
+        padding: 10px 12px !important;
+        transition: all 0.15s ease !important;
+        font-size: 0.95rem !important;
+    }
+
+    input::placeholder {
+        color: var(--text-muted) !important;
+    }
+
+    input:focus, select:focus, textarea:focus {
+        border-color: var(--primary-blue) !important;
+        box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1) !important;
+        outline: none !important;
+    }
+
+    /* Badges - Soft, Integrated */
+    .badge {
+        display: inline-block;
+        padding: 6px 12px;
+        border-radius: 6px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        background: var(--light-bg);
+        color: var(--primary-blue);
+        border: 1px solid transparent;
+    }
+
+    /* Navbar - Lightweight, Clean */
+    .navbar-container {
+        position: sticky;
+        top: 0;
+        z-index: 999;
+        background: var(--white);
+        border-bottom: 1px solid var(--border);
+        padding: 1rem 2rem;
+    }
+
+    .navbar-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 1280px;
+        margin: 0 auto;
+        gap: 2rem;
+    }
+
+    .navbar-brand {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--primary-blue);
+        white-space: nowrap;
+        letter-spacing: -0.02em;
+    }
+
+    .tab-switcher {
+        display: flex;
+        gap: 0.25rem;
+        justify-content: center;
+        flex: 1;
+    }
+
+    .tab-btn {
+        padding: 0.65rem 1.25rem;
+        border: none;
+        background: transparent;
+        color: var(--text-muted);
+        font-weight: 500;
+        font-size: 0.95rem;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        position: relative;
+    }
+
+    .tab-btn:hover {
+        color: var(--text-primary);
+        background: var(--light-gray);
+    }
+
+    .tab-btn.active {
+        color: var(--primary-blue);
+        background: transparent;
+        border-bottom: 2px solid var(--primary-blue);
+        border-radius: 0;
+    }
+
+    /* Sidebar - Clean & Light */
+    [data-testid="stSidebar"] {
+        background: var(--light-gray) !important;
+    }
+
+    [data-testid="stSidebar"] [data-testid="stElementContainer"] {
+        background: var(--light-gray) !important;
+    }
+
+    /* Sections - Alternating backgrounds */
+    .section-light {
+        background: var(--white);
+        padding: 2rem;
+        border-radius: 0;
+    }
+
+    .section-accent {
+        background: var(--light-bg);
+        padding: 2rem;
+        border-radius: 0;
+    }
+
+    /* Footer - Minimal */
     .footer {
-        background: #111A2E;
-        border-top: 1px solid #1F2A44;
-        padding: 3rem;
+        border-top: 1px solid var(--border);
+        padding: 2rem;
         text-align: center;
-        color: #94A3B8;
+        color: var(--text-muted);
+        background: var(--white);
+        margin-top: 3rem;
         font-size: 0.875rem;
-        margin-top: 4rem;
-        border-radius: 12px;
     }
 
     .footer a {
-        color: #3B82F6;
+        color: var(--primary-blue);
         text-decoration: none;
+        font-weight: 500;
     }
 
     .footer a:hover {
         text-decoration: underline;
     }
 
-    /* Buttons */
-    .stButton > button {
-        border-radius: 8px !important;
+    /* Animations - Subtle Only */
+    @keyframes fade-in {
+        from { opacity: 0; }
+        to { opacity: 1; }
     }
 
-    .stButton > button:hover {
-        border-color: #3B82F6 !important;
+    @keyframes slide-up {
+        from { opacity: 0; transform: translateY(8px); }
+        to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Input Fields */
-    .stTextInput > div > div > input,
-    .stSelectbox > div > div > select,
-    .stNumberInput > div > div > input {
-        background: #1F2A44 !important;
-        color: #E5E7EB !important;
-        border: 1px solid #1F2A44 !important;
-        border-radius: 8px !important;
+    .fade-in {
+        animation: fade-in 0.3s ease-out;
     }
 
-    .stTextInput > div > div > input:focus,
-    .stSelectbox > div > div > select:focus,
-    .stNumberInput > div > div > input:focus {
-        background: #2D3E52 !important;
-        color: #E5E7EB !important;
-        border-color: #3B82F6 !important;
+    .slide-up {
+        animation: slide-up 0.3s ease-out;
     }
 
-    /* Dividers */
+    /* Responsive */
+    @media (max-width: 768px) {
+        .navbar-content {
+            flex-direction: column;
+            gap: 1rem;
+            padding: 0.75rem 0;
+        }
+        
+        .tab-switcher {
+            width: 100%;
+        }
+
+        .tab-btn {
+            flex: 1;
+            text-align: center;
+        }
+
+        h1 { font-size: 1.75rem; }
+        h2 { font-size: 1.35rem; }
+    }
+
+    /* Divider */
     hr {
         border: none;
-        border-top: 1px solid #1F2A44;
+        border-top: 1px solid var(--border);
         margin: 2rem 0;
     }
 </style>
 """, unsafe_allow_html=True)
 
-# =========================================================================
-# NAVBAR
-# =========================================================================
-col_brand, col_spacer, col_auth = st.columns([2, 3, 2])
+# =====================================================
+# SESSION STATE & INITIALIZATION
+# =====================================================
+if "selected_tab" not in st.session_state:
+    st.session_state.selected_tab = "Jobs"
 
-with col_brand:
-    st.markdown('<div style="font-size: 1.8rem; font-weight: 800; background: linear-gradient(135deg, #3B82F6 0%, #22C55E 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">🚀 Kansalt.com</div>', unsafe_allow_html=True)
+if "last_search_results" not in st.session_state:
+    st.session_state.last_search_results = []
 
-with col_auth:
-    col_l, col_r, col_g = st.columns([1, 1, 1.2])
-    with col_l:
-        if st.button("Login", use_container_width=True, key="btn_login"):
-            st.info("Login feature coming soon!")
-    with col_r:
-        if st.button("Register", use_container_width=True, key="btn_register"):
-            st.info("Registration coming soon!")
-    with col_g:
-        if st.button("👤 Continue as Guest", use_container_width=True, key="btn_guest"):
-            st.info("You're browsing as a guest")
+# =====================================================
+# GLOBAL NAVBAR (Sticky, Tab Switcher)
+# =====================================================
+st.markdown('<div class="navbar-container">', unsafe_allow_html=True)
 
-st.markdown("---")
+navbar_col1, navbar_col2, navbar_col3 = st.columns([1.5, 3, 1.5])
 
-# =========================================================================
-# HERO SECTION
-# =========================================================================
-st.markdown("""
-<div class="hero">
-    <h1>Welcome to Kansalt</h1>
-    <p>Your all-in-one professional platform for finding jobs, learning, and growing your business</p>
-</div>
-""", unsafe_allow_html=True)
-
-# =========================================================================
-# TOOLS SECTION
-# =========================================================================
-st.markdown("### 🛠️ Our Tools")
-st.markdown("")
-
-col1, col2, col3 = st.columns(3, gap="large")
-
-# Tool 1: Jobs
-with col1:
+with navbar_col1:
     st.markdown("""
-    <div class="tool-card">
-        <span class="tool-icon">💼</span>
-        <div class="tool-title">Jobs</div>
-        <div class="tool-description">
-            Search and apply for remote jobs from 35+ sources. Get personalized job matches based on your skills and experience. Optimize your resume for each job with AI-powered tailoring.
-        </div>
+    <div class="navbar-brand">
+        🌍 kansalt
     </div>
     """, unsafe_allow_html=True)
 
-    if st.button("Open Jobs Tool →", use_container_width=True, key="btn_jobs"):
-        st.session_state.selected_tool = "jobs"
-        st.rerun()
+with navbar_col2:
+    # Tab buttons in centered section
+    col_ed, col_jobs, col_bus = st.columns([1, 1, 1])
+    
+    with col_ed:
+        active_ed = "active" if st.session_state.selected_tab == "Education" else ""
+        if st.button("🎓 Education", use_container_width=True, key="tab_education"):
+            st.session_state.selected_tab = "Education"
+            st.rerun()
+    
+    with col_jobs:
+        active_jobs = "active" if st.session_state.selected_tab == "Jobs" else ""
+        if st.button("💼 Jobs", use_container_width=True, key="tab_jobs"):
+            st.session_state.selected_tab = "Jobs"
+            st.rerun()
+    
+    with col_bus:
+        active_bus = "active" if st.session_state.selected_tab == "Business" else ""
+        if st.button("🏢 Business", use_container_width=True, key="tab_business"):
+            st.session_state.selected_tab = "Business"
+            st.rerun()
 
-# Tool 2: Education
-with col2:
+with navbar_col3:
     st.markdown("""
-    <div class="tool-card">
-        <span class="tool-icon">🎓</span>
-        <div class="tool-title">Education</div>
-        <div class="tool-description">
-            Discover online courses, certifications, and learning paths to upskill. Find programs that match your career goals and budget. Track your learning progress and earn certificates.
-        </div>
+    <div style="text-align: right; color: var(--text-muted); font-size: 0.875rem; padding-top: 0.5rem;">
+        v1.0 — Live
     </div>
     """, unsafe_allow_html=True)
 
-    if st.button("Open Education Tool →", use_container_width=True, key="btn_education"):
-        st.session_state.selected_tool = "education"
-        st.rerun()
-
-# Tool 3: Businesses
-with col3:
-    st.markdown("""
-    <div class="tool-card">
-        <span class="tool-icon">🏢</span>
-        <div class="tool-title">Businesses</div>
-        <div class="tool-description">
-            Explore business opportunities, startups, and investment options. Find partnerships and growth strategies. Connect with entrepreneurs and investors in your field.
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
-
-    if st.button("Open Businesses Tool →", use_container_width=True, key="btn_businesses"):
-        st.session_state.selected_tool = "businesses"
-        st.rerun()
-
-# =========================================================================
-# FEATURES SECTION
-# =========================================================================
+st.markdown('</div>', unsafe_allow_html=True)
 st.markdown("---")
-st.markdown("### ✨ Why Choose Kansalt?")
 
-st.markdown("""
-<div class="features">
-    <div class="feature-item">
-        <div class="feature-icon">⚡</div>
-        <div class="feature-title">Fast & Efficient</div>
-        <div class="feature-text">Get real-time results from 35+ job sources instantly</div>
-    </div>
-    <div class="feature-item">
-        <div class="feature-icon">🎯</div>
-        <div class="feature-title">Smart Matching</div>
-        <div class="feature-text">AI-powered job matching based on your skills</div>
-    </div>
-    <div class="feature-item">
-        <div class="feature-icon">📄</div>
-        <div class="feature-title">Resume Optimizer</div>
-        <div class="feature-text">Intelligently tailor resumes for each job</div>
-    </div>
-    <div class="feature-item">
-        <div class="feature-icon">🌍</div>
-        <div class="feature-title">Global Opportunities</div>
-        <div class="feature-text">Find remote jobs from companies worldwide</div>
-    </div>
-    <div class="feature-item">
-        <div class="feature-icon">📊</div>
-        <div class="feature-title">Data-Driven</div>
-        <div class="feature-text">Analytics and insights for better decisions</div>
-    </div>
-    <div class="feature-item">
-        <div class="feature-icon">🔒</div>
-        <div class="feature-title">Secure & Private</div>
-        <div class="feature-text">Your data is protected with enterprise-grade security</div>
-    </div>
-</div>
-""", unsafe_allow_html=True)
+# =====================================================
+# TAB CONTENT DISPATCH
+# =====================================================
+if st.session_state.selected_tab == "Education":
+    render_education()
+elif st.session_state.selected_tab == "Business":
+    render_business()
+else:  # Jobs (default)
+    render_jobs()
 
-# =========================================================================
-# FOOTER
-# =========================================================================
-st.markdown("---")
+# =====================================================
+# GLOBAL FOOTER
+# =====================================================
 st.markdown("""
 <div class="footer">
-    <p><strong>Kansalt.com</strong> v2.0 | Your Professional Platform</p>
-    <p>🚀 Empowering careers through technology | 
-       <a href="https://github.com" target="_blank">GitHub</a> | 
-       <a href="mailto:hello@kansalt.com">Contact Us</a></p>
-    <p style="margin-top: 1rem; font-size: 0.75rem; color: #64748B;">
-        © 2026 Kansalt. All rights reserved. | 
-        <a href="#" target="_blank">Privacy Policy</a> | 
-        <a href="#" target="_blank">Terms of Service</a>
+    <p><strong>kansalt.com</strong> — Find Your Opportunity | Study Abroad | Hire Top Talent</p>
+    <p style="margin-top: 0.5rem; font-size: 0.75rem;">
+        © 2026 Kansalt Inc. | 
+        <a href="#" target="_blank">Privacy</a> | 
+        <a href="#" target="_blank">Terms</a> | 
+        <a href="#" target="_blank">Contact</a>
     </p>
 </div>
 """, unsafe_allow_html=True)

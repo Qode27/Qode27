@@ -1,0 +1,709 @@
+"""
+Kansalt.com - Premium AI Job Aggregator & Career Platform
+Modern SaaS website with smooth animations and professional design
+Brand: Royal Blue + Gold accents, glassmorphism effects
+"""
+import streamlit as st
+import sys
+import os
+
+# Add project root to path for imports
+project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
+
+# =========================================================================
+# DISPATCH TO TOOLS
+# =========================================================================
+if "selected_tool" not in st.session_state:
+    st.session_state.selected_tool = None
+
+if st.session_state.selected_tool:
+    sel = st.session_state.selected_tool
+    if sel == "jobs":
+        from pages import jobs
+        jobs.render()
+        st.stop()
+    elif sel == "education":
+        from pages import education
+        education.render()
+        st.stop()
+    elif sel == "businesses":
+        from pages import businesses
+        businesses.render()
+        st.stop()
+
+# =========================================================================
+# PAGE CONFIG
+# =========================================================================
+st.set_page_config(
+    layout="wide",
+    page_title="Kansalt - AI-Powered Job Discovery Platform",
+    page_icon="💼",
+    initial_sidebar_state="collapsed",
+)
+
+# =========================================================================
+# PREMIUM CSS & ANIMATIONS
+# =========================================================================
+st.markdown("""
+<style>
+    /* GLOBAL SETUP */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    :root {
+        --primary: #1e40af;
+        --primary-light: #3b82f6;
+        --primary-dark: #0f172a;
+        --accent: #fbbf24;
+        --accent-dark: #f59e0b;
+        --bg: #0f172a;
+        --bg-secondary: #1e293b;
+        --text: #f1f5f9;
+        --text-muted: #cbd5e1;
+        --border: #334155;
+    }
+
+    html, body, [data-testid="stAppViewContainer"] {
+        background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%) !important;
+        color: #f1f5f9 !important;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif !important;
+    }
+
+    [data-testid="stToolbar"] { visibility: hidden; }
+    [data-testid="stDecoration"] { display: none; }
+    header[data-testid="stHeader"] { background: transparent !important; }
+    footer { display: none; }
+
+    .main { padding: 0 !important; }
+
+    /* TYPOGRAPHY */
+    h1 { font-size: 3.5rem !important; font-weight: 800 !important; line-height: 1.1; letter-spacing: -0.02em; }
+    h2 { font-size: 2.5rem !important; font-weight: 700 !important; letter-spacing: -0.01em; }
+    h3 { font-size: 1.875rem !important; font-weight: 600 !important; }
+    h4 { font-size: 1.25rem !important; font-weight: 600 !important; }
+
+    p { line-height: 1.6; color: #cbd5e1 !important; }
+
+    a {
+        color: #60a5fa !important;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    a:hover { color: #fbbf24 !important; }
+
+    /* NAVBAR */
+    .navbar {
+        position: sticky;
+        top: 0;
+        background: linear-gradient(180deg, rgba(15, 23, 42, 0.98) 0%, rgba(15, 23, 42, 0.85) 100%);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(251, 191, 36, 0.15);
+        padding: 1rem 2rem;
+        z-index: 1000;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    }
+
+    .navbar-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .navbar-brand {
+        font-size: 1.5rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, #3b82f6 0%, #fbbf24 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    /* HERO SECTION */
+    .hero {
+        position: relative;
+        overflow: hidden;
+        padding: 7rem 2rem;
+        background: linear-gradient(135deg, rgba(15, 23, 42, 0.5) 0%, rgba(30, 58, 95, 0.3) 100%);
+        text-align: center;
+        min-height: 700px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: 
+            radial-gradient(at 20% 50%, rgba(59, 130, 246, 0.15) 0px, transparent 50%),
+            radial-gradient(at 80% 50%, rgba(251, 191, 36, 0.1) 0px, transparent 50%);
+        animation: gradient-pulse 8s ease-in-out infinite;
+        pointer-events: none;
+    }
+
+    @keyframes gradient-pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.8; }
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 10;
+        max-width: 900px;
+        animation: fade-up-intro 0.8s ease-out;
+    }
+
+    @keyframes fade-up-intro {
+        from { opacity: 0; transform: translateY(40px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero h1 {
+        background: linear-gradient(135deg, #f1f5f9 0%, #cbd5e1 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 1rem;
+    }
+
+    .hero-accent {
+        background: linear-gradient(135deg, #60a5fa 0%, #fbbf24 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .hero-subtitle {
+        font-size: 1.3rem;
+        color: #cbd5e1;
+        margin-bottom: 2rem;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.7;
+    }
+
+    .cta-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 2.5rem;
+    }
+
+    .btn-hero {
+        padding: 1rem 2.5rem;
+        border-radius: 10px;
+        font-weight: 700;
+        font-size: 1rem;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .btn-primary-hero {
+        background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+        color: white;
+        box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+    }
+
+    .btn-primary-hero:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 15px 50px rgba(59, 130, 246, 0.5);
+        background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+    }
+
+    .btn-secondary-hero {
+        background: rgba(251, 191, 36, 0.1);
+        color: #fbbf24;
+        border: 2px solid #fbbf24;
+        backdrop-filter: blur(10px);
+    }
+
+    .btn-secondary-hero:hover {
+        background: rgba(251, 191, 36, 0.2);
+        transform: translateY(-4px);
+        box-shadow: 0 10px 30px rgba(251, 191, 36, 0.2);
+    }
+
+    /* SECTION STYLING */
+    .section {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 5rem 2rem;
+    }
+
+    .section-title {
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+
+    .section-subtitle {
+        text-align: center;
+        color: #cbd5e1;
+        font-size: 1.1rem;
+        margin-bottom: 3rem;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* CARDS & GRID */
+    .card {
+        background: rgba(30, 58, 95, 0.5);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border: 1px solid rgba(251, 191, 36, 0.15);
+        border-radius: 15px;
+        padding: 2rem;
+        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .card:hover {
+        border-color: rgba(251, 191, 36, 0.4);
+        background: rgba(30, 58, 95, 0.8);
+        box-shadow: 0 20px 50px rgba(59, 130, 246, 0.15);
+        transform: translateY(-8px);
+    }
+
+    .card-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        display: inline-block;
+        animation: float-icon 4s ease-in-out infinite;
+    }
+
+    @keyframes float-icon {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-15px); }
+    }
+
+    .card-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #fbbf24;
+        margin-bottom: 0.75rem;
+    }
+
+    .card-text {
+        color: #cbd5e1;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+    }
+
+    /* STEPS */
+    .steps-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        margin: 3rem 0;
+    }
+
+    .step {
+        position: relative;
+        padding: 2.5rem;
+        background: rgba(30, 58, 95, 0.4);
+        border-radius: 12px;
+        border: 1px solid rgba(251, 191, 36, 0.1);
+        transition: all 0.3s ease;
+    }
+
+    .step:hover {
+        background: rgba(30, 58, 95, 0.7);
+        border-color: #fbbf24;
+        transform: translateY(-5px);
+    }
+
+    .step-num {
+        position: absolute;
+        top: -18px;
+        left: 25px;
+        width: 45px;
+        height: 45px;
+        background: linear-gradient(135deg, #3b82f6 0%, #fbbf24 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        color: white;
+        font-size: 1.4rem;
+        box-shadow: 0 5px 20px rgba(59, 130, 246, 0.3);
+    }
+
+    .step-title {
+        font-weight: 700;
+        color: #fbbf24;
+        margin-top: 1.2rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .step-text {
+        color: #cbd5e1;
+        line-height: 1.6;
+        font-size: 0.95rem;
+    }
+
+    /* BENEFITS */
+    .benefits-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin: 3rem 0;
+    }
+
+    .benefit {
+        display: flex;
+        gap: 1.5rem;
+        padding: 2rem;
+        background: rgba(30, 58, 95, 0.3);
+        border-radius: 12px;
+        border-left: 4px solid #fbbf24;
+        transition: all 0.3s ease;
+    }
+
+    .benefit:hover {
+        background: rgba(30, 58, 95, 0.6);
+        transform: translateX(8px);
+        box-shadow: 0 10px 30px rgba(251, 191, 36, 0.1);
+    }
+
+    .benefit-icon {
+        font-size: 2.5rem;
+        min-width: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .benefit-title {
+        font-weight: 700;
+        color: #fbbf24;
+        margin-bottom: 0.25rem;
+    }
+
+    .benefit-text {
+        color: #cbd5e1;
+        font-size: 0.95rem;
+        line-height: 1.5;
+    }
+
+    /* FOOTER */
+    .footer {
+        background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 58, 95, 0.4) 100%);
+        border-top: 1px solid rgba(251, 191, 36, 0.15);
+        padding: 4rem 2rem 2rem;
+        margin-top: 6rem;
+    }
+
+    .footer-grid {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 2.5rem;
+        margin-bottom: 2.5rem;
+    }
+
+    .footer-col h4 {
+        color: #fbbf24;
+        margin-bottom: 1rem;
+        font-weight: 700;
+    }
+
+    .footer-col a {
+        display: block;
+        color: #cbd5e1;
+        margin: 0.5rem 0;
+        font-size: 0.9rem;
+        transition: color 0.3s ease;
+    }
+
+    .footer-col a:hover {
+        color: #fbbf24;
+    }
+
+    .footer-bottom {
+        max-width: 1400px;
+        margin: 0 auto;
+        text-align: center;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(251, 191, 36, 0.1);
+        color: #94a3b8;
+        font-size: 0.85rem;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+        h1 { font-size: 2rem !important; }
+        h2 { font-size: 1.5rem !important; }
+        .hero { padding: 3rem 1rem; min-height: 500px; }
+        .cta-buttons { flex-direction: column; }
+        .btn-hero { width: 100%; }
+        .section { padding: 3rem 1rem; }
+    }
+
+    /* UTILITY */
+    .text-center { text-align: center; }
+    .max-width { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
+</style>
+""", unsafe_allow_html=True)
+
+# =========================================================================
+# NAVBAR
+# =========================================================================
+st.markdown("""
+<div class="navbar">
+    <div class="navbar-content">
+        <div class="navbar-brand">💼 Kansalt</div>
+        <div style="font-size: 0.9rem; color: #cbd5e1;">AI-Powered Job Discovery</div>
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+# =========================================================================
+# HERO SECTION
+# =========================================================================
+st.markdown("""
+<div class="hero">
+    <div class="hero-content">
+        <h1>Find the Right Job. <span class="hero-accent">Faster. Smarter.</span></h1>
+        <p class="hero-subtitle">
+            AI-powered job discovery across 35+ platforms. Get personalized job matches, 
+            optimize your resume, and apply instantly.
+        </p>
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+col1, col2, col3 = st.columns([1, 2, 1])
+with col2:
+    b1, b2 = st.columns(2, gap="small")
+    with b1:
+        if st.button("🚀 Get Started", use_container_width=True, key="btn_hero_start"):
+            st.session_state.selected_tool = "jobs"
+            st.rerun()
+    with b2:
+        if st.button("👤 Explore", use_container_width=True, key="btn_hero_explore"):
+            st.session_state.selected_tool = "jobs"
+            st.rerun()
+
+st.markdown("<div style='height: 3rem;'></div>", unsafe_allow_html=True)
+
+# =========================================================================
+# HOW IT WORKS
+# =========================================================================
+st.markdown("""
+<div class="section">
+    <h2 class="section-title">✨ How It Works</h2>
+    <p class="section-subtitle">Three simple steps to land your dream job</p>
+    <div class="steps-grid">
+        <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-title">Select Your Skills</div>
+            <div class="step-text">Choose from 500+ curated skills or add custom ones that match your expertise and career goals.</div>
+        </div>
+        <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-title">Smart Job Matching</div>
+            <div class="step-text">Our AI analyzes your profile and finds the best matching jobs across 35+ platforms instantly.</div>
+        </div>
+        <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-title">Apply & Succeed</div>
+            <div class="step-text">Apply with one click. Auto-optimize your resume for each role. Track your applications.</div>
+        </div>
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+st.markdown("<div style='height: 2rem;'></div>", unsafe_allow_html=True)
+
+# =========================================================================
+# WHY KANSALT
+# =========================================================================
+st.markdown("""
+<div class="section" style="background: rgba(30, 58, 95, 0.2); border-radius: 20px; margin: 2rem auto;">
+    <h2 class="section-title">🎯 Why Choose Kansalt</h2>
+    <div class="benefits-grid">
+        <div class="benefit">
+            <div class="benefit-icon">⚡</div>
+            <div>
+                <div class="benefit-title">Lightning Fast</div>
+                <div class="benefit-text">Search 35+ platforms in seconds. Real-time job updates.</div>
+            </div>
+        </div>
+        <div class="benefit">
+            <div class="benefit-icon">🤖</div>
+            <div>
+                <div class="benefit-title">AI-Powered Matching</div>
+                <div class="benefit-text">Smart algorithms find your perfect job match.</div>
+            </div>
+        </div>
+        <div class="benefit">
+            <div class="benefit-icon">📄</div>
+            <div>
+                <div class="benefit-title">Resume Optimizer</div>
+                <div class="benefit-text">Auto-tailor resumes for each job application.</div>
+            </div>
+        </div>
+        <div class="benefit">
+            <div class="benefit-icon">🌍</div>
+            <div>
+                <div class="benefit-title">Global Opportunities</div>
+                <div class="benefit-text">Find remote jobs from companies worldwide.</div>
+            </div>
+        </div>
+        <div class="benefit">
+            <div class="benefit-icon">🔔</div>
+            <div>
+                <div class="benefit-title">Smart Alerts</div>
+                <div class="benefit-text">Get notified about jobs matching your profile.</div>
+            </div>
+        </div>
+        <div class="benefit">
+            <div class="benefit-icon">🔒</div>
+            <div>
+                <div class="benefit-title">Privacy First</div>
+                <div class="benefit-text">Your data is secure. Enterprise-grade encryption.</div>
+            </div>
+        </div>
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+st.markdown("<div style='height: 2rem;'></div>", unsafe_allow_html=True)
+
+# =========================================================================
+# TOOLS SECTION
+# =========================================================================
+st.markdown("""
+<div class="section">
+    <h2 class="section-title">🛠️ Our Tools & Features</h2>
+    <p class="section-subtitle">Comprehensive platform for your career growth</p>
+</div>
+""", unsafe_allow_html=True)
+
+col1, col2, col3 = st.columns(3, gap="large")
+
+with col1:
+    st.markdown("""
+    <div class="card" style="text-align: center;">
+        <div class="card-icon">💼</div>
+        <div class="card-title">Job Search</div>
+        <div class="card-text">
+            Search across 35+ job platforms. Smart filters. Personalized matches. Instant apply.
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+    if st.button("Explore Jobs →", use_container_width=True, key="btn_jobs_home"):
+        st.session_state.selected_tool = "jobs"
+        st.rerun()
+
+with col2:
+    st.markdown("""
+    <div class="card" style="text-align: center;">
+        <div class="card-icon">🎓</div>
+        <div class="card-title">Learning Paths</div>
+        <div class="card-text">
+            Courses, certifications & learning paths. Personalized career development. (Coming Soon)
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+    if st.button("Explore Learning →", use_container_width=True, key="btn_edu_home"):
+        st.session_state.selected_tool = "education"
+        st.rerun()
+
+with col3:
+    st.markdown("""
+    <div class="card" style="text-align: center;">
+        <div class="card-icon">🏢</div>
+        <div class="card-title">Business Hub</div>
+        <div class="card-text">
+            Startup opportunities, business insights & growth strategies. (Coming Soon)
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+    if st.button("Explore Business →", use_container_width=True, key="btn_bus_home"):
+        st.session_state.selected_tool = "businesses"
+        st.rerun()
+
+st.markdown("<div style='height: 3rem;'></div>", unsafe_allow_html=True)
+
+# =========================================================================
+# CTA SECTION
+# =========================================================================
+st.markdown("""
+<div style="background: linear-gradient(135deg, rgba(30, 58, 95, 0.6) 0%, rgba(30, 58, 95, 0.3) 100%); 
+            border: 1px solid rgba(251, 191, 36, 0.2); border-radius: 20px; padding: 4rem 2rem;
+            text-align: center; margin: 4rem auto; max-width: 1000px;">
+    <h2 style="margin-bottom: 1rem;">🚀 Ready to Find Your Dream Job?</h2>
+    <p style="color: #cbd5e1; font-size: 1.1rem; margin-bottom: 2rem;">
+        Join thousands of job seekers who are finding better opportunities, faster with Kansalt.
+    </p>
+</div>
+""", unsafe_allow_html=True)
+
+col1, col2, col3 = st.columns([1, 1, 1])
+with col2:
+    if st.button("Start Your Search →", use_container_width=True, key="btn_cta_final"):
+        st.session_state.selected_tool = "jobs"
+        st.rerun()
+
+st.markdown("<div style='height: 3rem;'></div>", unsafe_allow_html=True)
+
+# =========================================================================
+# FOOTER
+# =========================================================================
+st.markdown("""
+<div class="footer">
+    <div class="footer-grid">
+        <div class="footer-col">
+            <h4>About Kansalt</h4>
+            <p style="color: #cbd5e1; font-size: 0.9rem; margin-bottom: 1rem;">
+                AI-powered job aggregator helping professionals find their perfect role across 35+ platforms.
+            </p>
+        </div>
+        <div class="footer-col">
+            <h4>Features</h4>
+            <a href="#">Job Search</a>
+            <a href="#">Smart Matching</a>
+            <a href="#">Resume Optimizer</a>
+            <a href="#">Career Guides</a>
+        </div>
+        <div class="footer-col">
+            <h4>Company</h4>
+            <a href="#">About Us</a>
+            <a href="#">Blog</a>
+            <a href="#">Contact</a>
+            <a href="#">Careers</a>
+        </div>
+        <div class="footer-col">
+            <h4>Legal</h4>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Contact: hello@kansalt.com</a>
+            <a href="#">GitHub</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2026 Kansalt.com - Your AI Job Discovery Platform</p>
+        <p style="margin-top: 0.75rem; opacity: 0.7;">
+            Made with ❤️ for job seekers worldwide | Aggregating 35+ job platforms
+        </p>
+    </div>
+</div>
+""", unsafe_allow_html=True)
