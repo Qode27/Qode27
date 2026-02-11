@@ -117,9 +117,9 @@ st.markdown("""
     }
 
     .stButton > button:hover {
-        background: #2563EB !important;
+        background: #6D28D9 !important;
         transform: translateY(-2px) !important;
-        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4) !important;
+        box-shadow: 0 4px 12px rgba(109, 40, 217, 0.4) !important;
     }
 
     .stButton > button:active {
@@ -317,7 +317,7 @@ st.markdown("""
     }
 
     a:hover {
-        color: #2563EB !important;
+        color: #6D28D9 !important;
     }
 
     /* Metrics */

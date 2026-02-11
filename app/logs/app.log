@@ -341,3 +341,247 @@
 2026-02-10 17:02:09,047 | scrapers.rss_common | ERROR | RSS feed error for We Work Remotely: IncompleteRead(12761 bytes read)
 2026-02-10 17:02:09,057 | scrapers.rss_common | ERROR | RSS feed error for FlexJobs: Remote end closed connection without response
 2026-02-10 17:02:09,065 | scrapers.rss_common | ERROR | RSS feed error for FlexJobs: Remote end closed connection without response
+2026-02-11 01:14:32,309 | services.job_fetcher | INFO | Starting job fetch: skills=[], profile=Devops engineer, locations=['Remote'], manual_terms=[]
+2026-02-11 01:14:33,286 | scrapers.rss_common | WARNING | RSS feed parsing warning for Jobs Collider: <urlopen error [Errno 11001] getaddrinfo failed>
+2026-02-11 01:14:33,287 | scrapers.rss_common | INFO | RSS Jobs Collider: fetched 0 jobs
+2026-02-11 01:14:33,289 | services.job_fetcher | DEBUG | Source JobsCollider returned 0 jobs in 0.95s
+2026-02-11 01:14:33,976 | scrapers.rss_common | WARNING | RSS feed parsing warning for WorkingViral: <urlopen error [Errno 11001] getaddrinfo failed>
+2026-02-11 01:14:33,978 | scrapers.rss_common | INFO | RSS WorkingViral: fetched 0 jobs
+2026-02-11 01:14:33,978 | services.job_fetcher | DEBUG | Source WorkingViral returned 0 jobs in 1.55s
+2026-02-11 01:14:34,216 | scrapers.rss_common | WARNING | RSS feed parsing warning for GitHub Jobs: <urlopen error [Errno 11004] getaddrinfo failed>
+2026-02-11 01:14:34,217 | scrapers.rss_common | INFO | RSS GitHub Jobs: fetched 0 jobs
+2026-02-11 01:14:34,219 | services.job_fetcher | DEBUG | Source GitHub returned 0 jobs in 0.93s
+2026-02-11 01:14:34,666 | scrapers.himalayas_api | ERROR | Himalayas API error: HTTPSConnectionPool(host='api.thehimalayas.com', port=443): Max retries exceeded with url: /jobs?search=devops+engineer (Caused by SSLError(SSLError(1, '[SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1006)')))
+2026-02-11 01:14:34,667 | services.job_fetcher | DEBUG | Source Himalayas returned 0 jobs in 2.35s
+2026-02-11 01:14:34,811 | scrapers.rss_common | WARNING | RSS feed parsing warning for JobAlign: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'jobalign.com'. (_ssl.c:1006)>
+2026-02-11 01:14:34,812 | scrapers.rss_common | INFO | RSS JobAlign: fetched 0 jobs
+2026-02-11 01:14:34,814 | services.job_fetcher | DEBUG | Source JobAlign returned 0 jobs in 2.40s
+2026-02-11 01:14:35,037 | scrapers.rss_common | WARNING | RSS feed parsing warning for Remote.CA: <unknown>:43:2: mismatched tag
+2026-02-11 01:14:35,038 | scrapers.rss_common | INFO | RSS Remote.CA: fetched 0 jobs
+2026-02-11 01:14:35,041 | services.job_fetcher | DEBUG | Source RemoteCA returned 0 jobs in 2.51s
+2026-02-11 01:14:35,112 | scrapers.remotive_api | INFO | Remotive API: fetched 1 jobs
+2026-02-11 01:14:35,116 | services.job_fetcher | DEBUG | Source RemotiveAPI returned 1 jobs in 2.80s
+2026-02-11 01:14:35,621 | scrapers.rss_common | WARNING | RSS feed parsing warning for JavaScript Jobs: <urlopen error [Errno 11001] getaddrinfo failed>
+2026-02-11 01:14:35,621 | scrapers.rss_common | INFO | RSS JavaScript Jobs: fetched 0 jobs
+2026-02-11 01:14:35,621 | services.job_fetcher | DEBUG | Source JavaScriptJobs returned 0 jobs in 0.58s
+2026-02-11 01:14:35,670 | services.job_fetcher | INFO | Early return: 1 jobs after 3.3s from 8 sources
+2026-02-11 01:14:35,675 | utils.cache | DEBUG | Cache SET for key: jobs_-8794383845955698223 (TTL: 20m)
+2026-02-11 01:14:35,675 | services.job_fetcher | INFO | Returning 1 jobs, 27 sources still pending
+2026-02-11 01:14:36,798 | scrapers.arbeitnow_api | ERROR | ArbeitNow API error: Expecting value: line 1 column 1 (char 0)
+2026-02-11 01:14:36,873 | scrapers.common | DEBUG | Could not parse date: Mon, 09 Feb 2026 21:15:55 GMT
+2026-02-11 01:14:36,875 | scrapers.common | DEBUG | Could not parse date: Sun, 08 Feb 2026 22:01:13 GMT
+2026-02-11 01:14:36,876 | scrapers.common | DEBUG | Could not parse date: Fri, 06 Feb 2026 22:41:25 GMT
+2026-02-11 01:14:36,878 | scrapers.common | DEBUG | Could not parse date: Fri, 06 Feb 2026 16:14:35 GMT
+2026-02-11 01:14:36,880 | scrapers.common | DEBUG | Could not parse date: Wed, 04 Feb 2026 17:01:32 GMT
+2026-02-11 01:14:36,882 | scrapers.common | DEBUG | Could not parse date: Wed, 04 Feb 2026 08:43:19 GMT
+2026-02-11 01:14:36,883 | scrapers.common | DEBUG | Could not parse date: Mon, 02 Feb 2026 20:00:50 GMT
+2026-02-11 01:14:36,884 | scrapers.common | DEBUG | Could not parse date: Mon, 26 Jan 2026 07:45:51 GMT
+2026-02-11 01:14:36,886 | scrapers.common | DEBUG | Could not parse date: Sat, 24 Jan 2026 14:35:10 GMT
+2026-02-11 01:14:36,888 | scrapers.common | DEBUG | Could not parse date: Sat, 24 Jan 2026 14:33:27 GMT
+2026-02-11 01:14:36,890 | scrapers.common | DEBUG | Could not parse date: Fri, 23 Jan 2026 21:23:08 GMT
+2026-02-11 01:14:36,893 | scrapers.common | DEBUG | Could not parse date: Tue, 20 Jan 2026 21:33:20 GMT
+2026-02-11 01:14:36,894 | scrapers.common | DEBUG | Could not parse date: Sun, 18 Jan 2026 14:31:16 GMT
+2026-02-11 01:14:36,896 | scrapers.common | DEBUG | Could not parse date: Fri, 16 Jan 2026 14:01:26 GMT
+2026-02-11 01:14:36,898 | scrapers.common | DEBUG | Could not parse date: Fri, 16 Jan 2026 10:16:08 GMT
+2026-02-11 01:14:36,898 | scrapers.common | DEBUG | Could not parse date: Fri, 16 Jan 2026 10:16:03 GMT
+2026-02-11 01:14:36,898 | scrapers.common | DEBUG | Could not parse date: Wed, 14 Jan 2026 20:46:36 GMT
+2026-02-11 01:14:36,898 | scrapers.common | DEBUG | Could not parse date: Wed, 14 Jan 2026 20:46:28 GMT
+2026-02-11 01:14:36,898 | scrapers.common | DEBUG | Could not parse date: Wed, 14 Jan 2026 13:45:40 GMT
+2026-02-11 01:14:36,898 | scrapers.common | DEBUG | Could not parse date: Tue, 13 Jan 2026 18:29:39 GMT
+2026-02-11 01:14:36,907 | scrapers.common | DEBUG | Could not parse date: Tue, 13 Jan 2026 17:34:31 GMT
+2026-02-11 01:14:36,912 | scrapers.common | DEBUG | Could not parse date: Tue, 13 Jan 2026 09:27:49 GMT
+2026-02-11 01:14:36,914 | scrapers.common | DEBUG | Could not parse date: Mon, 12 Jan 2026 21:00:39 GMT
+2026-02-11 01:14:36,917 | scrapers.common | DEBUG | Could not parse date: Mon, 12 Jan 2026 13:19:44 GMT
+2026-02-11 01:14:36,916 | scrapers.rss_common | WARNING | RSS feed parsing warning for Python Jobs: text/html is not an XML media type
+2026-02-11 01:14:36,919 | scrapers.common | DEBUG | Could not parse date: Sun, 11 Jan 2026 20:30:35 GMT
+2026-02-11 01:14:36,918 | scrapers.rss_common | INFO | RSS Python Jobs: fetched 0 jobs
+2026-02-11 01:14:36,920 | scrapers.common | DEBUG | Could not parse date: Sat, 10 Jan 2026 23:00:36 GMT
+2026-02-11 01:14:36,922 | scrapers.rss_common | INFO | RSS Remotive RSS: fetched 26 jobs
+2026-02-11 01:14:37,068 | scrapers.rss_common | WARNING | RSS feed parsing warning for We Work Remotely: <unknown>:2:26: not well-formed (invalid token)
+2026-02-11 01:14:37,068 | scrapers.rss_common | INFO | RSS We Work Remotely: fetched 0 jobs
+2026-02-11 01:14:37,705 | scrapers.rss_common | WARNING | RSS feed parsing warning for Rust Jobs: <urlopen error [Errno 11001] getaddrinfo failed>
+2026-02-11 01:14:37,705 | scrapers.rss_common | INFO | RSS Rust Jobs: fetched 0 jobs
+2026-02-11 01:14:37,799 | scrapers.rss_common | WARNING | RSS feed parsing warning for Java Jobs: <urlopen error [Errno 11001] getaddrinfo failed>
+2026-02-11 01:14:37,799 | scrapers.rss_common | INFO | RSS Java Jobs: fetched 0 jobs
+2026-02-11 01:14:37,958 | scrapers.common | DEBUG | Could not parse date: Tue, 03 Feb 2026 15:46:09 +0000
+2026-02-11 01:14:37,960 | scrapers.common | DEBUG | Could not parse date: Mon, 26 Jan 2026 17:02:20 +0000
+2026-02-11 01:14:37,962 | scrapers.common | DEBUG | Could not parse date: Tue, 08 Jul 2025 19:57:39 +0000
+2026-02-11 01:14:37,963 | scrapers.common | DEBUG | Could not parse date: Fri, 20 Jun 2025 19:14:26 +0000
+2026-02-11 01:14:37,965 | scrapers.common | DEBUG | Could not parse date: Thu, 19 Jun 2025 13:23:02 +0000
+2026-02-11 01:14:37,966 | scrapers.common | DEBUG | Could not parse date: Thu, 19 Jun 2025 12:24:11 +0000
+2026-02-11 01:14:37,967 | scrapers.common | DEBUG | Could not parse date: Wed, 18 Jun 2025 15:37:21 +0000
+2026-02-11 01:14:37,969 | scrapers.common | DEBUG | Could not parse date: Wed, 18 Jun 2025 14:36:38 +0000
+2026-02-11 01:14:37,970 | scrapers.common | DEBUG | Could not parse date: Tue, 17 Jun 2025 21:47:12 +0000
+2026-02-11 01:14:37,971 | scrapers.common | DEBUG | Could not parse date: Tue, 17 Jun 2025 21:11:29 +0000
+2026-02-11 01:14:37,972 | scrapers.rss_common | INFO | RSS Authentic Jobs: fetched 10 jobs
+2026-02-11 01:14:38,630 | scrapers.rss_common | WARNING | RSS feed parsing warning for DeveloperJob: <unknown>:12:65: not well-formed (invalid token)
+2026-02-11 01:14:38,633 | scrapers.rss_common | INFO | RSS DeveloperJob: fetched 0 jobs
+2026-02-11 01:14:38,782 | scrapers.common | DEBUG | Could not parse date: Mon, 01 Dec 2025 16:22:48 +0000
+2026-02-11 01:14:38,785 | scrapers.common | DEBUG | Could not parse date: Mon, 01 Dec 2025 16:17:57 +0000
+2026-02-11 01:14:38,789 | scrapers.common | DEBUG | Could not parse date: Sun, 30 Nov 2025 17:42:38 +0000
+2026-02-11 01:14:38,791 | scrapers.common | DEBUG | Could not parse date: Thu, 27 Nov 2025 18:46:37 +0000
+2026-02-11 01:14:38,793 | scrapers.common | DEBUG | Could not parse date: Thu, 27 Nov 2025 18:34:29 +0000
+2026-02-11 01:14:38,855 | scrapers.common | DEBUG | Could not parse date: Sun, 23 Nov 2025 15:34:14 +0000
+2026-02-11 01:14:38,886 | scrapers.rss_common | WARNING | RSS feed parsing warning for Golang Jobs: <unknown>:12:65: not well-formed (invalid token)
+2026-02-11 01:14:38,888 | scrapers.rss_common | INFO | RSS Golang Jobs: fetched 0 jobs
+2026-02-11 01:14:38,887 | scrapers.common | DEBUG | Could not parse date: Sun, 23 Nov 2025 09:52:16 +0000
+2026-02-11 01:14:38,890 | scrapers.common | DEBUG | Could not parse date: Sun, 23 Nov 2025 08:58:33 +0000
+2026-02-11 01:14:38,892 | scrapers.common | DEBUG | Could not parse date: Sun, 09 Nov 2025 14:53:31 +0000
+2026-02-11 01:14:38,946 | scrapers.common | DEBUG | Could not parse date: Tue, 04 Nov 2025 15:04:00 +0000
+2026-02-11 01:14:38,946 | scrapers.rss_common | INFO | RSS JobIcy: fetched 10 jobs
+2026-02-11 01:14:39,280 | scrapers.rss_common | WARNING | RSS feed parsing warning for No Fluff Jobs: text/html is not an XML media type
+2026-02-11 01:14:39,281 | scrapers.rss_common | INFO | RSS No Fluff Jobs: fetched 0 jobs
+2026-02-11 01:14:39,402 | scrapers.rss_common | WARNING | RSS feed parsing warning for Stack Overflow: <unknown>:2:3012: not well-formed (invalid token)
+2026-02-11 01:14:39,403 | scrapers.rss_common | INFO | RSS Stack Overflow: fetched 0 jobs
+2026-02-11 01:14:39,533 | scrapers.rss_common | WARNING | RSS feed parsing warning for Data Jobs: <urlopen error [Errno 11001] getaddrinfo failed>
+2026-02-11 01:14:39,533 | scrapers.rss_common | INFO | RSS Data Jobs: fetched 0 jobs
+2026-02-11 01:14:39,995 | scrapers.rss_common | WARNING | RSS feed parsing warning for Marketing Jobs: <unknown>:26:113: not well-formed (invalid token)
+2026-02-11 01:14:39,995 | scrapers.rss_common | INFO | RSS Marketing Jobs: fetched 0 jobs
+2026-02-11 01:14:40,098 | scrapers.rss_common | WARNING | RSS feed parsing warning for Sales Jobs: <unknown>:26:113: not well-formed (invalid token)
+2026-02-11 01:14:40,098 | scrapers.rss_common | INFO | RSS Sales Jobs: fetched 0 jobs
+2026-02-11 01:14:40,469 | scrapers.rss_common | WARNING | RSS feed parsing warning for Design Jobs: <unknown>:28:76: not well-formed (invalid token)
+2026-02-11 01:14:40,471 | scrapers.rss_common | INFO | RSS Design Jobs: fetched 0 jobs
+2026-02-11 01:14:41,059 | scrapers.rss_common | WARNING | RSS feed parsing warning for Project Management Jobs: <urlopen error [Errno 11001] getaddrinfo failed>
+2026-02-11 01:14:41,059 | scrapers.rss_common | INFO | RSS Project Management Jobs: fetched 0 jobs
+2026-02-11 01:14:41,078 | scrapers.rss_common | WARNING | RSS feed parsing warning for Business Jobs: <urlopen error [Errno 11001] getaddrinfo failed>
+2026-02-11 01:14:41,078 | scrapers.rss_common | INFO | RSS Business Jobs: fetched 0 jobs
+2026-02-11 01:14:41,523 | scrapers.rss_common | WARNING | RSS feed parsing warning for Translator Jobs: text/html is not an XML media type
+2026-02-11 01:14:41,524 | scrapers.rss_common | INFO | RSS Translator Jobs: fetched 0 jobs
+2026-02-11 01:14:42,087 | scrapers.rss_common | WARNING | RSS feed parsing warning for Virtual Jobs: <unknown>:2:33: not well-formed (invalid token)
+2026-02-11 01:14:42,087 | scrapers.rss_common | INFO | RSS Virtual Jobs: fetched 0 jobs
+2026-02-11 01:14:44,009 | scrapers.rss_common | WARNING | RSS feed parsing warning for AI Jobs: <unknown>:2:0: syntax error
+2026-02-11 01:14:44,010 | scrapers.rss_common | INFO | RSS AI Jobs: fetched 0 jobs
+2026-02-11 01:14:45,045 | scrapers.rss_common | WARNING | RSS feed parsing warning for Security Jobs: <unknown>:3:0: XML or text declaration not at start of entity
+2026-02-11 01:14:45,046 | scrapers.common | DEBUG | Could not parse date: Thu, 05 Feb 2026 20:18:35 +0000
+2026-02-11 01:14:45,047 | scrapers.rss_common | INFO | RSS Security Jobs: fetched 1 jobs
+2026-02-11 01:14:46,404 | scrapers.rss_common | WARNING | RSS feed parsing warning for Content Jobs: text/html; charset=utf-8 is not an XML media type
+2026-02-11 01:14:46,405 | scrapers.rss_common | INFO | RSS Content Jobs: fetched 0 jobs
+2026-02-11 01:14:49,621 | scrapers.rss_common | WARNING | RSS feed parsing warning for DevOps Jobs: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'www.devopsboard.com'. (_ssl.c:1006)>
+2026-02-11 01:14:49,621 | scrapers.rss_common | INFO | RSS DevOps Jobs: fetched 0 jobs
+2026-02-11 01:15:02,987 | utils.cache | DEBUG | Cache HIT for key: jobs_-8794383845955698223
+2026-02-11 01:15:59,050 | scrapers.rss_common | WARNING | RSS feed parsing warning for Ruby on Rails Jobs: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)>
+2026-02-11 01:15:59,052 | scrapers.rss_common | INFO | RSS Ruby on Rails Jobs: fetched 0 jobs
+2026-02-11 01:16:03,614 | scrapers.rss_common | WARNING | RSS feed parsing warning for Education Jobs: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)>
+2026-02-11 01:16:03,614 | scrapers.rss_common | INFO | RSS Education Jobs: fetched 0 jobs
+2026-02-11 01:20:28,932 | scrapers.rss_common | ERROR | RSS feed error for FlexJobs: Remote end closed connection without response
+2026-02-11 01:38:19,403 | services.job_fetcher | INFO | Starting job fetch: skills=[], profile=manager, locations=['Remote'], manual_terms=[]
+2026-02-11 01:38:20,480 | scrapers.rss_common | WARNING | RSS feed parsing warning for Jobs Collider: <urlopen error [Errno 11001] getaddrinfo failed>
+2026-02-11 01:38:20,483 | scrapers.rss_common | INFO | RSS Jobs Collider: fetched 0 jobs
+2026-02-11 01:38:20,483 | services.job_fetcher | DEBUG | Source JobsCollider returned 0 jobs in 1.05s
+2026-02-11 01:38:21,370 | scrapers.rss_common | WARNING | RSS feed parsing warning for WorkingViral: <urlopen error [Errno 11001] getaddrinfo failed>
+2026-02-11 01:38:21,370 | scrapers.rss_common | INFO | RSS WorkingViral: fetched 0 jobs
+2026-02-11 01:38:21,370 | services.job_fetcher | DEBUG | Source WorkingViral returned 0 jobs in 1.81s
+2026-02-11 01:38:21,467 | scrapers.rss_common | WARNING | RSS feed parsing warning for GitHub Jobs: <urlopen error [Errno 11004] getaddrinfo failed>
+2026-02-11 01:38:21,470 | scrapers.rss_common | INFO | RSS GitHub Jobs: fetched 0 jobs
+2026-02-11 01:38:21,472 | services.job_fetcher | DEBUG | Source GitHub returned 0 jobs in 0.99s
+2026-02-11 01:38:21,777 | scrapers.himalayas_api | ERROR | Himalayas API error: HTTPSConnectionPool(host='api.thehimalayas.com', port=443): Max retries exceeded with url: /jobs?search=manager (Caused by SSLError(SSLError(1, '[SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1006)')))
+2026-02-11 01:38:21,778 | services.job_fetcher | DEBUG | Source Himalayas returned 0 jobs in 2.37s
+2026-02-11 01:38:21,839 | scrapers.rss_common | WARNING | RSS feed parsing warning for JobAlign: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'jobalign.com'. (_ssl.c:1006)>
+2026-02-11 01:38:21,840 | scrapers.rss_common | INFO | RSS JobAlign: fetched 0 jobs
+2026-02-11 01:38:21,841 | services.job_fetcher | DEBUG | Source JobAlign returned 0 jobs in 2.31s
+2026-02-11 01:38:21,893 | scrapers.rss_common | WARNING | RSS feed parsing warning for Remote.CA: <unknown>:43:2: mismatched tag
+2026-02-11 01:38:21,893 | scrapers.rss_common | INFO | RSS Remote.CA: fetched 0 jobs
+2026-02-11 01:38:21,898 | services.job_fetcher | DEBUG | Source RemoteCA returned 0 jobs in 2.26s
+2026-02-11 01:38:22,520 | scrapers.remotive_api | INFO | Remotive API: fetched 9 jobs
+2026-02-11 01:38:22,523 | services.job_fetcher | DEBUG | Source RemotiveAPI returned 9 jobs in 3.12s
+2026-02-11 01:38:22,631 | services.job_fetcher | INFO | Early return: 5 jobs after 3.1s from 7 sources
+2026-02-11 01:38:22,637 | utils.cache | DEBUG | Cache SET for key: jobs_-7954521393519236115 (TTL: 20m)
+2026-02-11 01:38:22,637 | services.job_fetcher | INFO | Returning 5 jobs, 28 sources still pending
+2026-02-11 01:38:22,789 | scrapers.rss_common | WARNING | RSS feed parsing warning for JavaScript Jobs: <urlopen error [Errno 11001] getaddrinfo failed>
+2026-02-11 01:38:22,790 | scrapers.rss_common | INFO | RSS JavaScript Jobs: fetched 0 jobs
+2026-02-11 01:38:24,165 | scrapers.rss_common | WARNING | RSS feed parsing warning for Python Jobs: text/html is not an XML media type
+2026-02-11 01:38:24,168 | scrapers.rss_common | INFO | RSS Python Jobs: fetched 0 jobs
+2026-02-11 01:38:24,214 | scrapers.arbeitnow_api | ERROR | ArbeitNow API error: Expecting value: line 1 column 1 (char 0)
+2026-02-11 01:38:24,218 | scrapers.common | DEBUG | Could not parse date: Mon, 09 Feb 2026 21:15:55 GMT
+2026-02-11 01:38:24,222 | scrapers.common | DEBUG | Could not parse date: Sun, 08 Feb 2026 22:01:13 GMT
+2026-02-11 01:38:24,225 | scrapers.common | DEBUG | Could not parse date: Fri, 06 Feb 2026 22:41:25 GMT
+2026-02-11 01:38:24,263 | scrapers.common | DEBUG | Could not parse date: Fri, 06 Feb 2026 16:14:35 GMT
+2026-02-11 01:38:24,266 | scrapers.common | DEBUG | Could not parse date: Wed, 04 Feb 2026 17:01:32 GMT
+2026-02-11 01:38:24,267 | scrapers.common | DEBUG | Could not parse date: Wed, 04 Feb 2026 08:43:19 GMT
+2026-02-11 01:38:24,268 | scrapers.common | DEBUG | Could not parse date: Mon, 02 Feb 2026 20:00:50 GMT
+2026-02-11 01:38:24,270 | scrapers.common | DEBUG | Could not parse date: Mon, 26 Jan 2026 07:45:51 GMT
+2026-02-11 01:38:24,272 | scrapers.common | DEBUG | Could not parse date: Sat, 24 Jan 2026 14:35:10 GMT
+2026-02-11 01:38:24,273 | scrapers.common | DEBUG | Could not parse date: Sat, 24 Jan 2026 14:33:27 GMT
+2026-02-11 01:38:24,275 | scrapers.common | DEBUG | Could not parse date: Fri, 23 Jan 2026 21:23:08 GMT
+2026-02-11 01:38:24,279 | scrapers.common | DEBUG | Could not parse date: Tue, 20 Jan 2026 21:33:20 GMT
+2026-02-11 01:38:24,281 | scrapers.common | DEBUG | Could not parse date: Sun, 18 Jan 2026 14:31:16 GMT
+2026-02-11 01:38:24,282 | scrapers.common | DEBUG | Could not parse date: Fri, 16 Jan 2026 14:01:26 GMT
+2026-02-11 01:38:24,284 | scrapers.common | DEBUG | Could not parse date: Fri, 16 Jan 2026 10:16:08 GMT
+2026-02-11 01:38:24,285 | scrapers.common | DEBUG | Could not parse date: Fri, 16 Jan 2026 10:16:03 GMT
+2026-02-11 01:38:24,287 | scrapers.common | DEBUG | Could not parse date: Wed, 14 Jan 2026 20:46:36 GMT
+2026-02-11 01:38:24,288 | scrapers.common | DEBUG | Could not parse date: Wed, 14 Jan 2026 20:46:28 GMT
+2026-02-11 01:38:24,291 | scrapers.common | DEBUG | Could not parse date: Wed, 14 Jan 2026 13:45:40 GMT
+2026-02-11 01:38:24,294 | scrapers.common | DEBUG | Could not parse date: Tue, 13 Jan 2026 18:29:39 GMT
+2026-02-11 01:38:24,296 | scrapers.common | DEBUG | Could not parse date: Tue, 13 Jan 2026 17:34:31 GMT
+2026-02-11 01:38:24,299 | scrapers.common | DEBUG | Could not parse date: Tue, 13 Jan 2026 09:27:49 GMT
+2026-02-11 01:38:24,300 | scrapers.common | DEBUG | Could not parse date: Mon, 12 Jan 2026 21:00:39 GMT
+2026-02-11 01:38:24,300 | scrapers.common | DEBUG | Could not parse date: Mon, 12 Jan 2026 13:19:44 GMT
+2026-02-11 01:38:24,300 | scrapers.common | DEBUG | Could not parse date: Sun, 11 Jan 2026 20:30:35 GMT
+2026-02-11 01:38:24,304 | scrapers.common | DEBUG | Could not parse date: Sat, 10 Jan 2026 23:00:36 GMT
+2026-02-11 01:38:24,306 | scrapers.rss_common | INFO | RSS Remotive RSS: fetched 26 jobs
+2026-02-11 01:38:24,530 | scrapers.rss_common | WARNING | RSS feed parsing warning for We Work Remotely: <unknown>:2:26: not well-formed (invalid token)
+2026-02-11 01:38:24,530 | scrapers.rss_common | INFO | RSS We Work Remotely: fetched 0 jobs
+2026-02-11 01:38:25,712 | scrapers.rss_common | WARNING | RSS feed parsing warning for No Fluff Jobs: <unknown>:43:9823: mismatched tag
+2026-02-11 01:38:25,751 | scrapers.rss_common | INFO | RSS No Fluff Jobs: fetched 0 jobs
+2026-02-11 01:38:25,818 | scrapers.common | DEBUG | Could not parse date: Tue, 03 Feb 2026 15:46:09 +0000
+2026-02-11 01:38:25,820 | scrapers.common | DEBUG | Could not parse date: Mon, 26 Jan 2026 17:02:20 +0000
+2026-02-11 01:38:25,837 | scrapers.common | DEBUG | Could not parse date: Tue, 08 Jul 2025 19:57:39 +0000
+2026-02-11 01:38:25,863 | scrapers.common | DEBUG | Could not parse date: Fri, 20 Jun 2025 19:14:26 +0000
+2026-02-11 01:38:25,864 | scrapers.common | DEBUG | Could not parse date: Thu, 19 Jun 2025 13:23:02 +0000
+2026-02-11 01:38:25,865 | scrapers.common | DEBUG | Could not parse date: Thu, 19 Jun 2025 12:24:11 +0000
+2026-02-11 01:38:25,867 | scrapers.common | DEBUG | Could not parse date: Wed, 18 Jun 2025 15:37:21 +0000
+2026-02-11 01:38:25,868 | scrapers.common | DEBUG | Could not parse date: Wed, 18 Jun 2025 14:36:38 +0000
+2026-02-11 01:38:25,869 | scrapers.common | DEBUG | Could not parse date: Tue, 17 Jun 2025 21:47:12 +0000
+2026-02-11 01:38:25,871 | scrapers.common | DEBUG | Could not parse date: Tue, 17 Jun 2025 21:11:29 +0000
+2026-02-11 01:38:25,871 | scrapers.rss_common | INFO | RSS Authentic Jobs: fetched 10 jobs
+2026-02-11 01:38:25,882 | scrapers.rss_common | WARNING | RSS feed parsing warning for Rust Jobs: <urlopen error [Errno 11001] getaddrinfo failed>
+2026-02-11 01:38:25,916 | scrapers.rss_common | INFO | RSS Rust Jobs: fetched 0 jobs
+2026-02-11 01:38:25,942 | scrapers.rss_common | WARNING | RSS feed parsing warning for Java Jobs: <urlopen error [Errno 11001] getaddrinfo failed>
+2026-02-11 01:38:25,963 | scrapers.rss_common | INFO | RSS Java Jobs: fetched 0 jobs
+2026-02-11 01:38:26,133 | scrapers.rss_common | ERROR | RSS feed error for DeveloperJob: [SSL: WRONG_VERSION_NUMBER] wrong version number (_ssl.c:2580)
+2026-02-11 01:38:26,564 | scrapers.rss_common | WARNING | RSS feed parsing warning for Golang Jobs: <unknown>:12:65: not well-formed (invalid token)
+2026-02-11 01:38:26,565 | scrapers.rss_common | INFO | RSS Golang Jobs: fetched 0 jobs
+2026-02-11 01:38:26,776 | scrapers.rss_common | WARNING | RSS feed parsing warning for Stack Overflow: <unknown>:2:3012: not well-formed (invalid token)
+2026-02-11 01:38:26,776 | scrapers.rss_common | INFO | RSS Stack Overflow: fetched 0 jobs
+2026-02-11 01:38:27,014 | scrapers.rss_common | WARNING | RSS feed parsing warning for Data Jobs: <urlopen error [Errno 11001] getaddrinfo failed>
+2026-02-11 01:38:27,014 | scrapers.rss_common | INFO | RSS Data Jobs: fetched 0 jobs
+2026-02-11 01:38:27,625 | scrapers.rss_common | WARNING | RSS feed parsing warning for Design Jobs: <unknown>:28:76: not well-formed (invalid token)
+2026-02-11 01:38:27,625 | scrapers.rss_common | INFO | RSS Design Jobs: fetched 0 jobs
+2026-02-11 01:38:28,004 | scrapers.rss_common | WARNING | RSS feed parsing warning for Marketing Jobs: <unknown>:26:113: not well-formed (invalid token)
+2026-02-11 01:38:28,004 | scrapers.rss_common | INFO | RSS Marketing Jobs: fetched 0 jobs
+2026-02-11 01:38:28,124 | scrapers.rss_common | WARNING | RSS feed parsing warning for Sales Jobs: <unknown>:26:113: not well-formed (invalid token)
+2026-02-11 01:38:28,124 | scrapers.rss_common | INFO | RSS Sales Jobs: fetched 0 jobs
+2026-02-11 01:38:29,002 | scrapers.rss_common | WARNING | RSS feed parsing warning for Business Jobs: <urlopen error [Errno 11001] getaddrinfo failed>
+2026-02-11 01:38:29,003 | scrapers.rss_common | INFO | RSS Business Jobs: fetched 0 jobs
+2026-02-11 01:38:29,097 | scrapers.rss_common | WARNING | RSS feed parsing warning for Translator Jobs: text/html is not an XML media type
+2026-02-11 01:38:29,097 | scrapers.rss_common | INFO | RSS Translator Jobs: fetched 0 jobs
+2026-02-11 01:38:29,187 | scrapers.rss_common | WARNING | RSS feed parsing warning for Project Management Jobs: <urlopen error [Errno 11001] getaddrinfo failed>
+2026-02-11 01:38:29,187 | scrapers.rss_common | INFO | RSS Project Management Jobs: fetched 0 jobs
+2026-02-11 01:38:29,590 | scrapers.rss_common | WARNING | RSS feed parsing warning for Virtual Jobs: <unknown>:2:33: not well-formed (invalid token)
+2026-02-11 01:38:29,590 | scrapers.rss_common | INFO | RSS Virtual Jobs: fetched 0 jobs
+2026-02-11 01:38:29,950 | scrapers.common | DEBUG | Could not parse date: Mon, 01 Dec 2025 16:22:48 +0000
+2026-02-11 01:38:29,951 | scrapers.common | DEBUG | Could not parse date: Mon, 01 Dec 2025 16:17:57 +0000
+2026-02-11 01:38:29,952 | scrapers.common | DEBUG | Could not parse date: Sun, 30 Nov 2025 17:42:38 +0000
+2026-02-11 01:38:29,953 | scrapers.common | DEBUG | Could not parse date: Thu, 27 Nov 2025 18:46:37 +0000
+2026-02-11 01:38:29,956 | scrapers.common | DEBUG | Could not parse date: Thu, 27 Nov 2025 18:34:29 +0000
+2026-02-11 01:38:29,956 | scrapers.common | DEBUG | Could not parse date: Sun, 23 Nov 2025 15:34:14 +0000
+2026-02-11 01:38:29,959 | scrapers.common | DEBUG | Could not parse date: Sun, 23 Nov 2025 09:52:16 +0000
+2026-02-11 01:38:29,960 | scrapers.common | DEBUG | Could not parse date: Sun, 23 Nov 2025 08:58:33 +0000
+2026-02-11 01:38:29,961 | scrapers.common | DEBUG | Could not parse date: Sun, 09 Nov 2025 14:53:31 +0000
+2026-02-11 01:38:29,963 | scrapers.common | DEBUG | Could not parse date: Tue, 04 Nov 2025 15:04:00 +0000
+2026-02-11 01:38:29,964 | scrapers.rss_common | INFO | RSS JobIcy: fetched 10 jobs
+2026-02-11 01:38:31,406 | scrapers.rss_common | WARNING | RSS feed parsing warning for AI Jobs: <unknown>:2:0: syntax error
+2026-02-11 01:38:31,407 | scrapers.rss_common | INFO | RSS AI Jobs: fetched 0 jobs
+2026-02-11 01:38:32,563 | scrapers.rss_common | WARNING | RSS feed parsing warning for Security Jobs: <unknown>:3:0: XML or text declaration not at start of entity
+2026-02-11 01:38:32,564 | scrapers.common | DEBUG | Could not parse date: Thu, 05 Feb 2026 20:18:35 +0000
+2026-02-11 01:38:32,565 | scrapers.rss_common | INFO | RSS Security Jobs: fetched 1 jobs
+2026-02-11 01:38:34,248 | scrapers.rss_common | WARNING | RSS feed parsing warning for Content Jobs: text/html; charset=utf-8 is not an XML media type
+2026-02-11 01:38:34,249 | scrapers.rss_common | INFO | RSS Content Jobs: fetched 0 jobs
+2026-02-11 01:38:37,191 | scrapers.rss_common | WARNING | RSS feed parsing warning for DevOps Jobs: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'www.devopsboard.com'. (_ssl.c:1006)>
+2026-02-11 01:38:37,191 | scrapers.rss_common | INFO | RSS DevOps Jobs: fetched 0 jobs
+2026-02-11 01:38:42,684 | utils.cache | DEBUG | Cache HIT for key: jobs_-7954521393519236115
+2026-02-11 01:39:46,326 | scrapers.rss_common | WARNING | RSS feed parsing warning for Ruby on Rails Jobs: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)>
+2026-02-11 01:39:46,327 | scrapers.rss_common | INFO | RSS Ruby on Rails Jobs: fetched 0 jobs
+2026-02-11 01:39:51,523 | scrapers.rss_common | WARNING | RSS feed parsing warning for Education Jobs: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)>
+2026-02-11 01:39:51,523 | scrapers.rss_common | INFO | RSS Education Jobs: fetched 0 jobs
+2026-02-11 01:48:22,477 | scrapers.rss_common | ERROR | RSS feed error for FlexJobs: Remote end closed connection without response
