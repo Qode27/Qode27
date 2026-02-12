@@ -1,41 +1,77 @@
 """
-Business page - launch stage positioning (no inflated metrics/dummy growth data)
+Business page - category + status driven tech solution advisory.
 """
 
-import os
 import urllib.parse
 
 import streamlit as st
 
 
-WHATSAPP_NUMBER = os.getenv("WHATSAPP_NUMBER", "")
+WHATSAPP_NUMBER = "+91-8555052189"
 
-SERVICE_AREAS = [
-    {
-        "id": "talent",
-        "title": "Talent Sourcing",
-        "description": "Role-specific candidate pipelines for startups and growing teams.",
-        "highlights": ["Tech and non-tech roles", "Screened candidate profiles", "Fast shortlist delivery"],
-    },
-    {
-        "id": "hiring",
-        "title": "Hiring Support",
-        "description": "Interview coordination and offer-stage support to reduce hiring friction.",
-        "highlights": ["Interview scheduling", "Candidate communication", "Offer follow-up"],
-    },
-    {
-        "id": "branding",
-        "title": "Employer Branding",
-        "description": "Foundational employer branding support for early-stage market visibility.",
-        "highlights": ["Job post optimization", "Career page guidance", "Candidate-facing messaging"],
-    },
-    {
-        "id": "custom",
-        "title": "Custom Engagement",
-        "description": "Flexible collaboration model built around your current hiring stage.",
-        "highlights": ["Discovery call", "Scope-based engagement", "Milestone reporting"],
-    },
+BUSINESS_CATEGORIES = [
+    "Tea Shop",
+    "Tea Manufacturing",
+    "Tea Export Business",
+    "Textile Manufacturing",
+    "Textile Retail",
+    "Travel Agency",
+    "Transport and Logistics",
+    "Restaurant",
+    "Cafe",
+    "E-commerce Store",
+    "Retail Store",
+    "Pharmacy",
+    "Clinic and Healthcare Center",
+    "Construction Company",
+    "Real Estate Agency",
+    "Education Institute",
+    "Coaching Center",
+    "IT Services Company",
+    "Digital Marketing Agency",
+    "Legal Services Firm",
+    "Accounting and Finance Firm",
+    "Beauty and Wellness Salon",
+    "Gym and Fitness Center",
+    "Automobile Service Center",
+    "Manufacturing Unit",
 ]
+
+BUSINESS_STATUSES = [
+    "1. Business is running good and we want to expand.",
+    "2. Business is stagnant and profit is not increasing.",
+    "3. Business is unstable: some months profit, some months loss.",
+    "4. Business is new and we need market entry + first customers.",
+    "5. Operations are growing but systems are manual and inefficient.",
+]
+
+STATUS_SOLUTIONS = {
+    BUSINESS_STATUSES[0]: [
+        "Expansion roadmap with market prioritization and branch-level KPI dashboards.",
+        "CRM + marketing automation to scale lead generation and retention.",
+        "Inventory and demand forecasting setup for multi-location growth.",
+    ],
+    BUSINESS_STATUSES[1]: [
+        "Revenue leakage audit with sales funnel analytics and conversion tracking.",
+        "Customer segmentation + targeted campaign engine for repeat business.",
+        "Pricing and product mix insights using BI dashboards.",
+    ],
+    BUSINESS_STATUSES[2]: [
+        "Cashflow and margin tracking system with early warning alerts.",
+        "Demand stabilization plan using seasonal trend analytics.",
+        "Operational cost optimization with process automation.",
+    ],
+    BUSINESS_STATUSES[3]: [
+        "Launch stack: website, lead capture, CRM, and campaign setup.",
+        "Digital presence and local discoverability strategy.",
+        "First 90-day execution plan with weekly business metrics.",
+    ],
+    BUSINESS_STATUSES[4]: [
+        "Workflow digitization: invoicing, inventory, and task tracking.",
+        "Management dashboard for real-time business visibility.",
+        "SOP-driven automation to reduce manual errors and delays.",
+    ],
+}
 
 
 def _wa_link(message: str) -> str:
@@ -46,56 +82,70 @@ def _wa_link(message: str) -> str:
 
 
 def render() -> None:
-    st.markdown('<section class="premium-hero">', unsafe_allow_html=True)
-    st.markdown('<div class="hero-kicker">Business</div>', unsafe_allow_html=True)
-    st.markdown('<h1 class="hero-title">Business Hiring Solutions</h1>', unsafe_allow_html=True)
     st.markdown(
-        '<p class="hero-sub">We are a new market entrant focused on practical hiring support, transparent communication, and execution speed.</p>',
+        """
+        <section class="premium-hero">
+            <div class="hero-kicker">Business</div>
+            <h1 class="hero-title">Tech Solutions For Every Business Category</h1>
+            <p class="hero-sub">Select your business category and current status. We will map the right technology interventions for growth, stability, and efficiency.</p>
+        </section>
+        """,
         unsafe_allow_html=True,
     )
-    st.markdown('</section>', unsafe_allow_html=True)
 
     st.markdown('<div class="section-shell">', unsafe_allow_html=True)
-    st.markdown('<div class="section-title">What We Offer Right Now</div>', unsafe_allow_html=True)
-    st.markdown('<div class="section-subtitle">Built for teams that want lean, outcome-focused recruitment support.</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-title">Step 1: Select Business Category</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-subtitle">Autocomplete is prefix-based. Example: type "tea" to see categories starting with tea.</div>', unsafe_allow_html=True)
 
-    for item in SERVICE_AREAS:
-        st.markdown('<article class="premium-card business-card">', unsafe_allow_html=True)
-        st.markdown(f'<h3 class="result-title">{item["title"]}</h3>', unsafe_allow_html=True)
-        st.markdown(f'<p class="result-description">{item["description"]}</p>', unsafe_allow_html=True)
+    query = st.text_input(
+        "Search business category",
+        placeholder="Type category prefix (e.g., tea, text, travel)",
+        key="business_category_query",
+    ).strip()
 
-        bullets_html = "".join([f"<li>{h}</li>" for h in item["highlights"]])
-        st.markdown(f'<ul class="feature-list">{bullets_html}</ul>', unsafe_allow_html=True)
+    filtered_categories = BUSINESS_CATEGORIES
+    if query:
+        filtered_categories = [c for c in BUSINESS_CATEGORIES if c.lower().startswith(query.lower())]
 
-        cols = st.columns([1.2, 1])
-        with cols[0]:
-            st.markdown('<div class="new-market-note">Launch-stage service. Scope and pricing shared after requirement discussion.</div>', unsafe_allow_html=True)
-        with cols[1]:
-            msg = f"Hello Kunsalt, I want to discuss {item['title']} for my company."
-            wa = _wa_link(msg)
-            if wa:
-                st.link_button("Talk on WhatsApp", wa, use_container_width=True)
-            else:
-                st.button("Talk on WhatsApp", disabled=True, use_container_width=True, key=f"wa_disabled_{item['id']}")
+    if not filtered_categories:
+        st.info("No category starts with this text. Try another prefix.")
+        st.markdown('</div>', unsafe_allow_html=True)
+        return
 
-        st.markdown('</article>', unsafe_allow_html=True)
+    selected_category = st.selectbox(
+        "Business category",
+        options=filtered_categories,
+        key="business_selected_category",
+        help="Dropdown supports typeahead; list is already filtered by your prefix.",
+    )
 
-    st.markdown('</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-title" style="margin-top:10px;">Step 2: Select Current Business Status</div>', unsafe_allow_html=True)
+    selected_status = st.radio(
+        "Current status",
+        options=BUSINESS_STATUSES,
+        key="business_status_radio",
+    )
 
-    st.markdown('<div class="section-shell">', unsafe_allow_html=True)
-    st.markdown('<div class="section-title">Contact</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-title" style="margin-top:10px;">Recommended Tech-Based Solutions</div>', unsafe_allow_html=True)
+    for item in STATUS_SOLUTIONS[selected_status]:
+        st.markdown(
+            f'<article class="premium-card business-card"><p class="result-description" style="margin:0;">{item}</p></article>',
+            unsafe_allow_html=True,
+        )
 
-    col1, col2 = st.columns(2)
-    with col1:
-        st.markdown('<div class="premium-card compact-card"><div class="result-title">Email</div><div class="result-description">sales@kunsalt.com</div></div>', unsafe_allow_html=True)
-    with col2:
-        if WHATSAPP_NUMBER:
-            wa_contact = _wa_link("Hello Kunsalt, I would like to discuss business hiring requirements.")
-            st.markdown('<div class="premium-card compact-card">', unsafe_allow_html=True)
-            st.markdown('<div class="result-title">WhatsApp</div>', unsafe_allow_html=True)
-            st.link_button("Start Conversation", wa_contact, use_container_width=True)
-            st.markdown('</div>', unsafe_allow_html=True)
+    msg = (
+        f"Hello Kunsalt, my business category is {selected_category}. "
+        f"Current status: {selected_status} Please share a tech solution plan."
+    )
+    wa = _wa_link(msg)
+
+    c1, c2 = st.columns(2)
+    with c1:
+        st.markdown('<div class="new-market-note">We are a new market entrant focused on practical implementation, not generic consulting decks.</div>', unsafe_allow_html=True)
+    with c2:
+        if wa:
+            st.link_button("Get Solution Plan on WhatsApp", wa, use_container_width=True)
         else:
-            st.markdown('<div class="premium-card compact-card"><div class="result-title">WhatsApp</div><div class="result-description">Set WHATSAPP_NUMBER env var to enable direct messaging CTA.</div></div>', unsafe_allow_html=True)
+            st.button("Get Solution Plan on WhatsApp", disabled=True, use_container_width=True)
 
     st.markdown('</div>', unsafe_allow_html=True)
