@@ -1,0 +1,113 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: kansalt
+      POSTGRES_USER: kansalt
+      POSTGRES_PASSWORD: kansalt
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  kansalt-frontend:
+    build:
+      context: .
+      dockerfile: apps/kansalt-frontend/Dockerfile
+    env_file:
+      - .env.platform.example
+    ports:
+      - '3000:3000'
+    depends_on:
+      - api-gateway
+
+  api-gateway:
+    build:
+      context: .
+      dockerfile: apps/api-gateway/Dockerfile
+    env_file:
+      - .env.platform.example
+    ports:
+      - '4000:4000'
+    depends_on:
+      - auth-service
+      - hms-service
+      - hrms-service
+      - user-service
+      - app-service
+      - billing-service
+      - notification-service
+
+  auth-service:
+    build:
+      context: .
+      dockerfile: apps/auth-service/Dockerfile
+    env_file:
+      - .env.platform.example
+    depends_on:
+      - postgres
+
+  hms-service:
+    build:
+      context: .
+      dockerfile: apps/hms-service/Dockerfile
+    env_file:
+      - .env.platform.example
+    depends_on:
+      - postgres
+
+  hrms-service:
+    build:
+      context: .
+      dockerfile: apps/hrms-service/Dockerfile
+    env_file:
+      - .env.platform.example
+
+  user-service:
+    build:
+      context: .
+      dockerfile: services/user-service/Dockerfile
+    env_file:
+      - .env.platform.example
+    depends_on:
+      - postgres
+
+  app-service:
+    build:
+      context: .
+      dockerfile: services/app-service/Dockerfile
+    env_file:
+      - .env.platform.example
+    depends_on:
+      - postgres
+
+  billing-service:
+    build:
+      context: .
+      dockerfile: services/billing-service/Dockerfile
+    env_file:
+      - .env.platform.example
+    depends_on:
+      - postgres
+
+  notification-service:
+    build:
+      context: .
+      dockerfile: services/notification-service/Dockerfile
+    env_file:
+      - .env.platform.example
+
+  nginx:
+    image: nginx:1.27-alpine
+    ports:
+      - '80:80'
+    volumes:
+      - ./infra/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - kansalt-frontend
+      - api-gateway
+
+volumes:
+  postgres_data:

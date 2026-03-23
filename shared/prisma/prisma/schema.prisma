@@ -1,0 +1,241 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  DOCTOR
+  RECEPTIONIST
+}
+
+enum ProductKey {
+  HMS
+  HRMS
+  CRM
+  FINANCE
+}
+
+enum VisitType {
+  OPD
+  IPD
+}
+
+enum AppointmentStatus {
+  SCHEDULED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+enum BillingStatus {
+  PENDING
+  PAID
+  CANCELLED
+}
+
+enum NotificationChannel {
+  EMAIL
+  WHATSAPP
+}
+
+enum NotificationStatus {
+  QUEUED
+  SENT
+  FAILED
+}
+
+model Organization {
+  id            String         @id @default(cuid())
+  name          String
+  slug          String         @unique
+  contactEmail  String?
+  contactPhone  String?
+  products      ProductKey[]   @default([])
+  featureFlags  String[]       @default([])
+  isActive      Boolean        @default(true)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  users         User[]
+  patients      Patient[]
+  doctors       Doctor[]
+  appointments  Appointment[]
+  billings      Billing[]
+  prescriptions Prescription[]
+  notifications Notification[]
+  subscriptions Subscription[]
+}
+
+model User {
+  id             String       @id @default(cuid())
+  organizationId String
+  email          String       @unique
+  name           String
+  passwordHash   String
+  role           Role
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  subscriptions  Subscription[]
+}
+
+model App {
+  id            String         @id @default(cuid())
+  name          String
+  slug          String         @unique
+  subdomain     String         @unique
+  description   String
+  category      String
+  icon          String?
+  pricingTier   String?
+  launchUrl     String
+  isActive      Boolean        @default(true)
+  sortOrder     Int            @default(0)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  subscriptions Subscription[]
+}
+
+model Subscription {
+  id             String       @id @default(cuid())
+  organizationId String
+  userId         String?
+  appId          String
+  plan           String       @default("Free")
+  isActive       Boolean      @default(true)
+  startedAt      DateTime     @default(now())
+  endsAt         DateTime?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user           User?        @relation(fields: [userId], references: [id], onDelete: SetNull)
+  app            App          @relation(fields: [appId], references: [id], onDelete: Cascade)
+
+  @@unique([organizationId, appId])
+}
+
+model Patient {
+  id             String          @id @default(cuid())
+  organizationId String
+  patientCode    String
+  firstName      String
+  lastName       String
+  gender         String
+  phone          String
+  email          String?
+  dateOfBirth    DateTime
+  address        String
+  bloodGroup     String?
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  organization   Organization    @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  appointments   Appointment[]
+  billings       Billing[]
+  prescriptions  Prescription[]
+
+  @@unique([organizationId, patientCode])
+}
+
+model Doctor {
+  id             String          @id @default(cuid())
+  organizationId String
+  employeeCode   String
+  name           String
+  specialization String
+  email          String
+  phone          String
+  licenseNumber  String
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  organization   Organization    @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  appointments   Appointment[]
+  prescriptions  Prescription[]
+
+  @@unique([organizationId, employeeCode])
+}
+
+model Appointment {
+  id             String          @id @default(cuid())
+  organizationId String
+  patientId      String
+  doctorId       String
+  appointmentNo  String
+  visitType      VisitType
+  status         AppointmentStatus @default(SCHEDULED)
+  scheduledAt    DateTime
+  notes          String?
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  organization   Organization    @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  patient        Patient         @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  doctor         Doctor          @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+  billings       Billing[]
+  prescriptions  Prescription[]
+
+  @@unique([organizationId, appointmentNo])
+}
+
+model Billing {
+  id             String          @id @default(cuid())
+  organizationId String
+  patientId      String
+  appointmentId  String?
+  invoiceNumber  String
+  amount         Float
+  status         BillingStatus
+  lineItems      Json
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  organization   Organization    @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  patient        Patient         @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  appointment    Appointment?    @relation(fields: [appointmentId], references: [id], onDelete: SetNull)
+
+  @@unique([organizationId, invoiceNumber])
+}
+
+model Prescription {
+  id             String          @id @default(cuid())
+  organizationId String
+  patientId      String
+  doctorId       String
+  appointmentId  String?
+  prescriptionNo String
+  diagnosis      String
+  notes          String?
+  medicines      Json
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  organization   Organization    @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  patient        Patient         @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  doctor         Doctor          @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+  appointment    Appointment?    @relation(fields: [appointmentId], references: [id], onDelete: SetNull)
+
+  @@unique([organizationId, prescriptionNo])
+}
+
+model Notification {
+  id             String               @id @default(cuid())
+  organizationId String
+  channel        NotificationChannel
+  recipient      String
+  template       String
+  payload        Json
+  status         NotificationStatus   @default(QUEUED)
+  createdAt      DateTime             @default(now())
+  updatedAt      DateTime             @updatedAt
+  organization   Organization         @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+}
+
+model Lead {
+  id           String   @id @default(cuid())
+  name         String
+  email        String
+  organization String?
+  product      String?
+  message      String
+  createdAt    DateTime @default(now())
+}

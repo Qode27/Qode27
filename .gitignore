@@ -40,6 +40,9 @@ logs/*.log
 # Environment
 .env
 .env.local
+deploy.env
+deploy-marketplace.env
+askpass.bat
 
 # OS
 .DS_Store
@@ -47,3 +50,27 @@ Thumbs.db
 
 # Streamlit
 .streamlit/
+
+# Node / Next
+node_modules/
+apps/*/.next/
+.next/
+npm-debug.log*
+
+# Deployment artifacts
+*.zip
+plink.exe
+pscp.exe
+scp-test.ps1
+sftp-test.ps1
+ssh-test.ps1
+deploy-remote.ps1
+deploy-remote-continue.ps1
+deploy-fix-lib.ps1
+deploy-fix-ports.ps1
+upload-deploy.ps1
+upload-lite.ps1
+make-lite.ps1
+
+# Attached external repos
+external/
