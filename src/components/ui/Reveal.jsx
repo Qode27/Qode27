@@ -1,7 +1,13 @@
-import { motion as Motion } from 'framer-motion'
+import { motion as Motion, useReducedMotion } from 'framer-motion'
 import { fadeUp } from '../../utils/motion'
 
 export default function Reveal({ children, className = '', delay = 0 }) {
+  const reduceMotion = useReducedMotion()
+
+  if (reduceMotion) {
+    return <div className={className}>{children}</div>
+  }
+
   return (
     <Motion.div
       className={className}

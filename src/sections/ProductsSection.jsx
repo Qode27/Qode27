@@ -26,20 +26,16 @@ export default function ProductsSection() {
         >
           {products.map(({ icon, title, description, highlights }) => (
             <Reveal key={title}>
-              <Motion.article
-                whileHover={{ y: -8 }}
-                transition={{ duration: 0.25, ease: 'easeOut' }}
-                className="gradient-border card-surface h-full rounded-[30px] p-7"
-              >
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-50 text-2xl text-brand-600">
+              <Motion.article whileHover={{ y: -4 }} transition={{ duration: 0.35, ease: 'easeOut' }} className="gradient-border system-card flex h-full flex-col">
+                <div className="system-icon">
                   {createElement(icon)}
                 </div>
-                <h3 className="mt-6 text-2xl font-semibold tracking-[-0.04em] text-slate-950">{title}</h3>
-                <p className="mt-4 text-base leading-7 text-slate-600">{description}</p>
+                <h3 className="mt-6 text-xl font-semibold text-black">{title}</h3>
+                <p className="mt-4 text-base leading-7 text-neutral-600">{description}</p>
                 <ul className="mt-6 space-y-3">
                   {highlights.map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-sm leading-6 text-slate-600">
-                      <span className="mt-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-brand-50 text-brand-600">
+                    <li key={item} className="flex items-start gap-3 text-sm leading-6 text-neutral-600">
+                      <span className="mt-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-brand-50 text-brand-700">
                         <FiCheck className="text-xs" />
                       </span>
                       <span>{item}</span>
@@ -48,7 +44,7 @@ export default function ProductsSection() {
                 </ul>
                 <a
                   href="#contact"
-                  className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-slate-950 hover:gap-3 hover:text-brand-600"
+                  className="mt-auto inline-flex items-center gap-2 pt-8 text-sm font-semibold text-black hover:gap-3 hover:text-brand-700"
                 >
                   View Demo
                   <FiArrowRight />

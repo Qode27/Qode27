@@ -7,12 +7,12 @@ export default function SectionHeader({ eyebrow, title, description, align = 'le
   return (
     <Reveal className={`${width} ${alignment}`.trim()}>
       {eyebrow ? (
-        <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-brand-600">{eyebrow}</p>
+        <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-brand-700">{eyebrow}</p>
       ) : null}
-      <h2 className="font-display text-3xl font-semibold tracking-[-0.05em] text-slate-950 sm:text-4xl lg:text-5xl">
+      <h2 className="font-display text-3xl font-semibold tracking-[-0.05em] text-black sm:text-4xl lg:text-5xl">
         {title}
       </h2>
-      <p className="mt-5 text-base leading-8 text-slate-600 sm:text-lg">{description}</p>
+      <p className="mt-5 text-base leading-8 text-neutral-600 sm:text-lg">{description}</p>
     </Reveal>
   )
 }

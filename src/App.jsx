@@ -18,13 +18,19 @@ function SectionFallback() {
 
 export default function App() {
   return (
-    <div className="relative min-h-screen bg-white text-slate-900">
+    <div className="relative min-h-screen bg-white text-neutral-900">
+      <a
+        href="#main-content"
+        className="absolute left-4 top-4 z-[70] -translate-y-20 rounded-xl bg-black px-4 py-2 text-sm font-semibold text-white focus:translate-y-0 focus:outline-none focus:ring-2 focus:ring-brand-300"
+      >
+        Skip to content
+      </a>
       <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-[42rem] bg-[radial-gradient(circle_at_top,_rgba(40,124,255,0.12),transparent_38%),radial-gradient(circle_at_20%_20%,_rgba(46,184,166,0.10),transparent_26%),linear-gradient(180deg,_#f8fbff_0%,_#ffffff_55%)]"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[42rem] bg-[radial-gradient(circle_at_top,_rgba(211,161,62,0.13),transparent_34%),radial-gradient(circle_at_18%_20%,_rgba(45,184,182,0.10),transparent_24%),linear-gradient(180deg,_#fcfbf7_0%,_#ffffff_58%)]"
         aria-hidden="true"
       />
       <Navbar />
-      <main>
+      <main id="main-content">
         <Suspense fallback={<SectionFallback />}>
           <HeroSection />
           <TrustStrip />

@@ -7,7 +7,7 @@ import { features } from '../data/site'
 
 export default function FeaturesSection() {
   return (
-    <section className="section-spacing">
+    <section className="brand-separator section-spacing">
       <Container>
         <SectionHeader
           eyebrow="Features"
@@ -18,16 +18,10 @@ export default function FeaturesSection() {
         <div className="mt-12 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
           {features.map(({ icon, title, text }) => (
             <Reveal key={title}>
-              <Motion.article
-                whileHover={{ y: -6 }}
-                transition={{ duration: 0.25, ease: 'easeOut' }}
-                className="rounded-[28px] border border-slate-200/80 bg-white p-6"
-              >
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-50 text-xl text-brand-600">
-                  {createElement(icon)}
-                </div>
-                <h3 className="mt-5 text-xl font-semibold tracking-[-0.04em] text-slate-950">{title}</h3>
-                <p className="mt-3 text-sm leading-7 text-slate-600">{text}</p>
+              <Motion.article whileHover={{ y: -4 }} transition={{ duration: 0.35, ease: 'easeOut' }} className="system-card">
+                <div className="system-icon">{createElement(icon)}</div>
+                <h3 className="mt-5 text-xl font-semibold text-black">{title}</h3>
+                <p className="mt-3 text-base text-neutral-600">{text}</p>
               </Motion.article>
             </Reveal>
           ))}

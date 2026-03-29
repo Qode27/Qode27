@@ -7,7 +7,7 @@ import { industries } from '../data/site'
 
 export default function SolutionsSection() {
   return (
-    <section id="solutions" className="section-spacing bg-slate-50/70">
+    <section id="solutions" className="brand-separator section-spacing bg-neutral-50/70">
       <Container>
         <SectionHeader
           eyebrow="Solutions"
@@ -19,17 +19,13 @@ export default function SolutionsSection() {
         <div className="mt-12 grid gap-6 md:grid-cols-2">
           {industries.map(({ icon, title, text }) => (
             <Reveal key={title}>
-              <Motion.article
-                whileHover={{ y: -6 }}
-                transition={{ duration: 0.25, ease: 'easeOut' }}
-                className="card-surface flex h-full gap-5 rounded-[30px] p-7"
-              >
-                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-slate-950 text-xl text-white">
+              <Motion.article whileHover={{ y: -4 }} transition={{ duration: 0.35, ease: 'easeOut' }} className="system-card flex h-full gap-5">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-black text-xl text-brand-200">
                   {createElement(icon)}
                 </div>
                 <div>
-                  <h3 className="text-2xl font-semibold tracking-[-0.04em] text-slate-950">{title}</h3>
-                  <p className="mt-3 text-base leading-7 text-slate-600">{text}</p>
+                  <h3 className="text-xl font-semibold text-black">{title}</h3>
+                  <p className="mt-3 text-base leading-7 text-neutral-600">{text}</p>
                 </div>
               </Motion.article>
             </Reveal>

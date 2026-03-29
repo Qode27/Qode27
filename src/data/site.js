@@ -142,7 +142,7 @@ export const differentiators = [
 export const pricingPlans = [
   {
     name: 'Basic',
-    price: '₹19k',
+    price: '\u20B919k',
     cadence: '/month',
     description: 'A clean starting point for businesses moving from manual work to organized software.',
     features: ['Core workflows', 'Up to 10 team members', 'Email support', 'Basic reports'],
@@ -151,7 +151,7 @@ export const pricingPlans = [
   },
   {
     name: 'Pro',
-    price: '₹49k',
+    price: '\u20B949k',
     cadence: '/month',
     description: 'Ideal for growing teams that need automation, stronger visibility, and better coordination.',
     features: ['Advanced automations', 'Up to 50 team members', 'Priority support', 'Custom dashboards'],

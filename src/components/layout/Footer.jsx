@@ -1,6 +1,7 @@
 import { createElement } from 'react'
 import { FiInstagram, FiLinkedin, FiMail, FiTwitter } from 'react-icons/fi'
 import { footerLinks } from '../../data/site'
+import BrandLogo from '../ui/BrandLogo'
 import Container from '../ui/Container'
 
 const socials = [
@@ -12,24 +13,24 @@ const socials = [
 
 export default function Footer() {
   return (
-    <footer id="contact" className="border-t border-slate-200/80 bg-slate-50/80">
-      <Container className="py-10 sm:py-14">
+    <footer id="contact" className="border-t border-neutral-200/80 bg-neutral-50">
+      <Container className="py-12">
         <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr_0.8fr]">
           <div className="max-w-md">
-            <a href="#home" className="font-display text-2xl font-semibold tracking-[-0.04em] text-slate-950">
-              Qode27
+            <a href="#home" className="inline-flex items-center">
+              <BrandLogo className="h-12 sm:h-14 max-w-[16rem] sm:max-w-[20rem]" />
             </a>
-            <p className="mt-4 text-sm leading-7 text-slate-600">
+            <p className="mt-4 text-sm leading-7 text-neutral-600">
               Premium software and automation for businesses that want simpler operations, clearer systems, and room to grow.
             </p>
-            <p className="mt-4 text-sm font-semibold uppercase tracking-[0.28em] text-brand-600">Just Code IT</p>
+            <p className="mt-4 text-sm font-medium uppercase tracking-[0.32em] text-brand-700">Just Code IT</p>
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Navigation</h3>
+            <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-neutral-500">Navigation</h3>
             <div className="mt-4 flex flex-col gap-3">
               {footerLinks.map((link) => (
-                <a key={link.label} href={link.href} className="text-sm text-slate-600 hover:text-slate-950">
+                <a key={link.label} href={link.href} className="text-sm text-neutral-600 hover:text-black">
                   {link.label}
                 </a>
               ))}
@@ -37,8 +38,8 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Contact</h3>
-            <div className="mt-4 space-y-3 text-sm text-slate-600">
+            <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-neutral-500">Contact</h3>
+            <div className="mt-4 space-y-3 text-sm text-neutral-600">
               <p>hello@qode27.com</p>
               <p>+91 00000 00000</p>
               <p>Business software for hospitals, firms, and growth-focused teams.</p>
@@ -49,7 +50,7 @@ export default function Footer() {
                   key={label}
                   href={href}
                   aria-label={label}
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 hover:-translate-y-0.5 hover:border-brand-300 hover:text-brand-600"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-neutral-200 bg-white text-neutral-700 hover:-translate-y-0.5 hover:border-brand-300 hover:text-brand-700"
                 >
                   {createElement(icon)}
                 </a>
