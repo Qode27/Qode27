@@ -1,0 +1,42 @@
+{
+  "stats": [
+    { "label": "Patients Today", "value": "128", "trend": "+12%" },
+    { "label": "Open Billing", "value": "₹3.4L", "trend": "+8%" },
+    { "label": "Avg. Wait Time", "value": "14 min", "trend": "-6%" }
+  ],
+  "patients": [
+    {
+      "id": "P-1001",
+      "name": "Ananya Rao",
+      "age": 32,
+      "department": "Cardiology",
+      "doctor": "Dr. Mehta",
+      "status": "Admitted",
+      "amountDue": 14800
+    },
+    {
+      "id": "P-1002",
+      "name": "Rohan Sharma",
+      "age": 45,
+      "department": "Orthopedics",
+      "doctor": "Dr. Kapoor",
+      "status": "Under Review",
+      "amountDue": 8600
+    },
+    {
+      "id": "P-1003",
+      "name": "Meera Nair",
+      "age": 28,
+      "department": "Dermatology",
+      "doctor": "Dr. Iyer",
+      "status": "Discharge Ready",
+      "amountDue": 4200
+    }
+  ],
+  "billingItems": [
+    { "label": "Consultation", "amount": 1200 },
+    { "label": "Diagnostics", "amount": 2800 },
+    { "label": "Pharmacy", "amount": 1650 },
+    { "label": "Ward Charges", "amount": 4500 }
+  ]
+}

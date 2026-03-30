@@ -1,4 +1,5 @@
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from 'react'
+import { Link } from 'react-router-dom'
 
 type ButtonVariant = 'primary' | 'secondary' | 'ghost'
 type ButtonSize = 'sm' | 'md'
@@ -23,15 +24,15 @@ type NativeButtonProps = CommonProps &
 type ButtonProps = AnchorButtonProps | NativeButtonProps
 
 const baseStyles =
-  'inline-flex min-h-12 items-center justify-center gap-2 rounded-xl font-semibold transition duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-300 focus-visible:ring-offset-2 focus-visible:ring-offset-white'
+  'button-glow inline-flex min-h-12 items-center justify-center gap-2 rounded-xl font-semibold transition duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-white'
 
 const variants: Record<ButtonVariant, string> = {
   primary:
-    'border border-black bg-black px-6 py-3 text-white shadow-[0_12px_30px_rgba(11,11,11,0.16)] hover:-translate-y-0.5 hover:border-brand-500 hover:shadow-[0_16px_32px_rgba(200,155,60,0.18)]',
+    'border border-black bg-black px-6 py-3 text-white shadow-[0_16px_36px_rgba(15,23,42,0.16)] hover:-translate-y-0.5 hover:border-[var(--color-accent)] hover:bg-[var(--color-ink)] hover:shadow-[0_18px_36px_rgba(19,178,191,0.24)]',
   secondary:
-    'border border-black bg-white px-6 py-3 text-black shadow-[0_10px_24px_rgba(11,11,11,0.04)] hover:-translate-y-0.5 hover:bg-black hover:text-white hover:shadow-[0_18px_32px_rgba(11,11,11,0.12)]',
+    'border border-black/12 bg-white px-6 py-3 text-black shadow-[0_12px_28px_rgba(15,23,42,0.06)] hover:-translate-y-0.5 hover:border-black hover:bg-black hover:text-white',
   ghost:
-    'border border-white/50 bg-white/88 px-5 py-3 text-black shadow-[0_10px_24px_rgba(255,255,255,0.06)] hover:-translate-y-0.5 hover:border-brand-300 hover:bg-white hover:shadow-[0_16px_32px_rgba(211,161,62,0.14)]',
+    'border border-black/10 bg-white/72 px-5 py-3 text-black shadow-[0_8px_18px_rgba(15,23,42,0.05)] hover:-translate-y-0.5 hover:border-[var(--color-accent)] hover:bg-white',
 }
 
 const sizes: Record<ButtonSize, string> = {
@@ -40,19 +41,19 @@ const sizes: Record<ButtonSize, string> = {
 }
 
 export default function Button(props: ButtonProps) {
-  const {
-    children,
-    href,
-    variant = 'primary',
-    size = 'md',
-    className = '',
-    ...rest
-  } = props
-
+  const { children, href, variant = 'primary', size = 'md', className = '', ...rest } = props
   const classes = `${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`.trim()
 
   if (href) {
     const anchorProps = rest as AnchorHTMLAttributes<HTMLAnchorElement>
+
+    if (href.startsWith('/') && !href.startsWith('//')) {
+      return (
+        <Link to={href} className={classes} onClick={anchorProps.onClick}>
+          {children}
+        </Link>
+      )
+    }
 
     return (
       <a href={href} className={classes} {...anchorProps}>

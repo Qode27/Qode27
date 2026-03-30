@@ -1,21 +1,15 @@
 import type { IconType } from 'react-icons'
 import {
-  FiActivity,
   FiArrowRight,
-  FiBarChart2,
   FiBriefcase,
   FiCheckCircle,
   FiClock,
-  FiCpu,
   FiCreditCard,
-  FiFolder,
   FiHeart,
-  FiLock,
-  FiRefreshCw,
+  FiLayers,
+  FiMail,
   FiShield,
-  FiSliders,
   FiTrendingUp,
-  FiUserCheck,
   FiUsers,
   FiZap,
 } from 'react-icons/fi'
@@ -25,202 +19,213 @@ export type NavItem = {
   href: string
 }
 
-export type ContentCard = {
-  icon: IconType
-  title: string
-  text: string
-}
-
 export type Product = {
+  slug: string
   icon: IconType
-  title: string
+  name: string
+  category: string
+  headline: string
   description: string
-  highlights: string[]
+  features: string[]
+  benefits: string[]
+  metrics: { label: string; value: string }[]
+  primaryCta: { label: string; href: string }
+  secondaryCta: { label: string; href: string }
 }
 
 export type PricingPlan = {
   name: string
+  price: string
   description: string
   features: string[]
   cta: string
-  featured: boolean
+  featured?: boolean
 }
 
-export type Testimonial = {
-  quote: string
-  name: string
-  role: string
+export type ContactMethod = {
+  title: string
+  value: string
+  description: string
+  href: string
+  icon: IconType
 }
 
 export const navigation: NavItem[] = [
-  { label: 'Home', href: '#home' },
-  { label: 'Products', href: '#products' },
-  { label: 'Solutions', href: '#solutions' },
-  { label: 'Pricing', href: '#pricing' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Home', href: '/' },
+  { label: 'Products', href: '/products' },
+  { label: 'Pricing', href: '/pricing' },
+  { label: 'Contact', href: '/contact' },
 ]
 
-export const trustLabels: string[] = ['Hospitals', 'CA Firms', 'SMEs', 'Clinics', 'Operations Teams']
-
-export const products: Product[] = [
-  {
-    icon: FiHeart,
-    title: 'Hospital Management System (SIMS)',
-    description: 'Manage billing, patients, workflows, and reports from one system your team can learn quickly.',
-    highlights: ['Patient records and admissions', 'Billing and insurance workflows', 'Real-time admin reporting'],
-  },
-  {
-    icon: FiUsers,
-    title: 'HRMS',
-    description: 'Bring attendance, payroll, employee records, and approvals into one clear workflow.',
-    highlights: ['Leave and attendance tracking', 'Payroll-ready employee data', 'Simple manager approvals'],
-  },
-  {
-    icon: FiZap,
-    title: 'Business Automation Tools',
-    description: 'Reduce repetitive work with practical automations that keep operations moving without extra overhead.',
-    highlights: ['Task and follow-up automation', 'Approval and reminder flows', 'Custom process dashboards'],
-  },
+export const heroStats = [
+  { label: 'Teams launched faster', value: '45%' },
+  { label: 'Operational visibility', value: '24/7' },
+  { label: 'Average workflow adoption', value: '94%' },
 ]
 
-export const industries: ContentCard[] = [
+export const platformHighlights = [
   {
-    icon: FiActivity,
-    title: 'Hospitals',
-    text: 'Manage patients, billing, prescriptions, staff coordination, and operations in one place.',
-  },
-  {
-    icon: FiFolder,
-    title: 'CA Firms',
-    text: 'Organize client work, documents, deadlines, and approvals with less manual follow-up.',
-  },
-  {
-    icon: FiTrendingUp,
-    title: 'SMEs',
-    text: 'Replace scattered spreadsheets with clear systems for finance, people, and daily operations.',
-  },
-  {
-    icon: FiBriefcase,
-    title: 'Service Businesses',
-    text: 'Track work, teams, billing, and customer requests with software built around your process.',
-  },
-]
-
-export const features: ContentCard[] = [
-  {
-    icon: FiClock,
-    title: 'Fast Setup',
-    text: 'Launch quickly with a clear rollout process that keeps your business moving.',
+    icon: FiLayers,
+    title: 'Product-led rollout',
+    text: 'Every flow is designed to feel intuitive on day one, so teams spend less time learning and more time shipping work.',
   },
   {
     icon: FiShield,
-    title: 'Secure Access',
-    text: 'Protect business data with role-based visibility and dependable controls.',
+    title: 'Trusted operating core',
+    text: 'Role-aware views, clean permissions, and clear process states make mission-critical operations easier to trust.',
   },
   {
-    icon: FiSliders,
-    title: 'Easy to Use',
-    text: 'Clean screens and simple actions make adoption easier for non-technical teams.',
-  },
-  {
-    icon: FiCpu,
-    title: 'Scalable Systems',
-    text: 'Start with what you need today and expand as operations become more complex.',
-  },
-  {
-    icon: FiRefreshCw,
-    title: 'Smart Automation',
-    text: 'Remove repetitive work from approvals, follow-ups, reminders, and reporting.',
-  },
-  {
-    icon: FiCreditCard,
-    title: 'Affordable Growth',
-    text: 'Business-friendly pricing keeps premium software within reach for growing teams.',
+    icon: FiTrendingUp,
+    title: 'Built to scale with process maturity',
+    text: 'Start with a focused workflow, then expand into automation, reporting, and multi-team coordination without redesigning the stack.',
   },
 ]
 
-export const differentiators: ContentCard[] = [
+export const products: Product[] = [
   {
-    icon: FiCheckCircle,
-    title: 'Built for real business workflows',
-    text: 'We design around the day-to-day work your team already does, not generic software assumptions.',
-  },
-  {
-    icon: FiUserCheck,
-    title: 'Clean and simple user experience',
-    text: 'Your staff should not need technical training just to complete routine work.',
-  },
-  {
-    icon: FiArrowRight,
-    title: 'Custom-fit where it matters',
-    text: 'We keep the product streamlined while tailoring the parts that affect your operations most.',
-  },
-  {
-    icon: FiBarChart2,
-    title: 'Business-first visibility',
-    text: 'Reports and dashboards focus on decisions, not noise, so owners and managers see what matters quickly.',
-  },
-  {
-    icon: FiLock,
-    title: 'Reliable foundations',
-    text: 'We build for stability, clarity, and long-term usefulness rather than short-term complexity.',
-  },
-  {
+    slug: 'hms',
     icon: FiHeart,
-    title: 'Support mindset',
-    text: 'Qode27 works like a partner that wants your systems to keep improving as your company grows.',
+    name: 'Qode27 HMS',
+    category: 'Healthcare Operations',
+    headline: 'Run patient, billing, and front-desk workflows from one clean operating layer.',
+    description:
+      'A hospital management platform that gives admins, reception teams, and finance staff a single source of truth for appointments, admissions, billing, and daily operations.',
+    features: ['Live patient registry', 'Billing and payment previews', 'Admin dashboard with operational KPIs'],
+    benefits: [
+      'Reduce front-desk handoff delays across admissions and billing',
+      'Give administrators a simple dashboard for daily performance',
+      'Replace spreadsheet-heavy patient tracking with a product workflow',
+    ],
+    metrics: [
+      { label: 'Admissions tracked', value: '1.8k/mo' },
+      { label: 'Billing completion lift', value: '+31%' },
+      { label: 'Admin time saved', value: '12 hrs/wk' },
+    ],
+    primaryCta: { label: 'View Demo', href: '/demo/hms' },
+    secondaryCta: { label: 'Get Pricing', href: '/pricing' },
+  },
+  {
+    slug: 'hrms',
+    icon: FiUsers,
+    name: 'Qode27 HRMS',
+    category: 'People Operations',
+    headline: 'Bring people ops, leave approvals, and payroll readiness into one workflow.',
+    description:
+      'A streamlined HR platform for growing companies that want better visibility across attendance, leave, approvals, and employee records without a heavy enterprise setup.',
+    features: ['Employee directory and records', 'Leave and approval workflows', 'Payroll-ready attendance data'],
+    benefits: [
+      'Make team operations faster with cleaner approval flows',
+      'Give managers a simple review surface instead of chat-based requests',
+      'Keep people data current without duplicate admin work',
+    ],
+    metrics: [
+      { label: 'Manager response time', value: '-53%' },
+      { label: 'Payroll prep cycle', value: '2x faster' },
+      { label: 'Employee visibility', value: '100%' },
+    ],
+    primaryCta: { label: 'Contact Sales', href: '/contact' },
+    secondaryCta: { label: 'Get Pricing', href: '/pricing' },
+  },
+  {
+    slug: 'automation-suite',
+    icon: FiZap,
+    name: 'Qode27 Automation Suite',
+    category: 'Operations Automation',
+    headline: 'Automate reminders, approvals, and internal process handoffs without adding complexity.',
+    description:
+      'A modular automation layer for finance, admin, and service teams that want to remove repetitive work while keeping full visibility over every operational step.',
+    features: ['Approval routing engine', 'Automated reminders and follow-ups', 'Process dashboards and activity logs'],
+    benefits: [
+      'Eliminate repetitive manual coordination across internal teams',
+      'Keep leaders informed with lightweight operational dashboards',
+      'Turn fragile process knowledge into repeatable product workflows',
+    ],
+    metrics: [
+      { label: 'Manual follow-ups reduced', value: '-61%' },
+      { label: 'Approval SLA', value: '<4 hrs' },
+      { label: 'Operational clarity', value: 'High' },
+    ],
+    primaryCta: { label: 'Talk to Qode27', href: '/contact' },
+    secondaryCta: { label: 'Get Pricing', href: '/pricing' },
   },
 ]
 
 export const pricingPlans: PricingPlan[] = [
   {
-    name: 'Basic',
-    description: 'A clean starting point for businesses moving from manual work to organized software.',
-    features: ['Core workflows', 'Up to 10 team members', 'Email support', 'Basic reports'],
-    cta: 'Get Started',
-    featured: false,
+    name: 'Starter',
+    price: 'Custom',
+    description: 'For smaller teams moving from spreadsheets to a dependable product workflow.',
+    features: ['Core modules', 'Guided onboarding', 'Email support', 'Usage-based expansion'],
+    cta: 'Talk to Sales',
   },
   {
-    name: 'Pro',
-    description: 'Ideal for growing teams that need automation, stronger visibility, and better coordination.',
-    features: ['Advanced automations', 'Up to 50 team members', 'Priority support', 'Custom dashboards'],
-    cta: 'Book Demo',
+    name: 'Growth',
+    price: 'Custom',
+    description: 'For scaling teams that want automation, reporting, and stronger operational control.',
+    features: ['Workflow automation', 'Advanced analytics', 'Priority support', 'Multi-team permissions'],
+    cta: 'Get Pricing',
     featured: true,
   },
   {
     name: 'Enterprise',
-    description: 'For larger or more complex operations that need tailored workflows, onboarding, and support.',
-    features: ['Custom implementation', 'Unlimited users', 'Dedicated support', 'Process consulting'],
-    cta: 'Talk to Sales',
-    featured: false,
+    price: 'Custom',
+    description: 'For complex orgs that need tailored rollout, governance, and process design support.',
+    features: ['Custom implementation', 'Executive onboarding', 'Dedicated success partner', 'Operational consulting'],
+    cta: 'Book Strategy Call',
   },
 ]
 
-export const testimonials: Testimonial[] = [
+export const contactMethods: ContactMethod[] = [
   {
-    quote:
-      'Qode27 helped us bring patient operations and billing into one clean workflow. Our team picked it up quickly, and day-to-day coordination became far easier.',
-    name: 'Ritika Sharma',
-    role: 'Hospital Administrator',
+    title: 'Email',
+    value: 'qode27business@gmail.com',
+    description: 'Best for demos, pricing conversations, and product discovery.',
+    href: 'mailto:qode27business@gmail.com',
+    icon: FiMail,
   },
   {
-    quote:
-      'We wanted software that felt practical, not complicated. The system gave our CA office better visibility without making the team change everything at once.',
-    name: 'Naveen Patel',
-    role: 'CA Firm Owner',
+    title: 'Phone',
+    value: '+91 7022556960',
+    description: 'Reach Qode27 directly for implementation or procurement discussions.',
+    href: 'tel:+917022556960',
+    icon: FiArrowRight,
   },
   {
-    quote:
-      'The biggest difference was speed. Repetitive operational work became simpler, and we finally had a system that felt built for a growing business.',
-    name: 'Aman Khurana',
-    role: 'SME Founder',
+    title: 'Strategy Intro',
+    value: 'Product-first rollout',
+    description: 'We position each implementation around adoption, speed, and measurable process wins.',
+    href: '/pricing',
+    icon: FiBriefcase,
   },
 ]
 
-export const footerLinks: NavItem[] = [
-  { label: 'Home', href: '#home' },
-  { label: 'Products', href: '#products' },
-  { label: 'Solutions', href: '#solutions' },
-  { label: 'Pricing', href: '#pricing' },
-  { label: 'Contact', href: '#contact' },
+export const trustPoints = [
+  'Healthcare, finance, and operations-friendly workflows',
+  'Fast adoption for non-technical teams',
+  'Premium visual polish with practical admin UX',
+  'Implementation support that stays grounded in real operations',
 ]
+
+export const pricingNotes = [
+  {
+    icon: FiClock,
+    title: 'Fast rollout',
+    text: 'Scoped launches keep the first version narrow, useful, and ready for team adoption.',
+  },
+  {
+    icon: FiCheckCircle,
+    title: 'Clear fit',
+    text: 'We recommend only the modules and workflows that make sense for your current stage.',
+  },
+  {
+    icon: FiCreditCard,
+    title: 'Practical pricing',
+    text: 'Engagements are structured around value and rollout complexity, not bloated enterprise overhead.',
+  },
+]
+
+export const footerLinks = navigation
+
+export function getProductBySlug(slug?: string) {
+  return products.find((product) => product.slug === slug)
+}

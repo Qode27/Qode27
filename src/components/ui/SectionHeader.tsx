@@ -19,7 +19,7 @@ export default function SectionHeader({
   return (
     <Reveal className={`${width} ${alignment}`.trim()}>
       {eyebrow ? (
-        <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-brand-700">{eyebrow}</p>
+        <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-[var(--color-accent-strong)]">{eyebrow}</p>
       ) : null}
       <h2 className="font-display text-3xl font-semibold text-black">{title}</h2>
       <p className="mt-5 text-base leading-8 text-neutral-600 sm:text-lg">{description}</p>

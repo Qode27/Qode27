@@ -3,14 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Page Not Found | Qode27</title>
-    <meta name="theme-color" content="#0B0B0B" />
+    <title>Redirecting | Qode27</title>
+    <meta name="theme-color" content="#081114" />
     <style>
       :root {
         color-scheme: light;
         --black: #0b0b0b;
-        --gold: #c89b3c;
-        --blue: #17c5ff;
+        --teal: #13b2bf;
         --border: #e5e7eb;
         --text: #6b7280;
       }
@@ -26,8 +25,8 @@
         place-items: center;
         font-family: Inter, Arial, sans-serif;
         background:
-          radial-gradient(circle at top, rgba(200, 155, 60, 0.12), transparent 30%),
-          radial-gradient(circle at 20% 20%, rgba(23, 197, 255, 0.08), transparent 22%),
+          radial-gradient(circle at top, rgba(19, 178, 191, 0.12), transparent 30%),
+          radial-gradient(circle at 20% 20%, rgba(8, 17, 20, 0.06), transparent 22%),
           #fff;
         color: var(--black);
         padding: 24px;
@@ -48,7 +47,7 @@
         font-weight: 700;
         letter-spacing: 0.22em;
         text-transform: uppercase;
-        color: #946d23;
+        color: #05707a;
       }
 
       h1 {
@@ -81,21 +80,26 @@
       }
 
       a:hover {
-        border-color: var(--gold);
-        box-shadow: 0 16px 32px rgba(200, 155, 60, 0.18);
+        border-color: var(--teal);
+        box-shadow: 0 16px 32px rgba(19, 178, 191, 0.18);
         transform: translateY(-2px);
       }
 
       .accent {
-        color: var(--gold);
+        color: var(--teal);
       }
     </style>
+    <script>
+      const redirectTarget = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+      window.sessionStorage.setItem('qode27.redirect', redirectTarget);
+      window.location.replace('/');
+    </script>
   </head>
   <body>
     <main class="card">
       <p class="eyebrow">Qode27</p>
-      <h1>Page <span class="accent">not found</span></h1>
-      <p>The page you are looking for does not exist or may have moved. Return to the Qode27 homepage to continue browsing.</p>
+      <h1>Opening the <span class="accent">right page</span></h1>
+      <p>If you are not redirected automatically, use the button below to return to the Qode27 website.</p>
       <a href="/">Go to Homepage</a>
     </main>
   </body>

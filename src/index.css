@@ -5,27 +5,14 @@
   --font-sans: "Inter", sans-serif;
   --font-display: "Poppins", sans-serif;
 
-  --color-brand-50: #fdf8ea;
-  --color-brand-100: #f8ebc3;
-  --color-brand-200: #efd88a;
-  --color-brand-300: #ddb95b;
-  --color-brand-400: #d3aa48;
-  --color-brand-500: #c89b3c;
-  --color-brand-600: #b18828;
-  --color-brand-700: #946d23;
-  --color-brand-800: #73541b;
-  --color-brand-900: #503913;
+  --color-page: #ffffff;
+  --color-copy: #5b6670;
+  --color-ink: #081114;
+  --color-accent: #13b2bf;
+  --color-accent-strong: #05707a;
+  --color-accent-soft: #e8fbfc;
 
-  --color-teal-500: #17c5ff;
-  --color-teal-600: #00b4d8;
-  --color-ink-950: #0b0b0b;
-  --color-ink-900: #111111;
-  --color-surface: #f7f7f7;
-  --color-surface-strong: #f7f7f7;
-
-  --shadow-soft: 0 22px 54px rgba(11, 11, 11, 0.06);
-  --shadow-float: 0 28px 76px rgba(45, 184, 182, 0.12);
-  --shadow-gold: 0 20px 60px rgba(211, 161, 62, 0.16);
+  --shadow-soft: 0 22px 54px rgba(8, 17, 20, 0.06);
 }
 
 @layer base {
@@ -35,23 +22,25 @@
 
   body {
     @apply bg-white font-sans text-neutral-700 antialiased;
+    background:
+      radial-gradient(circle at top, rgba(19, 178, 191, 0.08), transparent 30%),
+      linear-gradient(180deg, #ffffff 0%, #fbfcfc 45%, #ffffff 100%);
   }
 
   #root {
     @apply min-h-screen;
   }
 
-  section[id] {
-    scroll-margin-top: 7rem;
-  }
-
   ::selection {
-    background: rgba(211, 161, 62, 0.24);
-    color: #0b0b0b;
+    background: rgba(19, 178, 191, 0.18);
+    color: #081114;
   }
 
   a,
-  button {
+  button,
+  input,
+  textarea,
+  select {
     @apply transition-all duration-300;
   }
 
@@ -81,59 +70,8 @@
   }
 
   .glass-panel {
-    @apply border border-white/70 bg-white/80 backdrop-blur-xl;
+    @apply border border-white/70 bg-white/86 backdrop-blur-xl;
     box-shadow: var(--shadow-soft);
-  }
-
-  .card-surface {
-    @apply rounded-2xl border border-neutral-200 bg-white;
-    box-shadow: var(--shadow-soft);
-  }
-
-  .system-card {
-    @apply rounded-2xl border border-neutral-200 bg-white p-6;
-    box-shadow: var(--shadow-soft);
-    transition:
-      transform 0.35s ease,
-      box-shadow 0.35s ease,
-      border-color 0.35s ease;
-  }
-
-  .system-card:hover {
-    transform: translateY(-4px);
-    border-color: color-mix(in srgb, #c89b3c 28%, #e5e7eb);
-    box-shadow:
-      0 22px 54px rgba(11, 11, 11, 0.08),
-      0 0 0 1px rgba(200, 155, 60, 0.08);
-  }
-
-  .system-icon {
-    @apply flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-50 text-xl text-brand-700;
-  }
-
-  .gradient-border {
-    position: relative;
-    isolation: isolate;
-  }
-
-  .gradient-border::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    border-radius: inherit;
-    padding: 1px;
-    background:
-      linear-gradient(145deg, rgba(211, 161, 62, 0.26), rgba(45, 184, 182, 0.10), rgba(11, 11, 11, 0.08));
-    -webkit-mask:
-      linear-gradient(#fff 0 0) content-box,
-      linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-  }
-
-  .brand-separator {
-    @apply border-t border-neutral-200/70;
   }
 
   .nav-link {
@@ -149,35 +87,46 @@
     width: 100%;
     transform: scaleX(0);
     transform-origin: left;
-    background: linear-gradient(90deg, #c89b3c, #17c5ff);
+    background: linear-gradient(90deg, #081114, #13b2bf);
     transition: transform 220ms ease;
   }
 
   .nav-link:hover::after,
-  .nav-link:focus-visible::after {
+  .nav-link:focus-visible::after,
+  .nav-link.active::after {
     transform: scaleX(1);
   }
 
-  .brand-orb {
-    background:
-      radial-gradient(circle at 30% 30%, rgba(211, 161, 62, 0.18), transparent 42%),
-      radial-gradient(circle at 70% 65%, rgba(23, 197, 255, 0.14), transparent 38%);
-    filter: blur(6px);
+  .product-card {
+    box-shadow: 0 18px 42px rgba(8, 17, 20, 0.05);
   }
 
-  .brand-circuit {
-    background-image:
-      linear-gradient(rgba(23, 197, 255, 0.09) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(211, 161, 62, 0.08) 1px, transparent 1px);
-    background-size: 60px 60px;
-    mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 0.96) 32%, transparent 74%);
-    -webkit-mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 0.96) 32%, transparent 74%);
+  .product-card:hover {
+    box-shadow:
+      0 26px 56px rgba(8, 17, 20, 0.08),
+      0 0 0 1px rgba(19, 178, 191, 0.1);
   }
 
-  .grid-pattern {
-    background-image:
-      linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
-    background-size: 42px 42px;
+  .button-glow:hover {
+    filter: saturate(1.05);
+  }
+
+  .skeleton {
+    @apply relative overflow-hidden rounded-2xl bg-[#edf3f4];
+  }
+
+  .skeleton::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    animation: shimmer 1.4s infinite;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.65), transparent);
+  }
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
   }
 }

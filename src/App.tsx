@@ -1,49 +1,43 @@
 import { Suspense, lazy } from 'react'
-import Footer from './components/layout/Footer'
-import Navbar from './components/layout/Navbar'
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
+import { AnimatePresence } from 'framer-motion'
+import SiteLayout from './components/layout/SiteLayout'
+import PageSkeleton from './components/ui/PageSkeleton'
 
-const HeroSection = lazy(() => import('./sections/HeroSection'))
-const TrustStrip = lazy(() => import('./sections/TrustStrip'))
-const ProductsSection = lazy(() => import('./sections/ProductsSection'))
-const SolutionsSection = lazy(() => import('./sections/SolutionsSection'))
-const FeaturesSection = lazy(() => import('./sections/FeaturesSection'))
-const WhyQodeSection = lazy(() => import('./sections/WhyQodeSection'))
-const PricingSection = lazy(() => import('./sections/PricingSection'))
-const TestimonialsSection = lazy(() => import('./sections/TestimonialsSection'))
-const FinalCtaSection = lazy(() => import('./sections/FinalCtaSection'))
-
-function SectionFallback() {
-  return <div className="h-24" aria-hidden="true" />
-}
+const HomePage = lazy(() => import('./pages/HomePage'))
+const ProductsPage = lazy(() => import('./pages/ProductsPage'))
+const PricingPage = lazy(() => import('./pages/PricingPage'))
+const ContactPage = lazy(() => import('./pages/ContactPage'))
+const ProductDetailPage = lazy(() => import('./pages/ProductDetailPage'))
+const HmsDemoPage = lazy(() => import('./pages/demo/HmsDemoPage'))
 
 export default function App() {
+  const location = useLocation()
+
   return (
-    <div className="relative min-h-screen bg-white text-neutral-900">
+    <div className="relative min-h-screen bg-[var(--color-page)] text-[var(--color-copy)]">
       <a
         href="#main-content"
-        className="absolute left-4 top-4 z-[70] -translate-y-20 rounded-xl bg-black px-4 py-2 text-sm font-semibold text-white focus:translate-y-0 focus:outline-none focus:ring-2 focus:ring-brand-300"
+        className="absolute left-4 top-4 z-[80] -translate-y-20 rounded-xl bg-black px-4 py-2 text-sm font-semibold text-white focus:translate-y-0 focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]"
       >
         Skip to content
       </a>
-      <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-[42rem] bg-[radial-gradient(circle_at_top,_rgba(211,161,62,0.13),transparent_34%),radial-gradient(circle_at_18%_20%,_rgba(45,184,182,0.10),transparent_24%),linear-gradient(180deg,_#fcfbf7_0%,_#ffffff_58%)]"
-        aria-hidden="true"
-      />
-      <Navbar />
-      <main id="main-content">
-        <Suspense fallback={<SectionFallback />}>
-          <HeroSection />
-          <TrustStrip />
-          <ProductsSection />
-          <SolutionsSection />
-          <FeaturesSection />
-          <WhyQodeSection />
-          <PricingSection />
-          <TestimonialsSection />
-          <FinalCtaSection />
-        </Suspense>
-      </main>
-      <Footer />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-[38rem] bg-[radial-gradient(circle_at_top,_rgba(19,178,191,0.14),transparent_40%),linear-gradient(180deg,_rgba(255,255,255,0.98)_0%,_rgba(244,247,248,0.96)_48%,_rgba(255,255,255,1)_100%)]" />
+      <Suspense fallback={<PageSkeleton />}>
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
+            <Route element={<SiteLayout />}>
+              <Route index element={<HomePage />} />
+              <Route path="/products" element={<ProductsPage />} />
+              <Route path="/products/:slug" element={<ProductDetailPage />} />
+              <Route path="/pricing" element={<PricingPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+              <Route path="/demo/hms" element={<HmsDemoPage />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Route>
+          </Routes>
+        </AnimatePresence>
+      </Suspense>
     </div>
   )
 }
