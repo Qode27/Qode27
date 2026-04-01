@@ -1,0 +1,58 @@
+import { createElement } from 'react'
+import { motion as Motion } from 'framer-motion'
+import { FiArrowRight, FiCheckCircle } from 'react-icons/fi'
+import { Link } from 'react-router-dom'
+import type { Solution } from '../../data/solutions'
+import { buildRequestDemoPath } from '../../data/solutions'
+import Button from './Button'
+
+type SolutionCardProps = {
+  solution: Solution
+  featured?: boolean
+}
+
+export default function SolutionCard({ solution, featured = false }: SolutionCardProps) {
+  return (
+    <Motion.article
+      whileHover={{ y: -6 }}
+      transition={{ duration: 0.25 }}
+      className={`product-card flex h-full flex-col rounded-[1.5rem] border border-slate-200/70 bg-white p-7 ${
+        featured ? 'shine-border shadow-[0_26px_60px_rgba(15,23,42,0.1)]' : 'shadow-[0_18px_45px_rgba(15,23,42,0.07)]'
+      }`}
+    >
+      <div className="flex items-start justify-between gap-4">
+        <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--color-accent-soft)] text-xl text-[var(--color-accent)] transition duration-300 group-hover:scale-105">
+          {createElement(solution.icon)}
+        </div>
+        {featured ? (
+          <span className="rounded-full border border-[var(--color-accent)]/20 bg-[var(--color-accent-soft)] px-3 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-[var(--color-accent)]">
+            Popular
+          </span>
+        ) : null}
+      </div>
+      <p className="mt-6 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-accent)]">{solution.category}</p>
+      <h3 className="mt-3 text-[1.7rem] font-semibold tracking-[-0.04em] text-slate-950">{solution.name}</h3>
+      <p className="mt-4 text-base leading-7 text-slate-600">{solution.cardDescription}</p>
+      <div className="mt-6 space-y-3">
+        {solution.features.slice(0, 3).map((feature) => (
+          <div key={feature} className="flex items-start gap-3 rounded-2xl bg-slate-50 px-4 py-3 text-sm text-slate-600">
+            <FiCheckCircle className="mt-0.5 shrink-0 text-[var(--color-accent)]" />
+            <span>{feature}</span>
+          </div>
+        ))}
+      </div>
+      <div className="mt-auto flex flex-col gap-3 pt-8 sm:flex-row">
+        <Link
+          to={`/solutions/${solution.slug}`}
+          className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-900 hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
+        >
+          View Solution
+          <FiArrowRight />
+        </Link>
+        <Button href={buildRequestDemoPath(solution.name)} variant="primary" size="sm" className="justify-center">
+          Request Demo
+        </Button>
+      </div>
+    </Motion.article>
+  )
+}

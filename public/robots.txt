@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://qode27.com/sitemap.xml

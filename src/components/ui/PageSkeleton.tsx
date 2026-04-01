@@ -4,7 +4,7 @@ import Skeleton from './Skeleton'
 export default function PageSkeleton() {
   return (
     <div className="relative z-10">
-      <Container className="pt-30 pb-18">
+      <Container className="pt-24 pb-18">
         <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="space-y-4">
             <Skeleton className="h-4 w-32 rounded-full" />

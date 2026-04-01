@@ -28,11 +28,11 @@ const baseStyles =
 
 const variants: Record<ButtonVariant, string> = {
   primary:
-    'border border-black bg-black px-6 py-3 text-white shadow-[0_16px_36px_rgba(15,23,42,0.16)] hover:-translate-y-0.5 hover:border-[var(--color-accent)] hover:bg-[var(--color-ink)] hover:shadow-[0_18px_36px_rgba(19,178,191,0.24)]',
+    'border border-[var(--color-accent)] bg-[var(--color-accent)] px-6 py-3 text-white shadow-[0_18px_40px_rgba(20,131,181,0.18)] hover:-translate-y-0.5 hover:bg-[var(--color-accent-strong)] hover:shadow-[0_22px_46px_rgba(20,131,181,0.24)]',
   secondary:
-    'border border-black/12 bg-white px-6 py-3 text-black shadow-[0_12px_28px_rgba(15,23,42,0.06)] hover:-translate-y-0.5 hover:border-black hover:bg-black hover:text-white',
+    'border border-slate-200 bg-white px-6 py-3 text-slate-950 shadow-[0_12px_28px_rgba(15,23,42,0.05)] hover:-translate-y-0.5 hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]',
   ghost:
-    'border border-black/10 bg-white/72 px-5 py-3 text-black shadow-[0_8px_18px_rgba(15,23,42,0.05)] hover:-translate-y-0.5 hover:border-[var(--color-accent)] hover:bg-white',
+    'border border-transparent bg-transparent px-5 py-3 text-slate-700 hover:-translate-y-0.5 hover:text-[var(--color-accent)]',
 }
 
 const sizes: Record<ButtonSize, string> = {
