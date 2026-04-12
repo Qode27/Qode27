@@ -293,7 +293,7 @@ export const pricingPlans: PricingPlan[] = [
   {
     name: 'Starter',
     bestFor: 'Businesses moving out of spreadsheets and manual workflows',
-    priceLabel: 'Starting from Rs 18,000/month',
+    priceLabel: 'Starting from Rs 5000/month',
     description: 'Best for focused operational improvements and first-phase software adoption.',
     features: ['Core workflows', 'Standard onboarding', 'Essential dashboards', 'Custom modules available'],
     supportLevel: 'Business-hours support',
@@ -301,7 +301,7 @@ export const pricingPlans: PricingPlan[] = [
   {
     name: 'Growth',
     bestFor: 'Teams that need deeper workflows, role-based access, and more reporting',
-    priceLabel: 'Starting from Rs 40,000/month',
+    priceLabel: 'Starting from Rs 15,000/month',
     description: 'Designed for growing operations that need stronger process control and system depth.',
     features: ['Expanded modules', 'Priority onboarding', 'Operational reporting', 'Custom modules available'],
     supportLevel: 'Priority support',
