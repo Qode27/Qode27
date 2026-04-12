@@ -1,6 +1,6 @@
 import { createElement } from 'react'
 import { motion as Motion } from 'framer-motion'
-import { FiArrowRight, FiCheckCircle } from 'react-icons/fi'
+import { FiArrowRight } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 import type { Solution } from '../../data/solutions'
 import { buildRequestDemoPath } from '../../data/solutions'
@@ -33,13 +33,19 @@ export default function SolutionCard({ solution, featured = false }: SolutionCar
       <p className="mt-6 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-accent)]">{solution.category}</p>
       <h3 className="mt-3 text-[1.7rem] font-semibold tracking-[-0.04em] text-slate-950">{solution.name}</h3>
       <p className="mt-4 text-base leading-7 text-slate-600">{solution.cardDescription}</p>
-      <div className="mt-6 space-y-3">
-        {solution.features.slice(0, 3).map((feature) => (
-          <div key={feature} className="flex items-start gap-3 rounded-2xl bg-slate-50 px-4 py-3 text-sm text-slate-600">
-            <FiCheckCircle className="mt-0.5 shrink-0 text-[var(--color-accent)]" />
-            <span>{feature}</span>
-          </div>
-        ))}
+      <div className="mt-6 space-y-5 rounded-[1.3rem] bg-slate-50 p-5">
+        <div>
+          <p className="text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-slate-500">Problem</p>
+          <p className="mt-2 text-sm leading-6 text-slate-600">{solution.problems[0]}</p>
+        </div>
+        <div>
+          <p className="text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-slate-500">System</p>
+          <p className="mt-2 text-sm leading-6 text-slate-600">{solution.approach[0]}</p>
+        </div>
+        <div>
+          <p className="text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-slate-500">Outcome</p>
+          <p className="mt-2 text-sm leading-6 text-slate-600">{solution.benefits[0]}</p>
+        </div>
       </div>
       <div className="mt-auto flex flex-col gap-3 pt-8 sm:flex-row">
         <Link

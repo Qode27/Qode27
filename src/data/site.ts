@@ -27,6 +27,12 @@ export type TrustItem = {
   description: string
 }
 
+export type SolutionOverviewGroup = {
+  title: string
+  problem: string
+  outcome: string
+}
+
 export type Pillar = {
   icon: IconType
   title: string
@@ -42,7 +48,15 @@ export type Testimonial = {
 
 export type CaseStudyPreview = {
   title: string
+  before: string
+  after: string
   description: string
+  outcome: string
+}
+
+export type UseCaseScenario = {
+  scenario: string
+  problem: string
   outcome: string
 }
 
@@ -66,53 +80,76 @@ export const navigation: NavItem[] = [
 
 export const trustBar: TrustItem[] = [
   {
-    title: 'Multi-industry business solutions',
-    description: 'Software for logistics, retail, education, healthcare, operations, and internal business systems.',
+    title: 'Built for real business operations',
+    description: 'Designed around how work moves on the ground, not around generic software assumptions.',
   },
   {
-    title: 'Custom-built for real operations',
-    description: 'Every system is shaped around the workflow your team follows every day.',
+    title: 'Designed for Indian SMB workflows',
+    description: 'Practical for growing teams that need better control, clearer reporting, and fast adoption.',
   },
   {
-    title: 'Scalable for growing businesses',
-    description: 'Designed to support business expansion, more users, and deeper process visibility.',
+    title: 'Fast deployment cycles',
+    description: 'Built to move from requirement to usable system without slow, overcomplicated rollout.',
   },
   {
-    title: 'Designed for Indian SMBs and enterprises',
-    description: 'Practical rollout, strong usability, and grounded implementation support.',
+    title: 'Custom-ready systems',
+    description: 'Tailored to your workflow today with room to add users, modules, and visibility over time.',
+  },
+]
+
+export const solutionOverviewGroups: SolutionOverviewGroup[] = [
+  {
+    title: 'Operations and Logistics Systems',
+    problem: 'Movement, dispatch, status updates, and billing often sit across calls, sheets, and disconnected tools.',
+    outcome: 'Qode27 brings operational flow into one system so teams work with live visibility, cleaner execution, and better control.',
+  },
+  {
+    title: 'Inventory and Distribution Systems',
+    problem: 'Stock errors, dispatch delays, and weak warehouse visibility make it harder to plan and harder to trust the numbers.',
+    outcome: 'We build systems that keep inventory, inward and outward movement, and reporting aligned so decisions happen faster.',
+  },
+  {
+    title: 'Business Management Systems',
+    problem: 'Front-desk work, student admin, retail activity, internal approvals, and daily reporting become messy when managed manually.',
+    outcome: 'The result is a cleaner operating layer across departments, with less manual work and stronger day-to-day ownership.',
+  },
+  {
+    title: 'Custom Software',
+    problem: 'Some businesses are too operationally specific for off-the-shelf software or rigid templates.',
+    outcome: 'We design software around the way your business already works, then structure it for scale, usability, and speed.',
   },
 ]
 
 export const whyQode: Pillar[] = [
   {
     icon: FiCpu,
-    title: 'Built around your business workflow',
-    text: 'We start with your operations and shape software around the way your teams actually work.',
+    title: 'Built around workflows, not templates',
+    text: 'We study how your operation actually runs, then design the system around real approvals, movement, reporting, and execution.',
   },
   {
     icon: FiLayers,
-    title: 'No unnecessary complexity',
-    text: 'Qode27 focuses on operational clarity, cleaner interfaces, and systems people can use with confidence.',
+    title: 'Practical systems, not overengineered ones',
+    text: 'The goal is usable control, not bloated software. Every screen and workflow is there to reduce friction and improve decision-making.',
   },
   {
     icon: FiBriefcase,
-    title: 'Multi-industry experience',
-    text: 'We work across logistics, education, healthcare, retail, HR, and custom business operations.',
+    title: 'Multi-industry understanding',
+    text: 'We work across logistics, distribution, healthcare, retail, education, and internal operations, which helps us spot patterns others miss.',
   },
   {
     icon: FiClock,
-    title: 'Fast implementation',
-    text: 'Projects are planned for speed, clarity, and business readiness instead of endless setup cycles.',
+    title: 'Fast execution',
+    text: 'Projects are scoped for momentum. We focus on the workflows that matter first and move quickly toward a usable rollout.',
   },
   {
     icon: FiTrendingUp,
-    title: 'Scalable architecture',
-    text: 'The software foundation is built to support additional workflows, users, and reporting over time.',
+    title: 'Systems that scale with the business',
+    text: 'Your software should not break the moment the team grows. We plan for more users, more process depth, and stronger visibility over time.',
   },
   {
     icon: FiActivity,
-    title: 'Modern UI with operational clarity',
-    text: 'Interfaces are clean, premium, and designed to surface the information teams need quickly.',
+    title: 'Clean UI with operational clarity',
+    text: 'Good software should feel obvious to use. We design interfaces that surface the right information without clutter or confusion.',
   },
 ]
 
@@ -141,34 +178,66 @@ export const buildProcess = [
   },
 ]
 
-export const businessScenarios = [
-  'Truck enters parking, entry is recorded automatically, and billing begins from the first movement.',
-  'Distributor receives stock and inventory updates instantly across records, dispatch planning, and reporting.',
-  'Shipping business tracks operational movement and revenue through one clear management system.',
-  'Coaching center automates admissions, attendance, and fees without scattered spreadsheets.',
-  'Takeaway store tracks daily orders, revenue, and outlet performance from one operational dashboard.',
-  'Hospital manages patients, billing, prescriptions, and front-desk workflow with better speed and control.',
+export const businessScenarios: UseCaseScenario[] = [
+  {
+    scenario: 'Truck parking site handling high daily vehicle movement',
+    problem: 'Entries, exits, slot usage, and billing are tracked manually, creating disputes and weak revenue visibility.',
+    outcome: 'The operation runs through one live system with cleaner movement records, faster billing, and better site control.',
+  },
+  {
+    scenario: 'Distributor managing stock across warehouse and dispatch',
+    problem: 'Inventory figures drift when inward, outward, and dispatch activity are updated in separate sheets or by phone.',
+    outcome: 'Stock position, movement history, and dispatch planning stay aligned, giving the team better control over inventory decisions.',
+  },
+  {
+    scenario: 'Logistics business coordinating active jobs and status updates',
+    problem: 'Teams lose visibility when status updates, billing, and operational progress sit across chats, calls, and spreadsheets.',
+    outcome: 'Management gets one operating view for movement, status, and revenue, reducing follow-up effort and improving decisions.',
+  },
+  {
+    scenario: 'Coaching institute managing admissions, attendance, and fees',
+    problem: 'Admin teams spend too much time reconciling records and chasing updates across manual tools.',
+    outcome: 'Student operations become structured, fee tracking becomes clearer, and the institute spends less time on admin work.',
+  },
+  {
+    scenario: 'Retail or takeaway business running fast daily order volume',
+    problem: 'Orders, item records, and daily sales reporting are fragmented, making it hard to see what is really happening in the business.',
+    outcome: 'Owners get clearer day-level control over orders, revenue, and outlet performance from one operating system.',
+  },
+  {
+    scenario: 'Hospital or clinic managing front-desk, billing, and patient flow',
+    problem: 'Manual coordination slows teams down and makes billing accuracy harder to maintain across departments.',
+    outcome: 'Patient handling becomes more structured, billing becomes cleaner, and administrators get better operational visibility.',
+  },
 ]
 
 export const caseStudyPreviews: CaseStudyPreview[] = [
   {
-    title: 'Parking business operations digitized',
-    description: 'Manual entry tracking, billing confusion, and visibility gaps were replaced with a structured operations dashboard.',
-    outcome: 'Cleaner movement records and better revenue visibility',
+    title: 'Parking operations moved from manual tracking to live control',
+    before: 'Vehicle movement and billing were handled manually, which created delays, billing confusion, and weak operational visibility.',
+    after: 'A structured parking system connected entry, slot usage, billing, and reporting in one workflow.',
+    description: 'The business moved from reactive tracking to a clearer operating model with fewer billing disputes.',
+    outcome: 'Cleaner movement records, faster billing, and better revenue visibility',
   },
   {
-    title: 'Distribution inventory visibility improved',
-    description: 'Stock movement, dispatch planning, and reporting were centralized for faster operational decision-making.',
+    title: 'Distribution team gained control over stock movement and dispatch',
+    before: 'Warehouse updates and dispatch planning were spread across manual records, slowing decisions and reducing trust in stock data.',
+    after: 'Inventory, movement, and dispatch visibility were centralized into one operational system.',
+    description: 'The team gained a more reliable picture of stock position and a faster way to plan daily operations.',
     outcome: 'Better stock clarity across warehouse and distribution workflows',
   },
   {
-    title: 'Coaching admin workload reduced',
-    description: 'Admissions, batches, attendance, and fees were moved out of fragmented manual processes.',
+    title: 'Coaching institute reduced admin load across core workflows',
+    before: 'Admissions, attendance, batches, and fees were managed through scattered sheets and repetitive manual work.',
+    after: 'The institute adopted a unified admin system built around daily academic operations.',
+    description: 'Routine work became easier to manage, and leadership gained clearer visibility into student administration.',
     outcome: 'Less admin effort and a more organized institute workflow',
   },
   {
-    title: 'Retail order handling streamlined',
-    description: 'Order tracking and day-level performance reporting were brought into one operational interface.',
+    title: 'Retail business improved daily order and revenue control',
+    before: 'Order handling and sales reporting were fragmented, making it difficult to track outlet performance cleanly.',
+    after: 'Orders, revenue, and day-level performance moved into one structured interface.',
+    description: 'The business gained faster control over daily operations without relying on manual reporting at the end of the day.',
     outcome: 'Faster daily control and clearer revenue monitoring',
   },
 ]
@@ -176,21 +245,21 @@ export const caseStudyPreviews: CaseStudyPreview[] = [
 export const testimonials: Testimonial[] = [
   {
     quote:
-      'Qode27 understood our workflow quickly and translated it into software that made operations clearer from day one.',
+      'They understood the way our operation actually worked. The system was clear, practical, and our team started using it quickly.',
     name: 'Arjun Reddy',
-    businessType: 'Logistics Operations',
+    businessType: 'Logistics and Operations',
     company: 'Southline Logistics',
   },
   {
     quote:
-      'The system felt premium, but more importantly it solved the exact bottlenecks our team was dealing with every day.',
+      'What stood out was the clarity. It did not feel like generic software. It felt like something built around our daily workflow.',
     name: 'Nazia Khan',
-    businessType: 'Education Management',
+    businessType: 'Education Operations',
     company: 'Brightpath Institute',
   },
   {
     quote:
-      'We were not looking for generic software. Qode27 gave us a system that matched our business, our team, and our pace of growth.',
+      'We did not need more features. We needed more control. Qode27 helped us simplify the workflow and see the business more clearly.',
     name: 'Vikram S',
     businessType: 'Healthcare Operations',
     company: 'Carepoint Clinics',

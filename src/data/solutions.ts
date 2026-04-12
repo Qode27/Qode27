@@ -47,7 +47,7 @@ export const solutions: Solution[] = [
     icon: FiTruck,
     name: 'Parking Management System',
     category: 'Operations',
-    cardDescription: 'Track vehicle entries, exits, space usage, billing, and revenue in one system.',
+    cardDescription: 'Parking operations lose money when movement, slot usage, and billing are not connected. This system brings them into one controlled workflow.',
     introDescription: 'Software for truck parking businesses that need operational control, billing clarity, and live site visibility.',
     heroTitle: 'Smart parking management software for truck parking businesses.',
     heroDescription:
@@ -70,7 +70,7 @@ export const solutions: Solution[] = [
       'Operators can check occupied and available slots before assigning parking space.',
       'Management can review daily vehicle count, billing totals, and site utilization.',
     ],
-    benefits: ['Reduce billing disputes', 'Improve site visibility', 'Make operator workflows more structured', 'Centralize parking business reporting'],
+    benefits: ['Fewer billing disputes and better revenue control', 'Improve site visibility', 'Make operator workflows more structured', 'Centralize parking business reporting'],
     screenshots: ['Parking operations dashboard', 'Live slot occupancy view', 'Billing and movement records'],
     faqs: [
       {
@@ -89,7 +89,7 @@ export const solutions: Solution[] = [
     icon: FiBox,
     name: 'Inventory Management Software',
     category: 'Distribution',
-    cardDescription: 'Manage stock, dispatch, warehouse movement, and reporting for distributors.',
+    cardDescription: 'Distributors need accurate stock movement, dispatch control, and warehouse visibility. This system keeps inventory decisions grounded in live records.',
     introDescription: 'Inventory software for distributors and stock-driven businesses that need better control across inward, outward, and warehouse workflows.',
     heroTitle: 'Inventory software built for distributors and stock-driven businesses.',
     heroDescription:
@@ -112,7 +112,7 @@ export const solutions: Solution[] = [
       'Warehouse teams can track availability before dispatching goods to customers or branches.',
       'Management can review movement history and stock position without chasing manual sheets.',
     ],
-    benefits: ['Improve stock visibility', 'Reduce record mismatch', 'Support faster dispatch planning', 'Strengthen reporting across operations'],
+    benefits: ['Stronger stock accuracy and faster dispatch decisions', 'Reduce record mismatch', 'Support faster dispatch planning', 'Strengthen reporting across operations'],
     screenshots: ['Inventory dashboard', 'Warehouse stock records', 'Dispatch planning view'],
     faqs: [
       {
@@ -131,7 +131,7 @@ export const solutions: Solution[] = [
     icon: FiPackage,
     name: 'Logistics and Shipping Software',
     category: 'Logistics',
-    cardDescription: 'Digitize operations, job tracking, revenue flow, and business visibility.',
+    cardDescription: 'Logistics teams need one place to track status, workflow movement, and revenue visibility without chasing updates across channels.',
     introDescription: 'Software for logistics and shipping businesses that need centralized status tracking, operational control, and revenue visibility.',
     heroTitle: 'Software for logistics and shipping operations that need clarity and control.',
     heroDescription:
@@ -154,7 +154,7 @@ export const solutions: Solution[] = [
       'Managers review pending, active, and completed work with clearer visibility.',
       'Leadership gets business-level reporting on performance and operational movement.',
     ],
-    benefits: ['Reduce communication gaps', 'Improve job tracking', 'Increase management visibility', 'Support stronger operational discipline'],
+    benefits: ['Clearer operational tracking with less follow-up effort', 'Improve job tracking', 'Increase management visibility', 'Support stronger operational discipline'],
     screenshots: ['Operations control dashboard', 'Shipment workflow tracker', 'Revenue and activity reports'],
     faqs: [
       {
@@ -214,7 +214,7 @@ export const solutions: Solution[] = [
     icon: FiBookOpen,
     name: 'Coaching Management App',
     category: 'Education',
-    cardDescription: 'Manage students, attendance, fees, batches, and academic workflow.',
+    cardDescription: 'Institutes run better when admissions, attendance, fees, and batch operations are managed through one structured admin system.',
     introDescription: 'Software for coaching centers and institutes that need a cleaner system for admissions, fees, attendance, and student administration.',
     heroTitle: 'Simple coaching management software for growing institutes.',
     heroDescription:
@@ -237,7 +237,7 @@ export const solutions: Solution[] = [
       'Attendance and batch activity are tracked daily without manual reconciliation.',
       'Administrators can review dues, admissions, and operational performance quickly.',
     ],
-    benefits: ['Reduce admin workload', 'Improve student record visibility', 'Keep fee tracking more organized', 'Make institute operations easier to manage'],
+    benefits: ['Lower admin workload and cleaner institute operations', 'Improve student record visibility', 'Keep fee tracking more organized', 'Make institute operations easier to manage'],
     screenshots: ['Institute dashboard', 'Student and batch records', 'Attendance and fees reports'],
     faqs: [
       {
@@ -256,7 +256,7 @@ export const solutions: Solution[] = [
     icon: FiShoppingBag,
     name: 'Retail and Takeaway Management Software',
     category: 'Retail',
-    cardDescription: 'Track orders, sales, revenue, and day-to-day store performance.',
+    cardDescription: 'Retail and takeaway businesses need day-level order control, sales visibility, and faster operational reporting from one interface.',
     introDescription: 'Software for retail and takeaway businesses that need stronger daily control over orders, sales, and operational reporting.',
     heroTitle: 'Software for takeaway and retail businesses that need faster daily control.',
     heroDescription:
@@ -279,7 +279,7 @@ export const solutions: Solution[] = [
       'Owners monitor revenue and item-level performance more clearly.',
       'Daily sales reporting becomes easier to review without manual compilation.',
     ],
-    benefits: ['Improve store visibility', 'Reduce manual reporting effort', 'Support faster daily decisions', 'Strengthen order control'],
+    benefits: ['Faster daily control over orders and revenue', 'Reduce manual reporting effort', 'Support faster daily decisions', 'Strengthen order control'],
     screenshots: ['Store performance dashboard', 'Order operations panel', 'Daily sales summary'],
     faqs: [
       {
@@ -298,7 +298,7 @@ export const solutions: Solution[] = [
     icon: FiHeart,
     name: 'Hospital Management Software',
     category: 'Healthcare',
-    cardDescription: 'Handle patient workflows, billing, prescriptions, and operational efficiency.',
+    cardDescription: 'Hospitals and clinics need front-desk speed, patient workflow control, and billing accuracy without relying on manual coordination.',
     introDescription: 'Healthcare software for hospitals and clinics that need better front-desk speed, patient workflow control, and billing accuracy.',
     heroTitle: 'Healthcare software designed to simplify everyday hospital operations.',
     heroDescription:
@@ -321,7 +321,7 @@ export const solutions: Solution[] = [
       'Billing teams can track service-linked amounts more clearly.',
       'Administrators review activity, collections, and workflow performance in one place.',
     ],
-    benefits: ['Improve front-desk efficiency', 'Reduce billing confusion', 'Strengthen patient workflow visibility', 'Support better hospital administration'],
+    benefits: ['Smoother patient handling and cleaner billing control', 'Reduce billing confusion', 'Strengthen patient workflow visibility', 'Support better hospital administration'],
     screenshots: ['Patient operations dashboard', 'Billing and collections workspace', 'Hospital performance reports'],
     faqs: [
       {

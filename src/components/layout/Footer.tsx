@@ -23,7 +23,7 @@ export default function Footer() {
               <BrandLogo className="h-12 max-w-[12rem] sm:h-14 sm:max-w-[14rem]" />
             </NavLink>
             <p className="mt-5 text-sm leading-7 text-slate-600">
-              Qode27 builds multi-industry software solutions that automate business operations and drive growth.
+              Qode27 builds software systems for businesses that need stronger operations, cleaner workflows, and better control.
             </p>
             <div className="mt-6 flex items-center gap-3">
               {socialLinks.map((item) => {
