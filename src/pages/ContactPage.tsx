@@ -31,14 +31,14 @@ export default function ContactPage() {
 
           <div className="mt-12 grid gap-4 md:grid-cols-3">
             {contactMethods.map((method) => (
-              <Reveal key={method.title}>
+              <Reveal key={method.title} className="h-full">
                 <a
                   href={method.href}
                   target={method.href.startsWith('https://') ? '_blank' : undefined}
                   rel={method.href.startsWith('https://') ? 'noreferrer' : undefined}
-                  className="rounded-[1.4rem] border border-slate-200/70 bg-white p-6 shadow-[0_18px_45px_rgba(15,23,42,0.06)] hover:-translate-y-1 hover:shadow-[0_24px_55px_rgba(15,23,42,0.09)]"
+                  className="flex h-full flex-col rounded-[1.4rem] border border-slate-200/70 bg-white p-6 shadow-[0_18px_45px_rgba(15,23,42,0.06)] hover:-translate-y-1 hover:shadow-[0_24px_55px_rgba(15,23,42,0.09)]"
                 >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--color-accent-soft)] text-[var(--color-accent)]">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[var(--color-accent-soft)] text-[var(--color-accent)]">
                     {createElement(method.icon)}
                   </div>
                   <h2 className="mt-5 text-xl font-semibold text-slate-950">{method.title}</h2>
