@@ -26,17 +26,43 @@ const howItWorks = [
   {
     icon: FiLayers,
     step: '1. Choose a system',
-    text: 'Start with the business system that matches your operation, from logistics and inventory to retail, education, healthcare, or internal workflow management.',
+    text: 'Start from a proven system already built for the kind of operational work you run, so you move faster with less guesswork from day one.',
   },
   {
     icon: FiSettings,
     step: '2. Adapt it to your workflow',
-    text: 'We tailor roles, approvals, dashboards, reports, and process flow so the system fits the way your team already works.',
+    text: 'We shape roles, approvals, dashboards, and reporting around your real process, so the system fits the business instead of disrupting it.',
   },
   {
     icon: FiShield,
     step: '3. Deploy and scale',
-    text: 'Go live faster with a system that is already structured, then expand it with additional modules, users, and reporting as the business grows.',
+    text: 'Go live with more clarity, lower implementation risk, and a cleaner path to add modules, users, and reporting as operations grow.',
+  },
+]
+
+const idealClientSignals = [
+  'Businesses managing real operations like dispatch, stock movement, front-desk flow, billing, approvals, or daily coordination.',
+  'Teams that are still relying on spreadsheets, WhatsApp updates, calls, and manual follow-up to keep work moving.',
+  'Owners and managers who need better workflow control, cleaner reporting, and live visibility across the business.',
+  'Companies that want a serious system implementation without funding a slow custom build from a blank page.',
+]
+
+const whyApproachWorks = [
+  {
+    title: 'Faster implementation',
+    text: 'You start from a system foundation that already exists, which cuts delay and gets the business to usable software sooner.',
+  },
+  {
+    title: 'Lower execution risk',
+    text: 'Proven structures reduce the uncertainty, rework, and scope drift that usually slow down custom-from-scratch projects.',
+  },
+  {
+    title: 'Easier team adoption',
+    text: 'When software matches the actual workflow, teams understand it faster and use it with less resistance.',
+  },
+  {
+    title: 'Built to scale over time',
+    text: 'The system can expand cleanly as you add users, deeper process layers, reporting, and operational complexity.',
   },
 ]
 
@@ -155,17 +181,17 @@ export default function HomePage() {
                 Premium software systems company
               </div>
               <h1 className="mt-8 font-display text-5xl font-bold leading-[0.92] tracking-[-0.07em] text-slate-950 sm:text-6xl lg:text-[4.8rem]">
-                Replace manual operations with systems your business can actually run on.
+                When spreadsheets, calls, and manual follow-up start running the business, it is time for a structured system.
               </h1>
               <p className="mt-7 max-w-xl text-lg leading-8 text-slate-600 sm:text-[1.16rem]">
-                Qode27 offers a structured ecosystem of business software for logistics, distribution, retail, education, healthcare, and internal operations. Choose a proven system, adapt it to your workflow, and deploy faster without starting from zero.
+                Qode27 deploys structured business systems for logistics, distribution, retail, education, healthcare, and internal operations. Start from a proven system, adapt it to your workflow, and gain clearer control, visibility, and execution without building everything from scratch.
               </p>
               <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
                 <Button href="/request-demo" className="sm:min-w-[12rem] hover:scale-[1.02]">
-                  Request Demo
+                  Request Your System Demo
                 </Button>
                 <Button href="/solutions" variant="secondary" className="sm:min-w-[12rem]">
-                  Explore Systems
+                  Explore Proven Systems
                   <FiArrowRight />
                 </Button>
               </div>
@@ -180,6 +206,34 @@ export default function HomePage() {
             </div>
             <HeroVisual />
           </div>
+        </Container>
+      </section>
+
+      <section className="pb-10">
+        <Container>
+          <Reveal>
+            <div className="rounded-[1.7rem] border border-slate-200/70 bg-white/95 p-6 shadow-[0_18px_45px_rgba(15,23,42,0.06)] backdrop-blur-sm sm:p-7">
+              <div className="grid gap-8 lg:grid-cols-[0.7fr_1.3fr] lg:items-start">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.26em] text-[var(--color-accent)]">Who This Is For</p>
+                  <h2 className="mt-4 text-3xl font-semibold tracking-[-0.05em] text-slate-950">
+                    Built for businesses that need operational control, not just another tool.
+                  </h2>
+                  <p className="mt-4 text-sm leading-7 text-slate-600">
+                    If these sound familiar, Qode27 is likely a fit. If not, we are probably not the right implementation partner.
+                  </p>
+                </div>
+                <div className="grid gap-3">
+                  {idealClientSignals.map((item) => (
+                    <div key={item} className="flex items-start gap-3 rounded-[1.2rem] bg-slate-50 px-4 py-4">
+                      <FiCheckCircle className="mt-1 shrink-0 text-[var(--color-accent)]" />
+                      <p className="text-sm leading-7 text-slate-700">{item}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </Reveal>
         </Container>
       </section>
 
@@ -200,8 +254,8 @@ export default function HomePage() {
         <Container>
           <SectionHeader
             eyebrow="How Qode27 Works"
-            title="A smarter way to deploy business software."
-            description="Qode27 is not a generic development agency and not a one-size-fits-all SaaS product. We work from a structured library of business systems built for real operational use."
+            title="A faster, lower-risk way to deploy serious business software."
+            description="Most software projects fail because they start from scratch. We don’t. Qode27 works from a structured library of business systems, then adapts the right one to your workflow so deployment is clearer, faster, and far less risky."
           />
           <div className="mt-14 grid gap-6 lg:grid-cols-3">
             {howItWorks.map((item) => (
@@ -222,13 +276,37 @@ export default function HomePage() {
           </div>
           <Reveal className="mt-8">
             <div className="rounded-[1.4rem] border border-slate-200/70 bg-slate-50 px-6 py-5 text-sm font-medium text-slate-700 shadow-[0_18px_45px_rgba(15,23,42,0.04)]">
-              Result: less manual work, faster implementation, and better workflow control.
+              Result: less manual coordination, faster implementation, lower risk, and stronger workflow control.
             </div>
           </Reveal>
         </Container>
       </section>
 
       <section className="section-spacing bg-slate-50/70">
+        <Container>
+          <SectionHeader
+            eyebrow="Why This Approach Works"
+            title="Structured systems outperform blank-page software projects."
+            description="The goal is not to make software feel impressive. It is to get the business onto a system that works, gets adopted, and keeps scaling without unnecessary implementation drag."
+          />
+          <div className="mt-14 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            {whyApproachWorks.map((item) => (
+              <Reveal key={item.title} className="h-full">
+                <Motion.article
+                  whileHover={{ y: -4 }}
+                  transition={{ duration: 0.24 }}
+                  className="flex h-full flex-col rounded-[1.4rem] border border-slate-200/70 bg-white p-6 shadow-[0_18px_45px_rgba(15,23,42,0.06)]"
+                >
+                  <h3 className="text-xl font-semibold text-slate-950">{item.title}</h3>
+                  <p className="mt-3 text-sm leading-7 text-slate-600">{item.text}</p>
+                </Motion.article>
+              </Reveal>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      <section className="section-spacing">
         <Container>
           <SectionHeader
             eyebrow="Solution Library"
@@ -383,9 +461,10 @@ export default function HomePage() {
         <Container>
           <CtaBanner
             eyebrow="Final CTA"
-            title="If your business is serious about fixing operational inefficiency, start with the right system."
-            description="Qode27 helps businesses move from manual coordination to structured execution with software that is practical, scalable, and ready to deploy. If the workflow needs more, we can take it further."
-            secondaryLabel="Start Conversation"
+            title="If manual coordination is still running critical workflows, this is the point to fix it."
+            description="Qode27 helps serious businesses replace spreadsheet dependency, fragmented updates, and operational guesswork with structured systems built for control, visibility, and scale. Request a demo and we will identify the right system path for your workflow."
+            primaryLabel="Request Your Demo"
+            secondaryLabel="Talk Through Your Workflow"
             secondaryHref="/contact"
           />
         </Container>
