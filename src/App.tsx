@@ -17,6 +17,8 @@ const RequestDemoPage = lazy(() => import('./pages/RequestDemoPage'))
 const ThankYouPage = lazy(() => import('./pages/ThankYouPage'))
 const PrivacyPolicyPage = lazy(() => import('./pages/PrivacyPolicyPage'))
 const TermsAndConditionsPage = lazy(() => import('./pages/TermsAndConditionsPage'))
+const DemoCatalogPage = lazy(() => import('./pages/demo/DemoCatalogPage'))
+const DemoAppRoutePage = lazy(() => import('./pages/demo/DemoAppRoutePage'))
 
 export default function App() {
   const location = useLocation()
@@ -33,6 +35,9 @@ export default function App() {
       <Suspense fallback={<PageSkeleton />}>
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
+            <Route path="/demo" element={<DemoCatalogPage />} />
+            <Route path="/demo/:appSlug" element={<DemoAppRoutePage />} />
+            <Route path="/demo/:appSlug/:section" element={<DemoAppRoutePage />} />
             <Route element={<SiteLayout />}>
               <Route index element={<HomePage />} />
               <Route path="/about" element={<AboutPage />} />

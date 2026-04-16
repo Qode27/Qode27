@@ -2,6 +2,7 @@ import { createElement } from 'react'
 import { motion as Motion } from 'framer-motion'
 import { FiArrowRight } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
+import { getDemoAppBySolutionSlug, getDemoRoute } from '../../config/demo-apps'
 import type { Solution } from '../../data/solutions'
 import { buildRequestDemoPath } from '../../data/solutions'
 import Button from './Button'
@@ -12,6 +13,10 @@ type SolutionCardProps = {
 }
 
 export default function SolutionCard({ solution, featured = false }: SolutionCardProps) {
+  const demoApp = getDemoAppBySolutionSlug(solution.slug)
+  const hasInteractiveDemo = Boolean(demoApp?.demoEnabled && !demoApp.requestDemoOnly)
+  const demoRoute = hasInteractiveDemo && demoApp ? getDemoRoute(demoApp.slug) : null
+
   return (
     <Motion.article
       whileHover={{ y: -6 }}
@@ -31,6 +36,13 @@ export default function SolutionCard({ solution, featured = false }: SolutionCar
         ) : null}
       </div>
       <p className="mt-6 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-accent)]">{solution.category}</p>
+      {demoApp ? (
+        <div className="mt-3">
+          <span className="inline-flex rounded-full bg-slate-100 px-3 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-slate-600">
+            {hasInteractiveDemo ? 'Interactive Demo Available' : 'Request Demo Only'}
+          </span>
+        </div>
+      ) : null}
       <h3 className="mt-3 text-[1.7rem] font-semibold tracking-[-0.04em] text-slate-950">{solution.name}</h3>
       <p className="mt-4 text-base leading-7 text-slate-600">{solution.cardDescription}</p>
       <div className="mt-6 space-y-5 rounded-[1.3rem] bg-slate-50 p-5">
@@ -47,17 +59,25 @@ export default function SolutionCard({ solution, featured = false }: SolutionCar
           <p className="mt-2 text-sm leading-6 text-slate-600">{solution.benefits[0]}</p>
         </div>
       </div>
-      <div className="mt-auto flex flex-col gap-3 pt-8 sm:flex-row">
+      <div className="mt-auto flex flex-col gap-3 pt-8">
+        {demoRoute ? (
+          <Button href={demoRoute} variant="primary" size="sm" className="justify-center">
+            Try Interactive Demo
+            <FiArrowRight />
+          </Button>
+        ) : null}
+        <div className="flex flex-col gap-3 sm:flex-row">
         <Link
           to={`/solutions/${solution.slug}`}
           className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-900 hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
         >
-          View Solution
+          View Details
           <FiArrowRight />
         </Link>
         <Button href={buildRequestDemoPath(solution.name)} variant="primary" size="sm" className="justify-center">
           Request Demo
         </Button>
+        </div>
       </div>
     </Motion.article>
   )

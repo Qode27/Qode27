@@ -1,6 +1,7 @@
 import { motion as Motion } from 'framer-motion'
 import { FiCheckCircle } from 'react-icons/fi'
 import { Navigate, useParams } from 'react-router-dom'
+import { getDemoAppBySolutionSlug, getDemoRoute } from '../config/demo-apps'
 import Button from '../components/ui/Button'
 import Container from '../components/ui/Container'
 import FAQAccordion from '../components/ui/FAQAccordion'
@@ -11,6 +12,9 @@ import { buildRequestDemoPath, getSolutionBySlug } from '../data/solutions'
 export default function SolutionDetailPage() {
   const { slug } = useParams()
   const solution = getSolutionBySlug(slug)
+  const demoApp = getDemoAppBySolutionSlug(solution?.slug)
+  const hasInteractiveDemo = Boolean(demoApp?.demoEnabled && !demoApp.requestDemoOnly)
+  const demoRoute = hasInteractiveDemo && demoApp ? getDemoRoute(demoApp.slug) : null
 
   if (!solution) {
     return <Navigate to="/solutions" replace />
@@ -36,6 +40,7 @@ export default function SolutionDetailPage() {
               </h1>
               <p className="mt-6 text-lg leading-8 text-slate-600">{solution.heroDescription}</p>
               <div className="mt-9 flex flex-col gap-4 sm:flex-row">
+                {demoRoute ? <Button href={demoRoute}>Try Interactive Demo</Button> : null}
                 <Button href={buildRequestDemoPath(solution.name)}>Request Demo</Button>
                 <Button href="/contact" variant="secondary">
                   Book Consultation
@@ -138,9 +143,12 @@ export default function SolutionDetailPage() {
               Ready to explore the right software setup for this workflow?
             </h2>
             <p className="mt-4 max-w-3xl text-base leading-8 text-white/72">
-              We do not expose public demo environments. Share your business details and Qode27 will schedule the right walkthrough based on your requirement.
+              {hasInteractiveDemo
+                ? 'You can explore the interactive frontend demo now, then request a tailored walkthrough for your business workflow and rollout scope.'
+                : 'This product is handled through a guided walkthrough. Share your business details and Qode27 will schedule the right demo based on your requirement.'}
             </p>
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+              {demoRoute ? <Button href={demoRoute}>Try Interactive Demo</Button> : null}
               <Button href={buildRequestDemoPath(solution.name)}>Request Demo</Button>
               <Button href="/contact" variant="secondary">
                 Contact Us

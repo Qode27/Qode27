@@ -23,10 +23,10 @@ export default function RequestDemoPage() {
             <div className="rounded-[1.6rem] border border-slate-200/80 bg-[linear-gradient(135deg,#0f172a_0%,#13253a_55%,#17384d_100%)] p-8 text-white shadow-[0_24px_60px_rgba(15,23,42,0.16)]">
               <p className="text-xs font-semibold uppercase tracking-[0.24em] text-cyan-300">Request Demo</p>
               <h1 className="mt-4 font-display text-4xl font-semibold tracking-[-0.05em] sm:text-5xl">
-                A lead capture flow built to qualify serious business conversations.
+                Request a guided walkthrough or move from interactive demo to a tailored rollout discussion.
               </h1>
               <p className="mt-4 text-base leading-8 text-white/72">
-                Qode27 does not expose public demo links. This page is designed to capture requirements, understand fit, and move the conversation toward the right walkthrough.
+                Some Qode27 products now include public interactive demos built safely inside the website. This page is still the main path for scoped walkthroughs, pricing conversations, and request-only products.
               </p>
               <div className="mt-8 space-y-4">
                 {requestDemoBenefits.map((item) => (

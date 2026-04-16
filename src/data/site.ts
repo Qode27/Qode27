@@ -361,6 +361,7 @@ export const requestDemoBenefits: Pillar[] = [
 export const footerQuickLinks = [
   { label: 'Home', href: '/' },
   { label: 'Solutions', href: '/solutions' },
+  { label: 'Interactive Demos', href: '/demo' },
   { label: 'Custom Software', href: '/custom-software' },
   { label: 'Pricing', href: '/pricing' },
   { label: 'About', href: '/about' },

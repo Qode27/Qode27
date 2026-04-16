@@ -20,7 +20,8 @@ import {
 import { buildRequestDemoPath, solutions } from '../data/solutions'
 
 const featuredSolutionSlugs = ['logistics-shipping', 'inventory-management', 'parking-management', 'coaching-management'] as const
-const featuredSolutions = solutions.filter((solution) => featuredSolutionSlugs.includes(solution.slug))
+const featuredSolutionSlugSet = new Set<string>(featuredSolutionSlugs)
+const featuredSolutions = solutions.filter((solution) => featuredSolutionSlugSet.has(solution.slug))
 
 const howItWorks = [
   {
