@@ -11,7 +11,7 @@ export default function DemoCatalogPage() {
     <Motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -18 }} transition={{ duration: 0.35 }}>
       <Seo
         title="Interactive Product Demos | Qode27"
-        description="Explore Qode27 interactive demos for HRMS, hospital management, inventory management, and truck parking operations."
+        description="Explore Qode27 interactive demos across HRMS, healthcare, inventory, parking, coaching, CA practice, restaurant, shipping, port, and CRM products."
         canonicalPath="/demo"
       />
 
@@ -20,10 +20,10 @@ export default function DemoCatalogPage() {
           <div className="rounded-[2rem] border border-slate-200/80 bg-white/88 p-8 shadow-[0_28px_70px_rgba(15,23,42,0.1)] backdrop-blur-xl sm:p-10">
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--color-accent)]">Qode27 Demo Mode</p>
             <h1 className="mt-5 max-w-4xl font-display text-4xl font-semibold tracking-[-0.06em] text-slate-950 sm:text-5xl">
-              Real-feeling product walkthroughs, running inside qode27.com with zero new infrastructure.
+              Ten interactive software products, running inside qode27.com with zero new infrastructure.
             </h1>
             <p className="mt-5 max-w-3xl text-base leading-8 text-slate-600">
-              These demos are frontend-only sandboxes with premium UI, realistic sample data, mock login personas, local-only forms, and a hard guard against live production API calls.
+              These demos are frontend-only sandboxes with realistic sample data, mock login personas, local-only workflows, and a hard guard against live production API calls.
             </p>
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
               <Button href="/solutions">View solutions</Button>

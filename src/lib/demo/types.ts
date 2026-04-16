@@ -2,7 +2,17 @@ import type { CSSProperties, ComponentType } from 'react'
 import type { IconType } from 'react-icons'
 import type { SolutionSlug } from '../../data/solutions'
 
-export type DemoAppSlug = 'hrms' | 'hms' | 'inventory' | 'truck-parking'
+export type DemoAppSlug =
+  | 'hrms'
+  | 'hms'
+  | 'inventory'
+  | 'parking'
+  | 'coaching'
+  | 'ca'
+  | 'restaurant'
+  | 'shipping'
+  | 'port'
+  | 'crm'
 
 export type DemoUser = {
   name: string
@@ -47,15 +57,25 @@ export type DemoActionItem = {
   variant?: 'primary' | 'secondary'
 }
 
-export type DemoChromeStyle = 'enterprise-sidebar' | 'workflow-topbar' | 'operations-rail' | 'command-center'
+export type DemoChromeStyle =
+  | 'enterprise-sidebar'
+  | 'workflow-topbar'
+  | 'operations-rail'
+  | 'command-center'
+  | 'campus-hub'
+  | 'ledger-desk'
+  | 'kitchen-board'
+  | 'shipment-atlas'
+  | 'harbor-ops'
+  | 'pipeline-studio'
 
-export type DemoDensityMode = 'comfortable' | 'compact' | 'dense' | 'live'
+export type DemoDensityMode = 'comfortable' | 'compact' | 'dense' | 'live' | 'calendar' | 'ledger' | 'service' | 'tracking' | 'marine' | 'pipeline'
 
-export type DemoCardStyle = 'soft' | 'clinical' | 'industrial' | 'tactical'
+export type DemoCardStyle = 'soft' | 'clinical' | 'industrial' | 'tactical' | 'academic' | 'ledger' | 'hospitality' | 'tracking' | 'marine' | 'sales'
 
-export type DemoTableStyle = 'clean' | 'clinical' | 'warehouse' | 'board'
+export type DemoTableStyle = 'clean' | 'clinical' | 'warehouse' | 'board' | 'roster' | 'ledger' | 'kitchen' | 'manifest' | 'dock' | 'pipeline'
 
-export type DemoPreviewVariant = 'hrms' | 'hms' | 'inventory' | 'truck-parking'
+export type DemoPreviewVariant = 'hrms' | 'hms' | 'inventory' | 'parking' | 'coaching' | 'ca' | 'restaurant' | 'shipping' | 'port' | 'crm'
 
 export type DemoAppIdentity = {
   navStyle: DemoChromeStyle
@@ -63,9 +83,9 @@ export type DemoAppIdentity = {
   cardStyle: DemoCardStyle
   tableStyle: DemoTableStyle
   previewVariant: DemoPreviewVariant
-  typography: 'corporate' | 'clinical' | 'operational' | 'command'
+  typography: 'corporate' | 'clinical' | 'operational' | 'command' | 'campus' | 'finance' | 'hospitality' | 'logistics' | 'marine' | 'sales'
   dashboardLabel: string
-  motionStyle: 'calm' | 'precise' | 'mechanical' | 'urgent'
+  motionStyle: 'calm' | 'precise' | 'mechanical' | 'urgent' | 'rhythmic' | 'methodical' | 'snappy' | 'gliding' | 'tidal' | 'energetic'
   productHint: string
 }
 

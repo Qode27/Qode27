@@ -3,9 +3,11 @@ import {
   FiArchive,
   FiBookOpen,
   FiBox,
+  FiFileText,
   FiHeart,
   FiPackage,
   FiShoppingBag,
+  FiTrendingUp,
   FiTruck,
   FiUsers,
 } from 'react-icons/fi'
@@ -16,7 +18,9 @@ export type SolutionSlug =
   | 'logistics-shipping'
   | 'port-operations'
   | 'coaching-management'
+  | 'accounting-firm'
   | 'retail-takeaway'
+  | 'crm-sales'
   | 'healthcare-management'
   | 'hrms'
 
@@ -254,7 +258,7 @@ export const solutions: Solution[] = [
   {
     slug: 'retail-takeaway',
     icon: FiShoppingBag,
-    name: 'Retail and Takeaway Management Software',
+    name: 'Restaurant and Takeaway Order Management',
     category: 'Retail',
     cardDescription: 'Retail and takeaway businesses need day-level order control, sales visibility, and faster operational reporting from one interface.',
     introDescription: 'Software for retail and takeaway businesses that need stronger daily control over orders, sales, and operational reporting.',
@@ -289,6 +293,48 @@ export const solutions: Solution[] = [
       {
         question: 'Can the system match our store process?',
         answer: 'Yes. Qode27 can adapt the workflow around how your retail or takeaway operation actually runs.',
+      },
+    ],
+    featured: true,
+  },
+  {
+    slug: 'accounting-firm',
+    icon: FiFileText,
+    name: 'CA and Accounting Firm Software',
+    category: 'Finance',
+    cardDescription: 'Accounting and CA firms need client ledger visibility, compliance tracking, and invoice control in one workspace.',
+    introDescription: 'Software for accounting firms and CA practices that need cleaner client servicing, tax visibility, and billing follow-through.',
+    heroTitle: 'Accounting firm software built for client work, compliance, and billing clarity.',
+    heroDescription:
+      'Manage client ledgers, GST and tax work, invoice follow-up, filing checkpoints, and firm operations through one structured system.',
+    keywordsTitle: 'Accounting firm software for client servicing and compliance tracking',
+    keywordsDescription: 'Built for CA and accounting teams that need better client visibility, filing control, and invoice management.',
+    problems: [
+      'Client work gets fragmented when compliance status, invoices, and work notes are tracked separately.',
+      'Teams lose time following up on filing deadlines and payment status manually.',
+      'Partners lack one operational view across clients, assignments, and revenue.',
+    ],
+    approach: [
+      'Centralize client work, ledger history, and statutory milestone tracking in one system.',
+      'Improve visibility over invoicing, follow-up, and collection progress.',
+      'Give firm leadership a cleaner operating picture across active accounts.',
+    ],
+    features: ['Client ledgers', 'GST and tax tracking', 'Invoice management', 'Compliance checkpoints', 'Collections reporting'],
+    useCases: [
+      'Account managers can review pending GST work and invoice recovery from one interface.',
+      'Partners can check assignment status without chasing staff manually.',
+      'The firm can monitor revenue and client servicing discipline in one workspace.',
+    ],
+    benefits: ['Stronger client visibility', 'Cleaner compliance follow-through', 'Better invoice and collection control', 'Less fragmented firm operations'],
+    screenshots: ['Client ledger workspace', 'Compliance tracker', 'Invoice and collection board'],
+    faqs: [
+      {
+        question: 'Can this support recurring filing workflows?',
+        answer: 'Yes. The software is suited for repeated monthly, quarterly, and annual client servicing cycles.',
+      },
+      {
+        question: 'Is it useful for small CA firms as well as growing practices?',
+        answer: 'Yes. It is especially effective for firms that want more structure without heavy enterprise software complexity.',
       },
     ],
     featured: true,
@@ -376,6 +422,48 @@ export const solutions: Solution[] = [
       },
     ],
   },
+  {
+    slug: 'crm-sales',
+    icon: FiTrendingUp,
+    name: 'CRM and Sales Pipeline Software',
+    category: 'Sales',
+    cardDescription: 'Sales teams need a visible pipeline, better deal discipline, and faster follow-up without scattered spreadsheets.',
+    introDescription: 'CRM software for sales teams that need pipeline visibility, lead scoring, deal progression, and follow-up control.',
+    heroTitle: 'CRM software built to keep pipeline movement and revenue focus visible every day.',
+    heroDescription:
+      'Track leads, deal stages, next actions, and revenue confidence in one system designed for active sales execution.',
+    keywordsTitle: 'CRM software for sales pipeline visibility and deal management',
+    keywordsDescription: 'Built for teams that need stronger lead management, deal tracking, and revenue visibility.',
+    problems: [
+      'Leads fall through when follow-ups, deal notes, and stage updates live across disconnected tools.',
+      'Managers struggle to see whether revenue targets are backed by real pipeline quality.',
+      'Sales activity becomes reactive when ownership and next actions are unclear.',
+    ],
+    approach: [
+      'Centralize pipeline movement, lead scoring, and deal ownership in one product workspace.',
+      'Make next actions visible so teams follow through consistently.',
+      'Give managers a clearer view of pipeline health and forecast confidence.',
+    ],
+    features: ['Pipeline board', 'Lead scoring', 'Deal tracking', 'Next-action workflow', 'Revenue forecast reporting'],
+    useCases: [
+      'Sales reps can move deals between stages and log the next action immediately.',
+      'Managers can review forecast confidence from pipeline composition rather than guesswork.',
+      'Teams can track high-value leads and stalled deals in one place.',
+    ],
+    benefits: ['Clearer deal discipline', 'Stronger follow-up consistency', 'Better forecast visibility', 'Higher team accountability'],
+    screenshots: ['Pipeline board', 'Lead detail panel', 'Forecast dashboard'],
+    faqs: [
+      {
+        question: 'Can this work for service businesses as well as product sales?',
+        answer: 'Yes. The pipeline and follow-up approach can be adapted to different sales models.',
+      },
+      {
+        question: 'Does it support team-level revenue visibility?',
+        answer: 'Yes. Managers can review forecast, stage health, and ownership trends from one place.',
+      },
+    ],
+    featured: true,
+  },
 ]
 
 export const featuredSolutionSlugs: SolutionSlug[] = [
@@ -383,8 +471,10 @@ export const featuredSolutionSlugs: SolutionSlug[] = [
   'inventory-management',
   'logistics-shipping',
   'coaching-management',
+  'accounting-firm',
   'retail-takeaway',
   'healthcare-management',
+  'crm-sales',
 ]
 
 export const solutionIndustryOptions = [
@@ -393,8 +483,10 @@ export const solutionIndustryOptions = [
   'Logistics / Shipping',
   'Port Operations',
   'Coaching / Education',
+  'CA / Accounting Firm',
   'Retail / Takeaway',
   'Healthcare',
+  'CRM / Sales',
   'HRMS',
   'Custom Software',
   'Other',

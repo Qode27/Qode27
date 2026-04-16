@@ -9,16 +9,24 @@ The site now includes a reusable frontend-only demo framework that runs entirely
 ### What exists now
 
 - Public demo catalog at `/demo`
-- Four interactive demo routes:
+- Ten interactive demo routes:
   - `/demo/hrms`
   - `/demo/hms`
   - `/demo/inventory`
-  - `/demo/truck-parking`
+  - `/demo/parking`
+  - `/demo/coaching`
+  - `/demo/ca`
+  - `/demo/restaurant`
+  - `/demo/shipping`
+  - `/demo/port`
+  - `/demo/crm`
 - Optional nested routes per app, for example:
   - `/demo/hrms/employees`
   - `/demo/hms/billing`
   - `/demo/inventory/purchase-orders`
-  - `/demo/truck-parking/movement`
+  - `/demo/parking/movement`
+  - `/demo/coaching/fees`
+  - `/demo/crm/forecast`
 
 ### Core design
 
@@ -44,7 +52,7 @@ The site now includes a reusable frontend-only demo framework that runs entirely
 - `src/config/demo-apps.ts`
   Central registry for demo metadata, route slugs, enabled/request-only mode, solution mapping, theme accents, and lazy module loading.
 - `src/components/demo/`
-  Shared demo shell, metrics, tables, charts, badges, empty states, and toast UI.
+  Shared low-level demo utilities such as previews, toasts, charts, and support components. App layouts themselves are now intentionally route-specific.
 - `src/lib/demo/`
   Local persistence helpers, mock export helpers, and the live-request safety guard.
 - `src/data/demo/`
@@ -52,10 +60,10 @@ The site now includes a reusable frontend-only demo framework that runs entirely
 - `src/pages/demo/`
   Demo catalog, route entry page, and per-app demo modules.
 
-### How to add a 5th or 6th demo
+### How to add an 11th demo
 
 1. Create a new mock data file in `src/data/demo/`.
-2. Create a new demo page in `src/pages/demo/apps/`, reusing `DemoShell`, `DemoPanel`, `DemoDataTable`, `DemoTrendChart`, and `useDemoAppState`.
+2. Create a new demo page in `src/pages/demo/apps/`, using `useDemoAppState` and the mock helpers while keeping the product layout, navigation, dashboard composition, and page structure unique to that app.
 3. Add a registry entry in `src/config/demo-apps.ts`:
    - `slug`
    - `solutionSlug`
@@ -80,15 +88,21 @@ The site now includes a reusable frontend-only demo framework that runs entirely
    - `dashboardLabel`
    - `motionStyle`
    - `productHint`
-5. Compose the page using shared primitives differently per app. The visual goal is unique product identity, not shared wireframes.
-6. If the app should be public, set:
+5. Do not copy another app surface. Reuse only low-level engine pieces such as state, mock exports, and safety guards.
+6. Give the new product its own layout philosophy:
+   - navigation pattern
+   - dashboard hierarchy
+   - module flow
+   - interaction rhythm
+   - preview composition
+7. If the app should be public, set:
    - `demoEnabled: true`
    - `requestDemoOnly: false`
-7. If the app should stay private and only collect leads, set:
+8. If the app should stay private and only collect leads, set:
    - `demoEnabled: true`
    - `requestDemoOnly: true`
-8. If the related product already exists in `src/data/solutions.ts`, the solution cards and detail page will automatically pick up the interactive demo or request-only state from the registry mapping.
-9. Run:
+9. If the related product already exists in `src/data/solutions.ts`, the solution cards and detail page will automatically pick up the interactive demo or request-only state from the registry mapping.
+10. Run:
    - `npm.cmd run typecheck`
    - `npm.cmd run build`
 

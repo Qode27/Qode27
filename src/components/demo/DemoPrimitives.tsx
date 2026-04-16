@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react'
 import { motion as Motion } from 'framer-motion'
 import { FiAlertCircle, FiArrowRight, FiCheckCircle, FiRefreshCw, FiRotateCcw } from 'react-icons/fi'
 import { NavLink } from 'react-router-dom'
@@ -454,7 +455,7 @@ export function DemoMetricGrid({ app, items, isRefreshing = false, columnsClass 
   )
 }
 
-export function DemoPanel({ app, title, subtitle, action, children, className = '' }: { app: DemoAppConfig; title: string; subtitle?: string; action?: React.ReactNode; children: React.ReactNode; className?: string }) {
+export function DemoPanel({ app, title, subtitle, action, children, className = '' }: { app: DemoAppConfig; title: string; subtitle?: string; action?: ReactNode; children: ReactNode; className?: string }) {
   return (
     <section className={`${getPanelClass(app.identity.cardStyle)} p-5 sm:p-6 ${className}`.trim()}>
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
@@ -572,7 +573,7 @@ export function DemoToastStack({ toasts }: { toasts: DemoToast[] }) {
 export function DemoProductPreview({ app }: { app: DemoAppConfig }) {
   const variant = app.identity.previewVariant
 
-  if (variant === 'truck-parking') {
+  if (variant === 'parking') {
     return (
       <div className="rounded-[1.2rem] border border-amber-300/20 bg-[linear-gradient(135deg,#111111_0%,#1f1f1f_100%)] p-4 text-white">
         <div className="grid gap-3 sm:grid-cols-[1fr_0.9fr]">
@@ -640,6 +641,111 @@ export function DemoProductPreview({ app }: { app: DemoAppConfig }) {
               <div className="flex justify-between"><span>Rekha Menon</span><span className="rounded-full bg-amber-50 px-2 py-1 text-amber-700">Waiting</span></div>
               <div className="flex justify-between"><span>Sunita Rao</span><span className="rounded-full bg-sky-50 px-2 py-1 text-sky-700">Discharged</span></div>
             </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  if (variant === 'coaching') {
+    return (
+      <div className="rounded-[1.2rem] border border-violet-100 bg-[linear-gradient(135deg,#faf5ff_0%,#ffffff_100%)] p-4">
+        <div className="grid gap-3 sm:grid-cols-[1fr_0.95fr]">
+          <div className="rounded-xl border border-violet-100 bg-white p-3">
+            <p className="text-[0.62rem] uppercase tracking-[0.2em] text-violet-700">Batch Hub</p>
+            <p className="mt-2 text-sm font-semibold text-slate-950">NEET Alpha attendance 93%</p>
+          </div>
+          <div className="rounded-xl border border-violet-100 bg-white p-3">
+            <div className="space-y-2 text-xs text-slate-600">
+              <div className="flex justify-between"><span>7:00 AM Physics</span><span>Hall A</span></div>
+              <div className="flex justify-between"><span>9:00 AM Biology</span><span>Hall B</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  if (variant === 'ca') {
+    return (
+      <div className="rounded-[1.2rem] border border-teal-100 bg-[linear-gradient(135deg,#f0fdfa_0%,#ffffff_100%)] p-4">
+        <div className="grid gap-3 sm:grid-cols-[1fr_0.95fr]">
+          <div className="rounded-xl border border-teal-100 bg-white p-3">
+            <p className="text-[0.62rem] uppercase tracking-[0.2em] text-teal-700">Practice Desk</p>
+            <p className="mt-2 text-sm font-semibold text-slate-950">18 clients with open invoices</p>
+          </div>
+          <div className="rounded-xl border border-teal-100 bg-white p-3 text-xs text-slate-600">
+            <div className="flex justify-between"><span>GST review</span><span>41 open</span></div>
+            <div className="mt-2 flex justify-between"><span>Collections</span><span>Rs 9.4L</span></div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  if (variant === 'restaurant') {
+    return (
+      <div className="rounded-[1.2rem] border border-orange-100 bg-[linear-gradient(135deg,#fff7ed_0%,#ffffff_100%)] p-4">
+        <div className="grid gap-3 sm:grid-cols-[1fr_0.95fr]">
+          <div className="rounded-xl border border-orange-100 bg-white p-3">
+            <p className="text-[0.62rem] uppercase tracking-[0.2em] text-rose-700">Kitchen SLA</p>
+            <p className="mt-2 text-sm font-semibold text-slate-950">14 minutes average prep</p>
+          </div>
+          <div className="rounded-xl border border-orange-100 bg-white p-3 text-xs text-slate-600">
+            <div className="flex justify-between"><span>Queued</span><span>8</span></div>
+            <div className="mt-2 flex justify-between"><span>Cooking</span><span>11</span></div>
+            <div className="mt-2 flex justify-between"><span>Ready</span><span>5</span></div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  if (variant === 'shipping') {
+    return (
+      <div className="rounded-[1.2rem] border border-sky-100 bg-[linear-gradient(135deg,#eff6ff_0%,#ffffff_100%)] p-4">
+        <div className="grid gap-3 sm:grid-cols-[1fr_0.95fr]">
+          <div className="rounded-xl border border-sky-100 bg-white p-3">
+            <p className="text-[0.62rem] uppercase tracking-[0.2em] text-sky-700">Shipment Atlas</p>
+            <p className="mt-2 text-sm font-semibold text-slate-950">184 live consignments</p>
+          </div>
+          <div className="rounded-xl border border-sky-100 bg-white p-3 text-xs text-slate-600">
+            <div className="flex justify-between"><span>In transit</span><span>101</span></div>
+            <div className="mt-2 flex justify-between"><span>Exceptions</span><span>7</span></div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  if (variant === 'port') {
+    return (
+      <div className="rounded-[1.2rem] border border-cyan-100 bg-[linear-gradient(135deg,#ecfeff_0%,#ffffff_100%)] p-4">
+        <div className="grid gap-3 sm:grid-cols-[1fr_0.95fr]">
+          <div className="rounded-xl border border-cyan-100 bg-white p-3">
+            <p className="text-[0.62rem] uppercase tracking-[0.2em] text-cyan-700">Harbor Board</p>
+            <p className="mt-2 text-sm font-semibold text-slate-950">24 vessels scheduled today</p>
+          </div>
+          <div className="rounded-xl border border-cyan-100 bg-white p-3 text-xs text-slate-600">
+            <div className="flex justify-between"><span>Berth use</span><span>88%</span></div>
+            <div className="mt-2 flex justify-between"><span>Cargo</span><span>18.4k MT</span></div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  if (variant === 'crm') {
+    return (
+      <div className="rounded-[1.2rem] border border-violet-100 bg-[linear-gradient(135deg,#faf5ff_0%,#ffffff_100%)] p-4">
+        <div className="grid gap-3 sm:grid-cols-[1fr_0.95fr]">
+          <div className="rounded-xl border border-violet-100 bg-white p-3">
+            <p className="text-[0.62rem] uppercase tracking-[0.2em] text-violet-700">Pipeline Studio</p>
+            <p className="mt-2 text-sm font-semibold text-slate-950">Rs 3.8Cr open pipeline</p>
+          </div>
+          <div className="rounded-xl border border-violet-100 bg-white p-3 text-xs text-slate-600">
+            <div className="flex justify-between"><span>Negotiation</span><span>6</span></div>
+            <div className="mt-2 flex justify-between"><span>Won</span><span>4</span></div>
           </div>
         </div>
       </div>
