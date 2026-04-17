@@ -181,7 +181,7 @@ export default function HomePage() {
                 <span className="h-2 w-2 rounded-full bg-[var(--color-accent)]" />
                 Premium software systems company
               </div>
-              <h1 className="mt-8 font-display text-5xl font-bold leading-[0.92] tracking-[-0.07em] text-slate-950 sm:text-6xl lg:text-[4.8rem]">
+              <h1 className="mt-8 text-[2.85rem] font-semibold leading-[0.98] tracking-[-0.05em] text-slate-950 sm:text-[3.35rem] lg:text-[4rem]">
                 When spreadsheets, calls, and manual follow-up start running the business, it is time for a structured system.
               </h1>
               <p className="mt-7 max-w-xl text-lg leading-8 text-slate-600 sm:text-[1.16rem]">
