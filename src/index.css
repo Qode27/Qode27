@@ -69,7 +69,7 @@
   }
 
   .section-spacing {
-    @apply py-22 sm:py-24;
+    @apply py-20 sm:py-24;
   }
 
   .glass-panel {
@@ -146,6 +146,26 @@
     filter: saturate(1.03);
   }
 
+  .button-glow {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .button-glow::after {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(255,255,255,0.16), transparent 42%, rgba(255,255,255,0.08));
+    opacity: 0;
+    transition: opacity 220ms ease;
+    pointer-events: none;
+  }
+
+  .button-glow:hover::after {
+    opacity: 1;
+  }
+
   .hero-orb {
     position: absolute;
     border-radius: 9999px;
@@ -180,6 +200,35 @@
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     pointer-events: none;
+  }
+
+  .homepage-panel {
+    @apply rounded-[1.7rem] border border-slate-200/80 bg-white/92 backdrop-blur-xl;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+  }
+
+  .homepage-soft-card {
+    @apply rounded-[1.35rem] border border-slate-200/80 bg-white;
+    box-shadow: 0 14px 34px rgba(15, 23, 42, 0.05);
+  }
+
+  .product-preview-frame {
+    @apply overflow-hidden rounded-[1.25rem] border border-slate-200/80 bg-white;
+    box-shadow:
+      0 24px 55px rgba(15, 23, 42, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.75);
+  }
+
+  .product-preview-toolbar {
+    @apply flex items-center justify-between gap-3 border-b border-slate-200/80 bg-slate-50/92 px-4 py-3;
+  }
+
+  .product-preview-url {
+    @apply rounded-full border border-slate-200 bg-white px-3 py-1 text-[0.62rem] font-medium tracking-[0.08em] text-slate-500;
+  }
+
+  .product-preview-surface {
+    @apply relative bg-[linear-gradient(180deg,#fcfeff_0%,#f5f9fc_100%)];
   }
 
   .skeleton {

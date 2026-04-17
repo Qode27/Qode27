@@ -572,27 +572,82 @@ export function DemoToastStack({ toasts }: { toasts: DemoToast[] }) {
 
 export function DemoProductPreview({ app }: { app: DemoAppConfig }) {
   const variant = app.identity.previewVariant
+  const address = `${app.slug}.qode27.com`
+
+  const frame = (eyebrow: string, title: string, content: ReactNode) => (
+    <div className="product-preview-frame">
+      <div className="product-preview-toolbar">
+        <div className="flex items-center gap-2">
+          <span className="h-2.5 w-2.5 rounded-full bg-rose-300" />
+          <span className="h-2.5 w-2.5 rounded-full bg-amber-300" />
+          <span className="h-2.5 w-2.5 rounded-full bg-emerald-300" />
+        </div>
+        <span className="product-preview-url">{address}</span>
+      </div>
+      <div className="product-preview-surface p-4">
+        <div className="mb-4 flex items-start justify-between gap-3">
+          <div>
+            <p className="text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-slate-500">{eyebrow}</p>
+            <p className="mt-1 text-sm font-semibold text-slate-950">{title}</p>
+          </div>
+          <div className="rounded-full border border-slate-200 bg-white px-2.5 py-1 text-[0.62rem] font-semibold uppercase tracking-[0.14em] text-slate-500">
+            Live view
+          </div>
+        </div>
+        {content}
+      </div>
+    </div>
+  )
 
   if (variant === 'parking') {
     return (
-      <div className="rounded-[1.2rem] border border-amber-300/20 bg-[linear-gradient(135deg,#111111_0%,#1f1f1f_100%)] p-4 text-white">
-        <div className="grid gap-3 sm:grid-cols-[1fr_0.9fr]">
-          <div className="rounded-xl border border-white/10 bg-white/5 p-3">
-            <p className="text-[0.62rem] uppercase tracking-[0.2em] text-amber-300">Live yard</p>
-            <div className="mt-3 grid grid-cols-4 gap-2">
-              {[1, 2, 3, 4, 5, 6, 7, 8].map((cell) => (
-                <div key={cell} className={`h-8 rounded-md ${cell % 3 === 0 ? 'bg-amber-400' : cell % 4 === 0 ? 'bg-orange-500' : 'bg-white/10'}`} />
-              ))}
+      <div className="product-preview-frame overflow-hidden bg-[linear-gradient(180deg,#0f1115_0%,#1b1f25_100%)]">
+        <div className="product-preview-toolbar border-white/8 bg-white/5">
+          <div className="flex items-center gap-2">
+            <span className="h-2.5 w-2.5 rounded-full bg-rose-300" />
+            <span className="h-2.5 w-2.5 rounded-full bg-amber-300" />
+            <span className="h-2.5 w-2.5 rounded-full bg-emerald-300" />
+          </div>
+          <span className="rounded-full border border-white/10 bg-white/6 px-3 py-1 text-[0.62rem] font-medium tracking-[0.08em] text-white/60">{address}</span>
+        </div>
+        <div className="p-4 text-white">
+          <div className="mb-4 flex items-start justify-between gap-3">
+            <div>
+              <p className="text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-amber-300">Yard command</p>
+              <p className="mt-1 text-sm font-semibold text-white">Live bay occupancy and movement</p>
+            </div>
+            <div className="rounded-full border border-white/10 bg-white/8 px-2.5 py-1 text-[0.62rem] font-semibold uppercase tracking-[0.14em] text-white/62">
+              Live board
             </div>
           </div>
-          <div className="space-y-2">
-            <div className="rounded-xl border border-white/10 bg-white/5 p-3">
-              <p className="text-[0.62rem] uppercase tracking-[0.2em] text-white/55">Entries</p>
-              <p className="mt-2 text-xl font-semibold">52/67</p>
+          <div className="grid gap-3 sm:grid-cols-[1.05fr_0.95fr]">
+            <div className="rounded-[1rem] border border-white/10 bg-white/[0.05] p-3">
+              <div className="mb-3 flex items-center justify-between">
+                <p className="text-[0.62rem] uppercase tracking-[0.2em] text-white/52">Slot map</p>
+                <span className="rounded-full bg-emerald-500/14 px-2 py-1 text-[0.62rem] font-semibold text-emerald-300">78% occupied</span>
+              </div>
+              <div className="grid grid-cols-4 gap-2">
+                {[1, 2, 3, 4, 5, 6, 7, 8].map((cell) => (
+                  <div key={cell} className={`h-9 rounded-lg ${cell % 3 === 0 ? 'bg-amber-400' : cell % 4 === 0 ? 'bg-orange-500' : 'bg-white/10'}`} />
+                ))}
+              </div>
             </div>
-            <div className="rounded-xl border border-white/10 bg-white/5 p-3">
-              <p className="text-[0.62rem] uppercase tracking-[0.2em] text-white/55">Revenue</p>
-              <p className="mt-2 text-xl font-semibold">Rs 1.46L</p>
+            <div className="space-y-3">
+              <div className="rounded-[1rem] border border-white/10 bg-white/[0.05] p-3">
+                <p className="text-[0.62rem] uppercase tracking-[0.2em] text-white/52">Entries</p>
+                <p className="mt-2 text-xl font-semibold">52 / 67</p>
+                <div className="mt-3 h-2 rounded-full bg-white/8">
+                  <div className="h-2 w-[78%] rounded-full bg-amber-400" />
+                </div>
+              </div>
+              <div className="rounded-[1rem] border border-white/10 bg-white/[0.05] p-3">
+                <p className="text-[0.62rem] uppercase tracking-[0.2em] text-white/52">Collections</p>
+                <p className="mt-2 text-xl font-semibold">Rs 1.46L</p>
+                <div className="mt-3 flex gap-2 text-[0.62rem] text-white/62">
+                  <span className="rounded-full border border-white/10 px-2 py-1">12 exits</span>
+                  <span className="rounded-full border border-white/10 px-2 py-1">4 pending</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -601,176 +656,285 @@ export function DemoProductPreview({ app }: { app: DemoAppConfig }) {
   }
 
   if (variant === 'inventory') {
-    return (
-      <div className="rounded-[1.1rem] border border-slate-300 bg-[linear-gradient(180deg,#1f2937_0%,#111827_100%)] p-4 text-white">
-        <div className="grid gap-3 sm:grid-cols-[1fr_0.95fr]">
-          <div className="space-y-2">
-            <div className="rounded-lg bg-white/8 px-3 py-2 text-xs">SKU alerts: 98</div>
-            <div className="rounded-lg bg-white/8 px-3 py-2 text-xs">Dispatch fill rate: 97.1%</div>
-            <div className="rounded-lg bg-orange-500/20 px-3 py-2 text-xs text-orange-200">Low stock: Bearing Assembly</div>
+    return frame(
+      'Warehouse control',
+      'Stock heat, movement, and exception handling',
+      <div className="grid gap-3 sm:grid-cols-[1.05fr_0.95fr]">
+        <div className="rounded-[1rem] border border-slate-200 bg-slate-950 p-3 text-white">
+          <div className="flex items-center justify-between">
+            <p className="text-[0.62rem] uppercase tracking-[0.2em] text-white/52">Warehouse board</p>
+            <span className="rounded-full bg-orange-500/18 px-2 py-1 text-[0.62rem] font-semibold text-orange-200">98 alerts</span>
           </div>
-          <div className="rounded-lg border border-white/10 bg-white p-3 text-slate-900">
-            <div className="space-y-2 text-xs">
-              <div className="flex justify-between"><span>Hydraulic Valve Kit</span><span>184</span></div>
-              <div className="flex justify-between"><span>Thermal Sensor Pack</span><span className="text-orange-600">62</span></div>
+          <div className="mt-4 grid grid-cols-6 gap-1.5">
+            {[58, 72, 34, 81, 63, 29].map((level, index) => (
+              <div key={level} className="flex h-20 items-end rounded-lg bg-white/6 p-1">
+                <div className={`w-full rounded-md ${index === 2 || index === 5 ? 'bg-orange-400' : 'bg-cyan-300'}`} style={{ height: `${level}%` }} />
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="space-y-3">
+          <div className="rounded-[1rem] border border-slate-200 bg-white p-3">
+            <div className="mb-3 flex items-center justify-between text-[0.62rem] font-semibold uppercase tracking-[0.2em] text-slate-500">
+              <span>Low stock</span>
+              <span>SKU 0041</span>
+            </div>
+            <div className="space-y-2 text-xs text-slate-700">
               <div className="flex justify-between"><span>Bearing Assembly</span><span className="text-orange-600">28</span></div>
+              <div className="flex justify-between"><span>Thermal Sensor Pack</span><span className="text-orange-600">62</span></div>
+              <div className="flex justify-between"><span>Hydraulic Valve Kit</span><span>184</span></div>
+            </div>
+          </div>
+          <div className="rounded-[1rem] border border-slate-200 bg-white p-3">
+            <div className="grid grid-cols-2 gap-2 text-xs">
+              <div className="rounded-lg bg-slate-50 px-3 py-2">
+                <p className="text-slate-500">Dispatch fill</p>
+                <p className="mt-1 font-semibold text-slate-950">97.1%</p>
+              </div>
+              <div className="rounded-lg bg-slate-50 px-3 py-2">
+                <p className="text-slate-500">Vendor SLA</p>
+                <p className="mt-1 font-semibold text-slate-950">94.6%</p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </div>,
     )
   }
 
   if (variant === 'hms') {
-    return (
-      <div className="rounded-[1.2rem] border border-teal-100 bg-[linear-gradient(135deg,#f0fdfa_0%,#ffffff_100%)] p-4">
-        <div className="grid gap-3 sm:grid-cols-[1fr_0.95fr]">
-          <div className="space-y-2">
-            <div className="rounded-xl border border-teal-100 bg-white p-3">
-              <p className="text-[0.62rem] uppercase tracking-[0.2em] text-teal-700">Reception</p>
-              <p className="mt-2 text-sm font-semibold text-slate-950">126 appointments today</p>
+    return frame(
+      'Clinical flow',
+      'Reception, priority queue, and patient activity',
+      <div className="grid gap-3 sm:grid-cols-[1fr_0.95fr]">
+        <div className="space-y-3">
+          <div className="rounded-[1rem] border border-teal-100 bg-white p-3">
+            <div className="flex items-center justify-between">
+              <p className="text-[0.62rem] uppercase tracking-[0.2em] text-teal-700">Reception desk</p>
+              <span className="rounded-full bg-teal-50 px-2 py-1 text-[0.62rem] font-semibold text-teal-700">126 today</span>
             </div>
-            <div className="rounded-xl border border-teal-100 bg-white p-3">
-              <p className="text-[0.62rem] uppercase tracking-[0.2em] text-teal-700">Priority</p>
-              <p className="mt-2 text-sm font-semibold text-slate-950">3 urgent billing follow-ups</p>
+            <div className="mt-3 h-2 rounded-full bg-slate-100">
+              <div className="h-2 w-[72%] rounded-full bg-teal-500" />
             </div>
           </div>
-          <div className="rounded-xl border border-teal-100 bg-white p-3">
-            <div className="space-y-2 text-xs text-slate-600">
-              <div className="flex justify-between"><span>Mahesh Babu</span><span className="rounded-full bg-emerald-50 px-2 py-1 text-emerald-700">Admitted</span></div>
-              <div className="flex justify-between"><span>Rekha Menon</span><span className="rounded-full bg-amber-50 px-2 py-1 text-amber-700">Waiting</span></div>
-              <div className="flex justify-between"><span>Sunita Rao</span><span className="rounded-full bg-sky-50 px-2 py-1 text-sky-700">Discharged</span></div>
+          <div className="grid grid-cols-2 gap-3">
+            <div className="rounded-[1rem] border border-teal-100 bg-white p-3">
+              <p className="text-[0.62rem] uppercase tracking-[0.2em] text-slate-500">Billing priority</p>
+              <p className="mt-2 text-sm font-semibold text-slate-950">3 urgent follow-ups</p>
+            </div>
+            <div className="rounded-[1rem] border border-teal-100 bg-white p-3">
+              <p className="text-[0.62rem] uppercase tracking-[0.2em] text-slate-500">Doctor queue</p>
+              <p className="mt-2 text-sm font-semibold text-slate-950">14 waiting</p>
             </div>
           </div>
         </div>
-      </div>
+        <div className="rounded-[1rem] border border-teal-100 bg-white p-3">
+          <p className="text-[0.62rem] uppercase tracking-[0.2em] text-slate-500">Patient flow</p>
+          <div className="mt-3 space-y-2 text-xs text-slate-600">
+            <div className="flex justify-between"><span>Mahesh Babu</span><span className="rounded-full bg-emerald-50 px-2 py-1 text-emerald-700">Admitted</span></div>
+            <div className="flex justify-between"><span>Rekha Menon</span><span className="rounded-full bg-amber-50 px-2 py-1 text-amber-700">Waiting</span></div>
+            <div className="flex justify-between"><span>Sunita Rao</span><span className="rounded-full bg-sky-50 px-2 py-1 text-sky-700">Discharged</span></div>
+          </div>
+        </div>
+      </div>,
     )
   }
 
   if (variant === 'coaching') {
-    return (
-      <div className="rounded-[1.2rem] border border-violet-100 bg-[linear-gradient(135deg,#faf5ff_0%,#ffffff_100%)] p-4">
-        <div className="grid gap-3 sm:grid-cols-[1fr_0.95fr]">
-          <div className="rounded-xl border border-violet-100 bg-white p-3">
-            <p className="text-[0.62rem] uppercase tracking-[0.2em] text-violet-700">Batch Hub</p>
-            <p className="mt-2 text-sm font-semibold text-slate-950">NEET Alpha attendance 93%</p>
+    return frame(
+      'Academic operations',
+      'Batch attendance, timetable, and coaching control',
+      <div className="grid gap-3 sm:grid-cols-[1fr_0.95fr]">
+        <div className="rounded-[1rem] border border-violet-100 bg-white p-3">
+          <div className="mb-3 flex items-center justify-between">
+            <p className="text-[0.62rem] uppercase tracking-[0.2em] text-violet-700">Timetable</p>
+            <span className="rounded-full bg-violet-50 px-2 py-1 text-[0.62rem] font-semibold text-violet-700">93% attendance</span>
           </div>
-          <div className="rounded-xl border border-violet-100 bg-white p-3">
-            <div className="space-y-2 text-xs text-slate-600">
-              <div className="flex justify-between"><span>7:00 AM Physics</span><span>Hall A</span></div>
-              <div className="flex justify-between"><span>9:00 AM Biology</span><span>Hall B</span></div>
-            </div>
+          <div className="grid grid-cols-5 gap-2 text-[0.62rem]">
+            {['Mon', 'Tue', 'Wed', 'Thu', 'Fri'].map((day) => (
+              <div key={day} className="rounded-lg bg-violet-50 px-2 py-3 text-center font-semibold text-violet-700">{day}</div>
+            ))}
           </div>
         </div>
-      </div>
+        <div className="rounded-[1rem] border border-violet-100 bg-white p-3">
+          <p className="text-[0.62rem] uppercase tracking-[0.2em] text-slate-500">Today</p>
+          <div className="mt-3 space-y-2 text-xs text-slate-600">
+            <div className="flex justify-between"><span>7:00 AM Physics</span><span>Hall A</span></div>
+            <div className="flex justify-between"><span>9:00 AM Biology</span><span>Hall B</span></div>
+            <div className="flex justify-between"><span>4:30 PM Test review</span><span>Hall C</span></div>
+          </div>
+        </div>
+      </div>,
     )
   }
 
   if (variant === 'ca') {
-    return (
-      <div className="rounded-[1.2rem] border border-teal-100 bg-[linear-gradient(135deg,#f0fdfa_0%,#ffffff_100%)] p-4">
-        <div className="grid gap-3 sm:grid-cols-[1fr_0.95fr]">
-          <div className="rounded-xl border border-teal-100 bg-white p-3">
-            <p className="text-[0.62rem] uppercase tracking-[0.2em] text-teal-700">Practice Desk</p>
-            <p className="mt-2 text-sm font-semibold text-slate-950">18 clients with open invoices</p>
+    return frame(
+      'Practice visibility',
+      'Client ledger, compliance deadlines, and collections',
+      <div className="grid gap-3 sm:grid-cols-[1fr_0.95fr]">
+        <div className="rounded-[1rem] border border-emerald-100 bg-white p-3">
+          <div className="mb-3 flex items-center justify-between">
+            <p className="text-[0.62rem] uppercase tracking-[0.2em] text-emerald-700">Client ledger</p>
+            <span className="rounded-full bg-emerald-50 px-2 py-1 text-[0.62rem] font-semibold text-emerald-700">18 open invoices</span>
           </div>
-          <div className="rounded-xl border border-teal-100 bg-white p-3 text-xs text-slate-600">
-            <div className="flex justify-between"><span>GST review</span><span>41 open</span></div>
-            <div className="mt-2 flex justify-between"><span>Collections</span><span>Rs 9.4L</span></div>
+          <div className="grid grid-cols-2 gap-2 text-xs">
+            <div className="rounded-lg bg-slate-50 px-3 py-3">
+              <p className="text-slate-500">Collections</p>
+              <p className="mt-1 font-semibold text-slate-950">Rs 9.4L</p>
+            </div>
+            <div className="rounded-lg bg-slate-50 px-3 py-3">
+              <p className="text-slate-500">GST reviews</p>
+              <p className="mt-1 font-semibold text-slate-950">41 open</p>
+            </div>
           </div>
         </div>
-      </div>
+        <div className="rounded-[1rem] border border-emerald-100 bg-white p-3 text-xs text-slate-600">
+          <p className="text-[0.62rem] uppercase tracking-[0.2em] text-slate-500">Deadline board</p>
+          <div className="mt-3 space-y-2">
+            <div className="flex justify-between"><span>Audit filing</span><span>Today</span></div>
+            <div className="flex justify-between"><span>TDS summary</span><span>Tomorrow</span></div>
+            <div className="flex justify-between"><span>GST reconciliation</span><span>3 days</span></div>
+          </div>
+        </div>
+      </div>,
     )
   }
 
   if (variant === 'restaurant') {
-    return (
-      <div className="rounded-[1.2rem] border border-orange-100 bg-[linear-gradient(135deg,#fff7ed_0%,#ffffff_100%)] p-4">
-        <div className="grid gap-3 sm:grid-cols-[1fr_0.95fr]">
-          <div className="rounded-xl border border-orange-100 bg-white p-3">
+    return frame(
+      'Outlet operations',
+      'Kitchen load, prep speed, and live order progression',
+      <div className="grid gap-3 sm:grid-cols-[1fr_0.95fr]">
+        <div className="rounded-[1rem] border border-orange-100 bg-white p-3">
+          <div className="flex items-center justify-between">
             <p className="text-[0.62rem] uppercase tracking-[0.2em] text-rose-700">Kitchen SLA</p>
-            <p className="mt-2 text-sm font-semibold text-slate-950">14 minutes average prep</p>
+            <span className="rounded-full bg-orange-50 px-2 py-1 text-[0.62rem] font-semibold text-orange-700">14 min avg</span>
           </div>
-          <div className="rounded-xl border border-orange-100 bg-white p-3 text-xs text-slate-600">
-            <div className="flex justify-between"><span>Queued</span><span>8</span></div>
-            <div className="mt-2 flex justify-between"><span>Cooking</span><span>11</span></div>
-            <div className="mt-2 flex justify-between"><span>Ready</span><span>5</span></div>
+          <div className="mt-3 grid grid-cols-3 gap-2 text-xs">
+            <div className="rounded-lg bg-orange-50 px-3 py-3 text-center"><p className="font-semibold text-slate-950">8</p><p className="mt-1 text-slate-500">Queued</p></div>
+            <div className="rounded-lg bg-orange-50 px-3 py-3 text-center"><p className="font-semibold text-slate-950">11</p><p className="mt-1 text-slate-500">Cooking</p></div>
+            <div className="rounded-lg bg-orange-50 px-3 py-3 text-center"><p className="font-semibold text-slate-950">5</p><p className="mt-1 text-slate-500">Ready</p></div>
           </div>
         </div>
-      </div>
+        <div className="rounded-[1rem] border border-orange-100 bg-white p-3 text-xs text-slate-600">
+          <p className="text-[0.62rem] uppercase tracking-[0.2em] text-slate-500">Order stream</p>
+          <div className="mt-3 space-y-2">
+            <div className="flex justify-between"><span>#1043 Paneer Roll</span><span>Pickup</span></div>
+            <div className="flex justify-between"><span>#1044 Burger Combo</span><span>Cooking</span></div>
+            <div className="flex justify-between"><span>#1045 Pasta Box</span><span>Ready</span></div>
+          </div>
+        </div>
+      </div>,
     )
   }
 
   if (variant === 'shipping') {
-    return (
-      <div className="rounded-[1.2rem] border border-sky-100 bg-[linear-gradient(135deg,#eff6ff_0%,#ffffff_100%)] p-4">
-        <div className="grid gap-3 sm:grid-cols-[1fr_0.95fr]">
-          <div className="rounded-xl border border-sky-100 bg-white p-3">
-            <p className="text-[0.62rem] uppercase tracking-[0.2em] text-sky-700">Shipment Atlas</p>
-            <p className="mt-2 text-sm font-semibold text-slate-950">184 live consignments</p>
+    return frame(
+      'Movement visibility',
+      'Shipment milestones, exceptions, and delivery confidence',
+      <div className="grid gap-3 sm:grid-cols-[1fr_0.95fr]">
+        <div className="rounded-[1rem] border border-sky-100 bg-white p-3">
+          <div className="mb-3 flex items-center justify-between">
+            <p className="text-[0.62rem] uppercase tracking-[0.2em] text-sky-700">Milestones</p>
+            <span className="rounded-full bg-sky-50 px-2 py-1 text-[0.62rem] font-semibold text-sky-700">184 live</span>
           </div>
-          <div className="rounded-xl border border-sky-100 bg-white p-3 text-xs text-slate-600">
-            <div className="flex justify-between"><span>In transit</span><span>101</span></div>
-            <div className="mt-2 flex justify-between"><span>Exceptions</span><span>7</span></div>
+          <div className="flex items-center gap-2">
+            {[0, 1, 2, 3].map((step) => (
+              <div key={step} className={`h-2 flex-1 rounded-full ${step < 3 ? 'bg-sky-500' : 'bg-slate-200'}`} />
+            ))}
           </div>
         </div>
-      </div>
+        <div className="rounded-[1rem] border border-sky-100 bg-white p-3 text-xs text-slate-600">
+          <div className="flex justify-between"><span>In transit</span><span>101</span></div>
+          <div className="mt-2 flex justify-between"><span>Exceptions</span><span>7</span></div>
+          <div className="mt-2 flex justify-between"><span>On-time score</span><span>96%</span></div>
+        </div>
+      </div>,
     )
   }
 
   if (variant === 'port') {
-    return (
-      <div className="rounded-[1.2rem] border border-cyan-100 bg-[linear-gradient(135deg,#ecfeff_0%,#ffffff_100%)] p-4">
-        <div className="grid gap-3 sm:grid-cols-[1fr_0.95fr]">
-          <div className="rounded-xl border border-cyan-100 bg-white p-3">
-            <p className="text-[0.62rem] uppercase tracking-[0.2em] text-cyan-700">Harbor Board</p>
-            <p className="mt-2 text-sm font-semibold text-slate-950">24 vessels scheduled today</p>
+    return frame(
+      'Harbor operations',
+      'Berth scheduling, cargo throughput, and vessel sequencing',
+      <div className="grid gap-3 sm:grid-cols-[1fr_0.95fr]">
+        <div className="rounded-[1rem] border border-cyan-100 bg-white p-3">
+          <div className="mb-3 flex items-center justify-between">
+            <p className="text-[0.62rem] uppercase tracking-[0.2em] text-cyan-700">Berth board</p>
+            <span className="rounded-full bg-cyan-50 px-2 py-1 text-[0.62rem] font-semibold text-cyan-700">24 vessels</span>
           </div>
-          <div className="rounded-xl border border-cyan-100 bg-white p-3 text-xs text-slate-600">
-            <div className="flex justify-between"><span>Berth use</span><span>88%</span></div>
-            <div className="mt-2 flex justify-between"><span>Cargo</span><span>18.4k MT</span></div>
+          <div className="grid grid-cols-4 gap-2">
+            {[1, 2, 3, 4].map((slot) => (
+              <div key={slot} className={`rounded-lg px-2 py-3 text-center text-[0.62rem] font-semibold ${slot < 4 ? 'bg-cyan-50 text-cyan-700' : 'bg-slate-100 text-slate-500'}`}>
+                B-{slot}
+              </div>
+            ))}
           </div>
         </div>
-      </div>
+        <div className="rounded-[1rem] border border-cyan-100 bg-white p-3 text-xs text-slate-600">
+          <div className="flex justify-between"><span>Berth use</span><span>88%</span></div>
+          <div className="mt-2 flex justify-between"><span>Cargo</span><span>18.4k MT</span></div>
+          <div className="mt-2 flex justify-between"><span>ETA changes</span><span>3</span></div>
+        </div>
+      </div>,
     )
   }
 
   if (variant === 'crm') {
-    return (
-      <div className="rounded-[1.2rem] border border-violet-100 bg-[linear-gradient(135deg,#faf5ff_0%,#ffffff_100%)] p-4">
-        <div className="grid gap-3 sm:grid-cols-[1fr_0.95fr]">
-          <div className="rounded-xl border border-violet-100 bg-white p-3">
-            <p className="text-[0.62rem] uppercase tracking-[0.2em] text-violet-700">Pipeline Studio</p>
-            <p className="mt-2 text-sm font-semibold text-slate-950">Rs 3.8Cr open pipeline</p>
+    return frame(
+      'Revenue pipeline',
+      'Deals, next actions, and forecast confidence',
+      <div className="grid gap-3 sm:grid-cols-[1fr_0.95fr]">
+        <div className="rounded-[1rem] border border-violet-100 bg-white p-3">
+          <div className="mb-3 flex items-center justify-between">
+            <p className="text-[0.62rem] uppercase tracking-[0.2em] text-violet-700">Pipeline</p>
+            <span className="rounded-full bg-violet-50 px-2 py-1 text-[0.62rem] font-semibold text-violet-700">Rs 3.8Cr</span>
           </div>
-          <div className="rounded-xl border border-violet-100 bg-white p-3 text-xs text-slate-600">
-            <div className="flex justify-between"><span>Negotiation</span><span>6</span></div>
-            <div className="mt-2 flex justify-between"><span>Won</span><span>4</span></div>
+          <div className="grid grid-cols-4 gap-2 text-[0.62rem]">
+            {[
+              ['Lead', '12'],
+              ['Qualified', '8'],
+              ['Negotiation', '6'],
+              ['Won', '4'],
+            ].map(([stage, total]) => (
+              <div key={stage} className="rounded-lg bg-violet-50 px-2 py-3 text-center text-violet-700">
+                <p className="font-semibold">{total}</p>
+                <p className="mt-1">{stage}</p>
+              </div>
+            ))}
           </div>
         </div>
-      </div>
+        <div className="rounded-[1rem] border border-violet-100 bg-white p-3 text-xs text-slate-600">
+          <div className="flex justify-between"><span>Next follow-ups</span><span>11</span></div>
+          <div className="mt-2 flex justify-between"><span>Forecast confidence</span><span>82%</span></div>
+          <div className="mt-2 flex justify-between"><span>Won this month</span><span>4</span></div>
+        </div>
+      </div>,
     )
   }
 
-  return (
-    <div className="rounded-[1.2rem] border border-indigo-100 bg-[linear-gradient(135deg,#eff6ff_0%,#ffffff_100%)] p-4">
-      <div className="grid gap-3 sm:grid-cols-[1fr_0.95fr]">
-        <div className="rounded-xl border border-indigo-100 bg-white p-3">
-          <p className="text-[0.62rem] uppercase tracking-[0.2em] text-indigo-700">People Ops</p>
-          <p className="mt-2 text-sm font-semibold text-slate-950">96.4% attendance this week</p>
-          <div className="mt-3 flex gap-2">
-            <span className="rounded-full bg-indigo-50 px-2 py-1 text-[0.62rem] font-semibold text-indigo-700">Payroll</span>
-            <span className="rounded-full bg-indigo-50 px-2 py-1 text-[0.62rem] font-semibold text-indigo-700">Recruitment</span>
-          </div>
+  return frame(
+    'People operations',
+    'Attendance, payroll, and team visibility',
+    <div className="grid gap-3 sm:grid-cols-[1fr_0.95fr]">
+      <div className="rounded-[1rem] border border-indigo-100 bg-white p-3">
+        <div className="mb-3 flex items-center justify-between">
+          <p className="text-[0.62rem] uppercase tracking-[0.2em] text-indigo-700">Workforce board</p>
+          <span className="rounded-full bg-indigo-50 px-2 py-1 text-[0.62rem] font-semibold text-indigo-700">96.4% attendance</span>
         </div>
-        <div className="rounded-xl border border-indigo-100 bg-white p-3">
-          <div className="space-y-2 text-xs text-slate-600">
-            <div className="flex justify-between"><span>Engineering</span><span>84</span></div>
-            <div className="flex justify-between"><span>Operations</span><span>52</span></div>
-            <div className="flex justify-between"><span>Sales</span><span>37</span></div>
-          </div>
+        <div className="flex gap-2">
+          <span className="rounded-full bg-indigo-50 px-2 py-1 text-[0.62rem] font-semibold text-indigo-700">Payroll</span>
+          <span className="rounded-full bg-indigo-50 px-2 py-1 text-[0.62rem] font-semibold text-indigo-700">Recruitment</span>
         </div>
       </div>
-    </div>
+      <div className="rounded-[1rem] border border-indigo-100 bg-white p-3">
+        <div className="space-y-2 text-xs text-slate-600">
+          <div className="flex justify-between"><span>Engineering</span><span>84</span></div>
+          <div className="flex justify-between"><span>Operations</span><span>52</span></div>
+          <div className="flex justify-between"><span>Sales</span><span>37</span></div>
+        </div>
+      </div>
+    </div>,
   )
 }
