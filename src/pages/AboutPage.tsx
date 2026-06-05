@@ -21,7 +21,7 @@ export default function AboutPage() {
         <Container>
           <SectionHeader
             eyebrow="About Qode27"
-            title="A serious software company focused on operational clarity, automation, and scalable business systems."
+            title="A  serious software company focused on operational clarity, automation, and scalable business systems."
             description="Qode27 builds software that solves operational problems across industries. We work with businesses that want clarity, automation, and scalable systems instead of scattered manual processes."
           />
 
