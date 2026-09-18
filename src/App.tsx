@@ -24,14 +24,14 @@ export default function App() {
   const location = useLocation()
 
   return (
-    <div className="relative min-h-screen bg-[var(--color-page)] text-[var(--color-copy)]">
+    <div className="relative min-h-screen bg-[#050a12] text-[var(--color-copy)]">
       <a
         href="#main-content"
         className="absolute left-4 top-4 z-[80] -translate-y-20 rounded-xl bg-slate-950 px-4 py-2 text-sm font-semibold text-white focus:translate-y-0 focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]"
       >
         Skip to content
       </a>
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-[36rem] bg-[radial-gradient(circle_at_top,_rgba(20,131,181,0.12),transparent_30%)]" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-[36rem] bg-[radial-gradient(circle_at_top,_rgba(20,131,181,0.1),transparent_30%)]" />
       <Suspense fallback={<PageSkeleton />}>
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>

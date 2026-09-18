@@ -1,4 +1,4 @@
-import { Suspense, lazy, useMemo } from 'react'
+import { Suspense, lazy } from 'react'
 import { Navigate, useParams } from 'react-router-dom'
 import { buildDemoRequestPath, buildDemoWhatsAppHref, getDemoAppBySlug } from '../../config/demo-apps'
 import Container from '../../components/ui/Container'
@@ -6,23 +6,28 @@ import PageSkeleton from '../../components/ui/PageSkeleton'
 import Seo from '../../components/ui/Seo'
 import Button from '../../components/ui/Button'
 
+const demoComponents = {
+  hrms: lazy(() => import('./apps/HrmsDemoPage')),
+  hms: lazy(() => import('./apps/HmsDemoPage')),
+  inventory: lazy(() => import('./apps/InventoryDemoPage')),
+  parking: lazy(() => import('./apps/TruckParkingDemoPage')),
+  coaching: lazy(() => import('./apps/CoachingDemoPage')),
+  ca: lazy(() => import('./apps/CaDemoPage')),
+  restaurant: lazy(() => import('./apps/RestaurantDemoPage')),
+  shipping: lazy(() => import('./apps/ShippingDemoPage')),
+  port: lazy(() => import('./apps/PortDemoPage')),
+  crm: lazy(() => import('./apps/CrmDemoPage')),
+} as const
+
 export default function DemoAppRoutePage() {
   const { appSlug, section } = useParams()
   const app = getDemoAppBySlug(appSlug)
-
-  const DemoComponent = useMemo(() => {
-    if (!app || !app.demoEnabled || app.requestDemoOnly) {
-      return null
-    }
-
-    return lazy(app.modulePath)
-  }, [app])
 
   if (!app) {
     return <Navigate to="/demo" replace />
   }
 
-  if (!app.demoEnabled || app.requestDemoOnly || !DemoComponent) {
+  if (!app.demoEnabled || app.requestDemoOnly) {
     return (
       <div className="min-h-screen bg-[var(--color-page)] py-10">
         <Seo
@@ -48,6 +53,8 @@ export default function DemoAppRoutePage() {
       </div>
     )
   }
+
+  const DemoComponent = demoComponents[app.slug]
 
   return (
     <Suspense fallback={<PageSkeleton />}>

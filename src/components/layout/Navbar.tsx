@@ -2,7 +2,6 @@ import { AnimatePresence, motion as Motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { FiMenu, FiX } from 'react-icons/fi'
-import { navigation } from '../../data/site'
 import { useScrolled } from '../../hooks/useScrolled'
 import BrandLogo from '../ui/BrandLogo'
 import Button from '../ui/Button'
@@ -31,6 +30,12 @@ export default function Navbar() {
   }, [open])
 
   const closeMenu = () => setOpen(false)
+  const primaryNavigation = [
+    { label: 'Solutions', href: '/solutions' },
+    { label: 'How It Works', href: '/#how-it-works' },
+    { label: 'About', href: '/about' },
+    { label: 'Contact', href: '/contact' },
+  ]
 
   return (
     <header className="sticky top-0 z-50 px-3 pt-3 sm:px-4">
@@ -43,22 +48,22 @@ export default function Navbar() {
       >
         <Container>
           <div
-            className={`flex min-h-[4.6rem] items-center justify-between gap-4 rounded-2xl border px-4 sm:px-5 ${
+            className={`flex min-h-[4.2rem] items-center justify-between gap-4 rounded-2xl border px-4 sm:px-5 ${
               scrolled
-                ? 'border-slate-200/80 bg-white/86 shadow-[0_18px_45px_rgba(15,23,42,0.08)] backdrop-blur-2xl'
-                : 'border-white/80 bg-white/78 shadow-[0_10px_30px_rgba(15,23,42,0.04)] backdrop-blur-xl'
+                ? 'border-cyan-100/15 bg-slate-950/82 shadow-[0_18px_45px_rgba(0,0,0,0.3)] backdrop-blur-2xl'
+                : 'border-white/10 bg-slate-950/52 shadow-[0_10px_30px_rgba(0,0,0,0.16)] backdrop-blur-xl'
             }`}
           >
             <NavLink to="/" className="flex items-center" aria-label="Qode27 home" onClick={closeMenu}>
-              <BrandLogo className="h-10 max-w-[10rem] sm:h-11 sm:max-w-[11rem]" />
+              <BrandLogo className="h-10 max-w-[10rem] brightness-0 invert sm:h-11 sm:max-w-[11rem]" />
             </NavLink>
 
             <nav className="hidden items-center gap-7 lg:flex" aria-label="Primary navigation">
-              {navigation.map((item) => (
+              {primaryNavigation.map((item) => (
                 <NavLink
                   key={item.label}
                   to={item.href}
-                  className={({ isActive }) => `nav-link ${isActive ? 'active text-slate-950' : ''}`}
+                  className={({ isActive }) => `nav-link qode-nav-link ${isActive ? 'active text-white' : ''}`}
                 >
                   {item.label}
                 </NavLink>
@@ -77,7 +82,7 @@ export default function Navbar() {
 
             <button
               type="button"
-              className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-900 hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] lg:hidden"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/15 bg-white/5 text-white hover:border-cyan-300 hover:text-cyan-200 lg:hidden"
               onClick={() => setOpen((value) => !value)}
               aria-label={open ? 'Close navigation menu' : 'Open navigation menu'}
               aria-expanded={open}
@@ -108,16 +113,16 @@ export default function Navbar() {
               className="relative lg:hidden"
             >
               <Container className="pb-4">
-                <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-[0_24px_55px_rgba(15,23,42,0.16)]">
+                <div className="rounded-2xl border border-white/10 bg-slate-950/96 p-4 shadow-[0_24px_55px_rgba(0,0,0,0.45)] backdrop-blur-2xl">
                   <nav className="flex flex-col gap-1" aria-label="Mobile navigation">
-                    {navigation.map((item) => (
+                    {primaryNavigation.map((item) => (
                       <NavLink
                         key={item.label}
                         to={item.href}
                         onClick={closeMenu}
                         className={({ isActive }) =>
                           `block rounded-2xl px-4 py-3 text-sm font-medium transition ${
-                            isActive ? 'bg-slate-950 text-white' : 'text-slate-700 hover:bg-slate-50 hover:text-slate-950'
+                            isActive ? 'bg-cyan-300/15 text-cyan-100' : 'text-slate-300 hover:bg-white/6 hover:text-white'
                           }`
                         }
                       >
