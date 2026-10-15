@@ -1,10 +1,15 @@
 import { motion as Motion, useReducedMotion } from 'framer-motion'
-import { FiArrowRight } from 'react-icons/fi'
+import { Link } from 'react-router-dom'
+import { FiArrowRight, FiPlay } from 'react-icons/fi'
 import HeroVisual from '../three/HeroVisual'
 import Button from '../ui/Button'
-import { products } from '../../data/products'
+import { getProductBySlug, products } from '../../data/products'
 
 const facts = [`${products.length} industry products`, 'Live interactive demos', 'Custom engineering']
+const quickDemos = (['healthcare-management', 'inventory-management', 'crm-sales', 'hrms'] as const)
+  .map((slug) => getProductBySlug(slug))
+  .filter((product) => product?.demoHref)
+  .map((product) => product!)
 
 export default function HomeHero() {
   const reduce = useReducedMotion()
@@ -43,14 +48,31 @@ export default function HomeHero() {
               Explore Our Solutions
             </Button>
           </Motion.div>
-          <Motion.ul className="mt-12 flex flex-wrap gap-x-6 gap-y-3 text-sm text-[var(--color-subtle)]" {...enter(0.42)}>
-            {facts.map((fact) => (
-              <li key={fact} className="flex items-center gap-2">
-                <span aria-hidden="true" className="h-1 w-1 rounded-full bg-[var(--color-gold)]" />
-                {fact}
+          <Motion.div className="mt-12 border-t border-[var(--color-line)] pt-6" {...enter(0.42)}>
+            <p className="text-sm text-[var(--color-muted)]">
+              <span className="font-medium text-white">Try before you talk.</span> Open a live product — no sign-up, sample data only:
+            </p>
+            <ul className="mt-4 flex flex-wrap gap-2">
+              {quickDemos.map((product) => (
+                <li key={product.slug}>
+                  <Link to={product.demoHref!} className="chip transition-colors hover:border-[var(--color-accent)] hover:text-white">
+                    <FiPlay aria-hidden="true" className="h-3 w-3" style={{ color: product.accent }} />
+                    {product.label}
+                  </Link>
+                </li>
+              ))}
+              <li>
+                <Link to="/demo" className="chip hover:text-white">
+                  All {products.length} demos <FiArrowRight aria-hidden="true" className="h-3 w-3" />
+                </Link>
               </li>
-            ))}
-          </Motion.ul>
+            </ul>
+            <ul className="sr-only">
+              {facts.map((fact) => (
+                <li key={fact}>{fact}</li>
+              ))}
+            </ul>
+          </Motion.div>
         </div>
 
         <Motion.div

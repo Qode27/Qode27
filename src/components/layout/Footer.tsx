@@ -27,7 +27,7 @@ export default function Footer() {
   const year = new Date().getFullYear()
   return (
     <footer className="relative border-t border-[var(--color-line)] bg-[var(--color-bg-raised)]">
-      <div className="section-shell py-16 sm:py-20">
+      <div className="section-shell pb-28 pt-16 sm:py-20">
         <div className="grid gap-12 lg:grid-cols-[1.1fr_2fr]">
           <div className="max-w-sm">
             <Link to="/" aria-label="Qode27 home" className="inline-flex rounded-lg">

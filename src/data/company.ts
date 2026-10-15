@@ -74,3 +74,37 @@ export const principles = [
     text: 'Work across healthcare, logistics, distribution, education, retail, and professional services reveals patterns that single-vertical teams miss.',
   },
 ] as const
+
+/** Questions buyers ask before committing. Answers are limited to what Qode27 has stated publicly. */
+export const buyerFaqs = [
+  {
+    question: 'Can we see the software before we commit to anything?',
+    answer:
+      'Yes. Every Qode27 product runs as a live interactive demo on this website — no sign-up, sample data only. After that, we arrange a walkthrough configured around your own roles and workflow.',
+  },
+  {
+    question: 'Do you sell ready-made products or build custom software?',
+    answer:
+      'Both. If one of our products fits your operation closely, we configure it. If it covers most of what you need, we extend it with business-specific modules. If your process is unique, we build the system from the ground up.',
+  },
+  {
+    question: 'How is the cost of a project decided?',
+    answer:
+      'Commercials are based on scope: the modules you need, the number of users and roles, and how much the workflow must be customised. We share a proposal only after we understand the requirement, so you are never quoted for things you do not need.',
+  },
+  {
+    question: 'How quickly will our team actually be using it?',
+    answer:
+      'Projects are scoped for momentum. The workflows causing the most friction are delivered first, so your team starts using the system while further modules are added in planned phases.',
+  },
+  {
+    question: 'What happens after the system goes live?',
+    answer:
+      'We help your team adopt the system through onboarding, then keep improving it as the business grows. Support is matched to your operation — from business-hours support to a dedicated support model — and new modules can be added over time.',
+  },
+  {
+    question: 'Will the software fit the way our business already works?',
+    answer:
+      'That is the starting point. We map your operation, approvals, user roles, and reporting before proposing anything, and design the system around them rather than asking your team to change how they work.',
+  },
+] as const

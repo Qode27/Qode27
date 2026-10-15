@@ -1,4 +1,6 @@
 import ApproachTimeline from '../components/home/ApproachTimeline'
+import BuyerFaq from '../components/home/BuyerFaq'
+import ProofSection from '../components/home/ProofSection'
 import CapabilitiesBento from '../components/home/CapabilitiesBento'
 import ChallengesSection from '../components/home/ChallengesSection'
 import FeaturedProducts from '../components/home/FeaturedProducts'
@@ -10,7 +12,7 @@ import CtaSection from '../components/ui/CtaSection'
 import SectionIntro from '../components/ui/SectionIntro'
 import Seo from '../components/ui/Seo'
 import SystemMap from '../components/visual/SystemMap'
-import { company, SITE_URL } from '../data/company'
+import { buyerFaqs, company, SITE_URL } from '../data/company'
 
 const organizationJsonLd = {
   '@context': 'https://schema.org',
@@ -23,6 +25,12 @@ const organizationJsonLd = {
   address: { '@type': 'PostalAddress', addressLocality: 'Hyderabad', addressCountry: 'IN' },
 }
 
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: buyerFaqs.map((faq) => ({ '@type': 'Question', name: faq.question, acceptedAnswer: { '@type': 'Answer', text: faq.answer } })),
+}
+
 export default function HomePage() {
   return (
     <>
@@ -30,9 +38,10 @@ export default function HomePage() {
         title="Qode27 | Business Software, SaaS Platforms & Custom Software Development"
         description="Qode27 designs and builds SaaS platforms, web applications, and custom business software for healthcare, logistics, distribution, education, retail, and professional services."
         canonicalPath="/"
-        jsonLd={organizationJsonLd}
+        jsonLd={[organizationJsonLd, faqJsonLd]}
       />
       <HomeHero />
+      <ProofSection />
       <PositioningStatement />
       <ChallengesSection />
       <CapabilitiesBento />
@@ -52,6 +61,7 @@ export default function HomePage() {
       <IndustriesIndex />
       <WorkPreview />
       <ApproachTimeline />
+      <BuyerFaq />
       <CtaSection title="Your business has a workflow. We build the system around it." />
     </>
   )

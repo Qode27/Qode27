@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import Footer from './Footer'
+import MobileActionBar from './MobileActionBar'
 import Navbar from './Navbar'
 
 function useScrollToTopOnNavigate() {
@@ -23,6 +24,7 @@ export default function SiteLayout() {
         <Outlet />
       </main>
       <Footer />
+      <MobileActionBar />
     </>
   )
 }

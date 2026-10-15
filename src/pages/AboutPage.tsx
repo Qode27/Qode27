@@ -6,6 +6,7 @@ import SectionIntro from '../components/ui/SectionIntro'
 import Seo from '../components/ui/Seo'
 import PageHero from '../components/ui/PageHero'
 import { BrandGlyph } from '../components/ui/BrandMark'
+import TeamSection from '../components/about/TeamSection'
 import { company, deliveryPhases, principles, technologyStack } from '../data/company'
 import { industries } from '../data/industries'
 import { products } from '../data/products'
@@ -89,6 +90,8 @@ export default function AboutPage() {
           </ol>
         </div>
       </section>
+
+      <TeamSection />
 
       {/* Principles */}
       <section className="section">
