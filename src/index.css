@@ -62,6 +62,34 @@
     @apply min-h-screen;
   }
 
+  /* Arrow cursor over text (instead of the I-beam); text stays selectable.
+     Interactive elements and form fields keep their own cursors. */
+  body,
+  body * {
+    cursor: default;
+  }
+
+  a[href],
+  a[href] *,
+  button:not(:disabled),
+  button:not(:disabled) *,
+  [role="button"],
+  [role="tab"],
+  label[for],
+  select,
+  summary,
+  input[type="checkbox"],
+  input[type="radio"],
+  input[type="submit"] {
+    cursor: pointer;
+  }
+
+  input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]),
+  textarea,
+  [contenteditable="true"] {
+    cursor: text;
+  }
+
   ::selection {
     background: rgba(76, 141, 255, 0.35);
     color: #fff;
