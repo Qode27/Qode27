@@ -1,6 +1,42 @@
 # Qode27
 
-Premium static marketing website for Qode27, built with React, Vite, Tailwind CSS, and Framer Motion.
+Marketing website and interactive product demos for Qode27, built with React 19, Vite, Tailwind CSS v4, Framer Motion, and three.js.
+
+## Site structure
+
+| Route | Page |
+| --- | --- |
+| `/` | Home — 3D hero, positioning, capabilities, products, systems map, industries, work, delivery approach |
+| `/about` | Philosophy, mission and vision, principles, delivery methodology |
+| `/services`, `/services/:slug` | Six service lines (`src/data/services.ts`), each with its own diagram |
+| `/products`, `/products/:slug` | Ten products (`src/data/solutions.ts` + `src/data/products.ts`) with category filter and module explorer |
+| `/industries`, `/industries/:slug` | Six industries (`src/data/industries.ts`) |
+| `/work` | Interactive demonstrations + clearly labelled illustrative scenarios (`src/data/work.ts`) |
+| `/contact`, `/request-demo` | Project inquiry / demo request form |
+| `/insights`, `/insights/:slug` | Article index and template (`src/data/insights.ts`, currently empty) |
+| `/privacy`, `/terms` | Legal pages — **pending legal review**; placeholders are marked “to be confirmed” |
+| `/demo`, `/demo/:app` | Interactive demo catalog and apps (see below) |
+| `*` | Branded not-found page (`noindex`) |
+
+Legacy URLs (`/solutions/*`, `/custom-software`, `/case-studies`, `/pricing`, `/thank-you`, `/privacy-policy`, `/terms-and-conditions`) redirect to their new equivalents.
+
+The site intentionally shows **no pricing**. Conversion is through consultation and demo requests.
+
+## Contact form
+
+The inquiry form posts JSON to `VITE_INQUIRY_ENDPOINT` (see `.env.example`), e.g. a Formspree form URL or your own API route. Only public endpoint URLs belong in `VITE_*` variables — they are bundled into client code.
+
+If the variable is not set, the form validates input and then offers a pre-filled email to `qode27business@gmail.com`. It never reports a submission as sent unless the endpoint returned a success response.
+
+## 3D and motion
+
+- Hero scene: `src/components/three/HeroScene.tsx` (plain three.js, lazy-loaded chunk). Pauses when off-screen or the tab is hidden, caps pixel ratio, uses fewer particles on small screens, and renders a single static frame under `prefers-reduced-motion`.
+- If WebGL is unavailable or the context is lost, `HeroFallback` (SVG) is shown instead.
+- Scroll-linked effects use Framer Motion (`useScroll`). `MotionConfig reducedMotion="user"` and CSS overrides disable motion for users who prefer it.
+
+## SEO
+
+Per-page titles, descriptions, canonical URLs, Open Graph/Twitter tags, and JSON-LD (Organization, Service, SoftwareApplication, FAQPage) are set by `src/components/ui/Seo.tsx`. `public/sitemap.xml` lists all indexable routes — regenerate it when adding services, products, industries, or demos.
 
 ## Demo Mode Architecture
 
@@ -114,28 +150,17 @@ The site now includes a reusable frontend-only demo framework that runs entirely
 - No live API requests are allowed from demo routes
 - Resetting a demo restores sample data only
 
-## Stack
-
-- React
-- Vite
-- Tailwind CSS v4
-- Framer Motion
-- React Icons
-
 ## Scripts
 
 - `npm install`
 - `npm run dev`
 - `npm run build`
-- `npm run preview`
+- `npm run typecheck`
 - `npm run lint`
 
 ## Branding
 
-The active brand assets used by the site live in `public/`:
-
-- `qode27-wordmark-cropped.png`
-- `qode27-icon-cropped.png`
+The site header and footer use a vector mark (`src/components/ui/BrandMark.tsx`). The original raster assets in `public/` (`qode27-wordmark-cropped.png`, `qode27-icon-cropped.png`) are still used by the demo apps and as fallback icons. `public/og-image.png` is the social sharing image.
 
 ## Deploy
 

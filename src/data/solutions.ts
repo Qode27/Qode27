@@ -477,25 +477,6 @@ export const featuredSolutionSlugs: SolutionSlug[] = [
   'crm-sales',
 ]
 
-export const solutionIndustryOptions = [
-  'Truck Parking',
-  'Inventory / Distribution',
-  'Logistics / Shipping',
-  'Port Operations',
-  'Coaching / Education',
-  'CA / Accounting Firm',
-  'Retail / Takeaway',
-  'Healthcare',
-  'CRM / Sales',
-  'HRMS',
-  'Custom Software',
-  'Other',
-] as const
-
 export function getSolutionBySlug(slug?: string) {
   return solutions.find((solution) => solution.slug === slug)
-}
-
-export function buildRequestDemoPath(solutionName?: string) {
-  return solutionName ? `/request-demo?industry=${encodeURIComponent(solutionName)}` : '/request-demo'
 }

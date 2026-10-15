@@ -1,101 +1,93 @@
-import { createElement } from 'react'
-import { FiFacebook, FiInstagram, FiLinkedin, FiTwitter } from 'react-icons/fi'
-import { NavLink } from 'react-router-dom'
-import { footerLegalLinks, footerQuickLinks, contactMethods } from '../../data/site'
-import { solutions } from '../../data/solutions'
-import BrandLogo from '../ui/BrandLogo'
-import Container from '../ui/Container'
+import { Link } from 'react-router-dom'
+import { FiArrowUpRight, FiMail, FiMapPin, FiPhone } from 'react-icons/fi'
+import { company } from '../../data/company'
+import { industries } from '../../data/industries'
+import { legalLinks } from '../../data/navigation'
+import { products, productHref } from '../../data/products'
+import { services } from '../../data/services'
+import BrandMark from '../ui/BrandMark'
 
-const socialLinks = [
-  { label: 'LinkedIn', icon: FiLinkedin, href: '#' },
-  { label: 'Twitter', icon: FiTwitter, href: '#' },
-  { label: 'Instagram', icon: FiInstagram, href: '#' },
-  { label: 'Facebook', icon: FiFacebook, href: '#' },
+const columns = [
+  { title: 'Services', links: services.map((item) => ({ label: item.shortName, href: `/services/${item.slug}` })) },
+  { title: 'Products', links: products.slice(0, 7).map((item) => ({ label: item.label, href: productHref(item.slug) })).concat([{ label: 'All products', href: '/products' }]) },
+  { title: 'Industries', links: industries.map((item) => ({ label: item.name, href: `/industries/${item.slug}` })) },
+  {
+    title: 'Company',
+    links: [
+      { label: 'About', href: '/about' },
+      { label: 'Work', href: '/work' },
+      { label: 'Insights', href: '/insights' },
+      { label: 'Interactive demos', href: '/demo' },
+      { label: 'Contact', href: '/contact' },
+    ],
+  },
 ]
 
 export default function Footer() {
+  const year = new Date().getFullYear()
   return (
-    <footer className="relative z-10 border-t border-white/10 bg-[#050a12] text-slate-300">
-      <Container className="py-16">
-        <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr_0.9fr_1fr]">
-          <div className="max-w-md">
-            <NavLink to="/" className="inline-flex items-center" aria-label="Qode27 home">
-              <BrandLogo className="h-12 max-w-[12rem] brightness-0 invert sm:h-14 sm:max-w-[14rem]" />
-            </NavLink>
-            <p className="mt-5 text-sm leading-7 text-slate-400">
-              Qode27 builds software systems for businesses that need stronger operations, cleaner workflows, and better control.
+    <footer className="relative border-t border-[var(--color-line)] bg-[var(--color-bg-raised)]">
+      <div className="section-shell py-16 sm:py-20">
+        <div className="grid gap-12 lg:grid-cols-[1.1fr_2fr]">
+          <div className="max-w-sm">
+            <Link to="/" aria-label="Qode27 home" className="inline-flex rounded-lg">
+              <BrandMark />
+            </Link>
+            <p className="mt-5 text-[0.95rem] leading-7 text-[var(--color-muted)]">
+              Business software, SaaS platforms, and custom systems for organizations that need operational clarity.
             </p>
-            <div className="mt-6 flex items-center gap-3">
-              {socialLinks.map((item) => {
-                const Icon = item.icon
-                return (
-                  <a
-                    key={item.label}
-                    href={item.href}
-                    aria-label={item.label}
-                    className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-slate-400 hover:-translate-y-0.5 hover:border-cyan-300 hover:text-cyan-200"
-                  >
-                    <Icon />
-                  </a>
-                )
-              })}
-            </div>
-          </div>
-
-          <div className="border-t border-white/10 pt-6 lg:border-t-0 lg:border-l lg:border-white/10 lg:pl-8 lg:pt-0">
-            <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Quick Links</h3>
-            <div className="mt-5 flex flex-col gap-3">
-              {footerQuickLinks.map((link) => (
-                <NavLink key={link.label} to={link.href} className="text-sm text-slate-400 hover:text-white">
-                  {link.label}
-                </NavLink>
-              ))}
-            </div>
-          </div>
-
-          <div className="border-t border-white/10 pt-6 lg:border-t-0 lg:border-l lg:border-white/10 lg:pl-8 lg:pt-0">
-            <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Solutions</h3>
-            <div className="mt-5 flex flex-col gap-3">
-              {solutions.map((solution) => (
-                <NavLink key={solution.slug} to={`/solutions/${solution.slug}`} className="text-sm text-slate-400 hover:text-white">
-                  {solution.name}
-                </NavLink>
-              ))}
-            </div>
-          </div>
-
-          <div className="border-t border-white/10 pt-6 lg:border-t-0 lg:border-l lg:border-white/10 lg:pl-8 lg:pt-0">
-            <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Contact</h3>
-            <div className="mt-5 space-y-3 text-sm text-slate-400">
-              {contactMethods.map((method) => (
-                <a
-                  key={method.title}
-                  href={method.href}
-                  target={method.href.startsWith('https://') ? '_blank' : undefined}
-                  rel={method.href.startsWith('https://') ? 'noreferrer' : undefined}
-                  className="flex items-center gap-3 hover:text-white"
-                >
-                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-cyan-200">
-                    {createElement(method.icon)}
-                  </span>
-                  <span>{method.value}</span>
+            <ul className="mt-8 space-y-3 text-sm">
+              <li>
+                <a href={company.emailHref} className="inline-flex items-center gap-3 text-[var(--color-muted)] hover:text-white">
+                  <FiMail aria-hidden="true" /> {company.email}
                 </a>
-              ))}
-            </div>
-            <div className="mt-6 flex flex-col gap-3 border-t border-white/10 pt-6">
-              {footerLegalLinks.map((link) => (
-                <NavLink key={link.label} to={link.href} className="text-sm text-slate-500 hover:text-white">
-                  {link.label}
-                </NavLink>
-              ))}
-            </div>
+              </li>
+              <li>
+                <a href={company.phoneHref} className="inline-flex items-center gap-3 text-[var(--color-muted)] hover:text-white">
+                  <FiPhone aria-hidden="true" /> {company.phoneDisplay}
+                </a>
+              </li>
+              <li className="inline-flex items-center gap-3 text-[var(--color-muted)]">
+                <FiMapPin aria-hidden="true" /> {company.location}
+              </li>
+            </ul>
           </div>
+          <nav aria-label="Footer" className="grid grid-cols-2 gap-10 sm:grid-cols-4">
+            {columns.map((column) => (
+              <div key={column.title}>
+                <h2 className="mono text-[0.7rem] uppercase tracking-[0.16em] text-[var(--color-subtle)]">{column.title}</h2>
+                <ul className="mt-5 space-y-3">
+                  {column.links.map((link) => (
+                    <li key={link.href}>
+                      <Link to={link.href} className="text-sm text-[var(--color-muted)] transition-colors hover:text-white">
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </nav>
         </div>
 
-        <div className="mt-12 border-t border-white/10 pt-6 text-sm text-slate-500">
-          Copyright {new Date().getFullYear()} Qode27. All rights reserved.
+        <div className="mt-16 flex flex-col gap-6 border-t border-[var(--color-line)] pt-8 text-sm text-[var(--color-subtle)] sm:flex-row sm:items-center sm:justify-between">
+          <p>© {year} Qode27. All rights reserved.</p>
+          <ul className="flex flex-wrap items-center gap-6">
+            {legalLinks.map((link) => (
+              <li key={link.href}>
+                <Link to={link.href} className="hover:text-white">
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+            <li>
+              <Link to="/contact" className="inline-flex items-center gap-1 text-white">
+                Discuss your project <FiArrowUpRight aria-hidden="true" />
+              </Link>
+            </li>
+          </ul>
         </div>
-      </Container>
+      </div>
     </footer>
   )
 }

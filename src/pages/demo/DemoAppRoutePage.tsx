@@ -40,11 +40,11 @@ export default function DemoAppRoutePage() {
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-accent)]">Guided Demo</p>
             <h1 className="mt-4 text-4xl font-semibold tracking-[-0.06em] text-slate-950">{app.name}</h1>
             <p className="mt-4 text-base leading-8 text-slate-600">
-              This product is configured in request-only mode. The architecture already supports that path without any extra hosting or backend. Use the actions below to collect qualified leads while keeping the app private.
+              This product is shown through a guided walkthrough rather than a public demo. Request a session and we will take you through it with your workflow in mind.
             </p>
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-              <Button href={buildDemoRequestPath(app.name)}>Request tailored demo</Button>
-              <Button href={buildDemoWhatsAppHref(app.name)} variant="secondary">
+              <Button href={buildDemoRequestPath(app.name)} variant="light">Request tailored demo</Button>
+              <Button href={buildDemoWhatsAppHref(app.name)} variant="outline-light">
                 WhatsApp Qode27
               </Button>
             </div>
