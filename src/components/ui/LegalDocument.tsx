@@ -10,7 +10,7 @@ type LegalDocumentProps = {
 export default function LegalDocument({ title, updatedNote, children }: LegalDocumentProps) {
   return (
     <article className="pb-24 pt-32 sm:pt-40">
-      <div className="mx-auto max-w-3xl px-4 sm:px-6">
+      <div className="mx-auto max-w-3xl px-6 sm:px-8">
         <p className="eyebrow">Legal</p>
         <h1 className="display-lg mt-6">{title}</h1>
         <p className="mt-4 text-sm text-[var(--color-subtle)]">{updatedNote}</p>

@@ -28,7 +28,7 @@ export default function InsightsPage() {
 
       <section className="pb-24">
         <div className="section-shell">
-          <div role="group" aria-label="Filter insights by category" className="-mx-4 flex gap-2 overflow-x-auto border-b border-[var(--color-line)] px-4 pb-6 sm:mx-0 sm:flex-wrap sm:px-0">
+          <div role="group" aria-label="Filter insights by category" className="-mx-6 flex gap-2 overflow-x-auto border-b border-[var(--color-line)] px-6 pb-6 sm:mx-0 sm:flex-wrap sm:px-0">
             {[{ slug: 'all', name: 'All topics' }, ...insightCategories].map((item) => (
               <button
                 key={item.slug}

@@ -76,7 +76,7 @@ export default function HomeHero() {
         </div>
 
         <Motion.div
-          className="relative -mx-4 h-[22rem] sm:mx-0 sm:h-[30rem] lg:h-[min(46rem,82svh)]"
+          className="relative -mx-6 h-[22rem] sm:mx-0 sm:h-[30rem] lg:h-[min(46rem,82svh)]"
           initial={reduce ? false : { opacity: 0, scale: 0.94 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}

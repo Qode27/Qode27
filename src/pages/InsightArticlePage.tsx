@@ -28,7 +28,7 @@ export default function InsightArticlePage() {
     <>
       <Seo title={`${article.title} | Qode27 Insights`} description={article.excerpt} canonicalPath={`/insights/${article.slug}`} jsonLd={jsonLd} />
       <article className="pb-16 pt-32 sm:pt-40">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6">
+        <div className="mx-auto max-w-3xl px-6 sm:px-8">
           <Link to="/insights" className="link-arrow text-sm text-[var(--color-muted)]">
             <FiArrowLeft aria-hidden="true" /> All insights
           </Link>

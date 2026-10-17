@@ -46,7 +46,7 @@ export default function ProductsPage() {
               {visible.length} {visible.length === 1 ? 'product' : 'products'}
               {category !== 'All' ? <span className="text-[var(--color-muted)]"> in {category}</span> : null}
             </h2>
-            <div role="group" aria-label="Filter products by category" className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:px-0">
+            <div role="group" aria-label="Filter products by category" className="-mx-6 flex gap-2 overflow-x-auto px-6 pb-1 sm:mx-0 sm:flex-wrap sm:px-0">
               {categories.map((item) => (
                 <button
                   key={item}
